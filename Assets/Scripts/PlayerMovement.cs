@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] float baseSpeed = 10.0f;
-    [SerializeField] public float baseJumpSpeed = 5.0f;
+    [SerializeField] public float baseJumpSpeed = 10.0f;
     [SerializeField] float climbSpeed = 5.0f;
     [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
     [SerializeField] GameObject bullet;
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     float gravityScaleAtStart;
     bool isAlive = true;
     //int deaths = 0;
-    public float jumpSpeed = 5.0f;
+    public float jumpSpeed;
 
     [Header("Attack")]
     public int damage = 20;
@@ -47,13 +47,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("CheckPoint")]
     private Vector3 respawnPoint;
 
+    PotionHolder potion;
+
     //ANIMATION STATES
     string currentState;
     const string PLAYER_IDLE = "Metroid_Idle";
     const string PLAYER_RUN = "MetroidVania_Running";
     const string PLAYER_JUMP = "MetroidV_JumpUp";
-    const string PLAYER_ATTACK = "Player_MetroidV_Attack_Sword";
+    const string PLAYER_ATTACK = "Player_Attack_Sword";
     const string PLAYER_DEATH = "MetroidVania_Death";
+    bool isAttacking;
+    bool isJumping;
+    
 
 
 
@@ -77,23 +82,24 @@ public class PlayerMovement : MonoBehaviour
         Die();
     }
 
-    IEnumerator OnTriggerEnter2D(Collider2D collison)
+    void OnTriggerEnter2D(Collider2D collison)
     {
         if (collison.tag == "JumpBoostPotion" && !isPickedUp)
         {
             isPickedUp = true;
             Debug.Log("POOOTION");
-            jumpSpeed = 20f;
+            //jumpSpeed = 20f;
+            GetComponent<PotionHolder>().state = PotionHolder.PotionState.pickedUp;
             Destroy(collison.gameObject);
-            yield return new WaitForSecondsRealtime(activeTime);
-            jumpSpeed = baseJumpSpeed;
-            Debug.Log("Inactive");
-            isPickedUp = false;
+            //yield return new WaitForSecondsRealtime(activeTime);
+            //jumpSpeed = baseJumpSpeed;
+            //Debug.Log("Inactive");
+            //isPickedUp = false;
         }
-        else if(collison.tag == "Stone")
+        /*else if(collison.tag == "Stone")
         {
             collison.attachedRigidbody.velocity = new Vector2(10f, 0f);
-        }
+        }*/
         
        
     }
@@ -103,14 +109,20 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         //Instantiate(bullet, gun.position, transform.rotation);
         //AudioSource.PlayClipAtPoint(bulletSound, Camera.main.transform.position);
-        ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
-        ChangeAnimationState(PLAYER_IDLE);
-        //Detect enemies whose in range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position,attackRange, enemyLayers);
-        foreach(Collider2D enemy in hitEnemies)//Damage the enemy/them
+        if (!isAttacking && !isJumping)
         {
-            enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
+            isAttacking = true;
+            ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
+                                                              //Detect enemies whose in range
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
+            {
+                enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
+            }
+            ChangeAnimationState(PLAYER_IDLE);
+            isAttacking = false;
         }
+        
 
 
     }
@@ -141,12 +153,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAlive) { return; }
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
-        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacle")))
+        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacle")) && !isJumping && !isAttacking)
         {
+            isJumping = true;
             ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(0f, jumpSpeed);
             ChangeAnimationState(PLAYER_IDLE);
+            isJumping = false;
         }
         
     }
@@ -253,7 +267,16 @@ public class PlayerMovement : MonoBehaviour
         anim.Play(newState);
 
         //Átírjuk az újra az aktuális állapotunkat
-        currentState = newState;
+        if(newState == PLAYER_ATTACK || newState == PLAYER_JUMP)
+        {
+            ChangeAnimationState(currentState);
+        }
+        else
+        {
+            currentState = newState;
+        }
+        
+        
     }
   
 

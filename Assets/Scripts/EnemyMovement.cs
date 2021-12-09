@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 1.0f;
     Rigidbody2D rb;
+    CapsuleCollider2D bodyCollider;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -17,7 +18,8 @@ public class EnemyMovement : MonoBehaviour
     public const string ENEMY_IDLE = "Enemy_Idle";
     public const string ENEMY_RUN = "Enemy_Run";
     public const string ENEMY_HIT = "Enemy_Hit";
-    public const string ENEMY_DEATH = "Enemy_Death";   
+    public const string ENEMY_DEATH = "Enemy_Death";
+    public const string ENEMY_ATTACK = "Enemy_Attack";
 
 
     void Start()
@@ -25,11 +27,21 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
+        bodyCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
-            
+        Hit();    
+    }
+
+    void Hit()
+    {
+        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Player")))
+        {
+            ChangeAnimationState(ENEMY_ATTACK);
+            ChangeAnimationState(ENEMY_IDLE);
+        }
     }
 
     void Die()
@@ -75,6 +87,7 @@ public class EnemyMovement : MonoBehaviour
 
         //animáció lejátszása
         anim.Play(newState);
+        
 
         //Átírjuk az újra a mostani állapotunkat
         currentState = newState;

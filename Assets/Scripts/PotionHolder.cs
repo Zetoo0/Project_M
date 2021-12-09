@@ -6,16 +6,16 @@ public class PotionHolder : MonoBehaviour
 {
     public Potion potion;
     float activeTime;
-    public KeyCode key;
+    //public KeyCode key;
 
-    enum PotionState
+    public enum PotionState
     {
         pickedUp,
-        active,
+        //active,
         notPickedUp
     }
 
-    PotionState state = PotionState.notPickedUp;
+    public PotionState state = PotionState.notPickedUp;
 
     void Update()
     {
@@ -23,17 +23,15 @@ public class PotionHolder : MonoBehaviour
         {                
             case PotionState.pickedUp:
                 //GetComponent<PlayerMovement>().isPickedUp == true
-                if (Input.GetKeyDown(key))
-                {
-                    potion.Activate(gameObject);
-                    state = PotionState.active;
-                    activeTime = potion.activeTime;
-                }
-                break;
-            case PotionState.active:
+                //if (Input.GetKeyDown(key))
+                //{
+                potion.Activate(gameObject);
+                activeTime = potion.activeTime;
+                //}
                 if(activeTime > 0)
                 {
                     activeTime -= Time.deltaTime;
+                    Debug.Log(activeTime);
                 }
                 else
                 {

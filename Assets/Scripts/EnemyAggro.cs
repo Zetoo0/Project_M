@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class EnemyAggro : MonoBehaviour
 {
-
-    [SerializeField]
-    public Transform castPoint;
-
     [SerializeField]
     public Transform Player;
-    
+
     [SerializeField]
     public float agroRange;
 
     [SerializeField]
     public float moveSpeed;
 
+    [SerializeField]
+    public Transform castPoint;
+
     Rigidbody2D rb;
 
+    bool isFacingLeft = true;
+    bool isAgro;
+    bool isSearching;
+
+    const string ENEMY_RUN = "Enemy_Run";
 
 
     void Start()
@@ -29,54 +33,83 @@ public class EnemyAggro : MonoBehaviour
     void Update()
     {
         //Distance to player
-        float distToPlayer = Vector2.Distance(transform.position, Player.position);
-        if(distToPlayer < agroRange)
+        //float distToPlayer = Vector2.Distance(transform.position, Player.position);
+        if (CanSeePlayer(agroRange))
         {
             //Chase the player
-            ChasePlayer();
+            //ChasePlayer();
+            isAgro = true;
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Run");
         }
         else
         {
+            if (isAgro)
+            {
+                isSearching = true;
+                if (!isSearching)
+                {
+                    isSearching = true;
+                    Invoke("StopChasingPlayer", 5);
+                    //StartCoroutine(StopChasingPlayer());
+                }
+            }
             //Stop chasing the player
-            StopChasingPlayer();
+            //StopChasingPlayer();
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
+
         }
-        
+
+        if (isAgro)
+        {
+            ChasePlayer();
+        }
+
     }
 
     void ChasePlayer()
     {
-        if(transform.position.x < Player.position.x)
+        if (transform.position.x < Player.position.x)
         {
             //enemy is the left side and the player is on the right so move right
             rb.velocity = new Vector2(moveSpeed, 0f);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
-            GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Run");
+            GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
+            isFacingLeft = false;
         }
         else
         {
             //enemy is the right side and the player is on the left so move left
             rb.velocity = new Vector2(-moveSpeed, 0f);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
-            GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Run");
+            GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
+            isFacingLeft = true;
         }
     }
 
     void StopChasingPlayer()
     {
-        rb.velocity = new Vector2(0f,0f);
+        isAgro = false;
+        isSearching = false;
+        rb.velocity = new Vector2(0f, 0f);
         GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
+        //yield return new WaitForSecondsRealtime(5); 
     }
 
     bool CanSeePlayer(float distance)
     {
         bool value = false;
         var castDistance = distance;
-        Vector2 endPosition = castPoint.position + Vector3.right * distance;//== new Vector3(position.x * distance)
-        RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position,endPosition, 1 << LayerMask.NameToLayer("Action"));
 
-        if(rcHit.collider != null)
+        if (isFacingLeft)
+        {
+            castDistance = -distance;
+        }
+
+
+        Vector2 endPosition = castPoint.position + Vector3.right * castDistance;//== new Vector3(position.x * distance)
+        RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position, endPosition,LayerMask.GetMask("MoveableObstacle","Player"));
+
+        if (rcHit.collider != null)
         {
             if (rcHit.collider.gameObject.CompareTag("Player"))
             {
@@ -86,10 +119,15 @@ public class EnemyAggro : MonoBehaviour
             {
                 value = false;
             }
+            Debug.DrawLine(castPoint.position, rcHit.point, Color.green);
         }
-        Debug.DrawLine(castPoint.position, rcHit.point, Color.blue);
+        else
+        {
+            Debug.DrawLine(castPoint.position, endPosition, Color.blue); ;
+        }
 
         return value;
     }
+
 
 }

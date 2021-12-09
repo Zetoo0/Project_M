@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MegaJump
   m_EditorClassIdentifier: 
   name: Mega Jump
-  activeTime: 30
-  jumpspeed: 15
+  activeTime: 10
+  jumpspeed: 20
