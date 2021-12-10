@@ -32,7 +32,8 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        Hit();    
+        Hit();
+        //Invoke("FlipEnemyFaceing", 5);
     }
 
     void Hit()
@@ -40,14 +41,13 @@ public class EnemyMovement : MonoBehaviour
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
             ChangeAnimationState(ENEMY_ATTACK);
-            ChangeAnimationState(ENEMY_IDLE);
+            //ChangeAnimationState(ENEMY_IDLE);
         }
     }
 
     void Die()
     {
         //anim.SetBool("IsDead", true);
-        ChangeAnimationState(ENEMY_DEATH);
         Destroy(gameObject);
     }
 
@@ -56,9 +56,10 @@ public class EnemyMovement : MonoBehaviour
         currentHealth -= damage;
         ChangeAnimationState(ENEMY_HIT);
         //anim.SetTrigger("Hit");
-        ChangeAnimationState(ENEMY_IDLE);
-        if(currentHealth == 0)
+        //ChangeAnimationState(ENEMY_IDLE);
+        if(currentHealth <= 0)
         {
+            ChangeAnimationState(ENEMY_DEATH);
             Die();
         }
     }
@@ -75,6 +76,8 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), 1.0f);
     }
+
+ 
 
     public void ChangeAnimationState(string newState)
     {

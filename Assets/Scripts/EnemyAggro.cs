@@ -18,9 +18,9 @@ public class EnemyAggro : MonoBehaviour
 
     Rigidbody2D rb;
 
-    bool isFacingLeft = true;
-    bool isAgro;
-    bool isSearching;
+    bool isFacingLeft;
+    bool isAgro = false;
+    bool isSearching = false;
 
     const string ENEMY_RUN = "Enemy_Run";
 
@@ -41,15 +41,16 @@ public class EnemyAggro : MonoBehaviour
             isAgro = true;
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Run");
         }
-        else
+        
+        
+        if (isAgro)
         {
-            if (isAgro)
+            isSearching = true;
+            if (!isSearching)
             {
                 isSearching = true;
-                if (!isSearching)
-                {
-                    isSearching = true;
-                    Invoke("StopChasingPlayer", 5);
+                    //StopChasingPlayer();
+                Invoke("StopChasingPlayer", 2);
                     //StartCoroutine(StopChasingPlayer());
                 }
             }
@@ -57,7 +58,7 @@ public class EnemyAggro : MonoBehaviour
             //StopChasingPlayer();
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
 
-        }
+        
 
         if (isAgro)
         {
@@ -107,7 +108,7 @@ public class EnemyAggro : MonoBehaviour
 
 
         Vector2 endPosition = castPoint.position + Vector3.right * castDistance;//== new Vector3(position.x * distance)
-        RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position, endPosition,LayerMask.GetMask("MoveableObstacle","Player"));
+        RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position, endPosition,LayerMask.GetMask("MoveableObstacle","Player","Ground"));
 
         if (rcHit.collider != null)
         {

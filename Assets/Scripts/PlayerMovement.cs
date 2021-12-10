@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash")]
     bool isDashing;
     float dashDistance = 15.0f;
+    public float dashSpeed;
+    private float dashTime;
+    public float startDashTime;
+    float direction;
 
     [Header("Particles")]
     public ParticleSystem dust;
@@ -53,12 +57,16 @@ public class PlayerMovement : MonoBehaviour
     string currentState;
     const string PLAYER_IDLE = "Metroid_Idle";
     const string PLAYER_RUN = "MetroidVania_Running";
-    const string PLAYER_JUMP = "MetroidV_JumpUp";
+    const string PLAYER_JUMP = "Player_Jump";
     const string PLAYER_ATTACK = "Player_Attack_Sword";
     const string PLAYER_DEATH = "MetroidVania_Death";
+   
+
+
     bool isAttacking;
     bool isJumping;
-    
+    string beforeState;
+
 
 
 
@@ -70,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
+        dashTime = startDashTime;
     }
 
     // Update is called once per frame
@@ -80,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         ClimbLadder();
         Die();
+        //direction = transform.localScale.x; 
     }
 
     void OnTriggerEnter2D(Collider2D collison)
@@ -112,19 +122,27 @@ public class PlayerMovement : MonoBehaviour
         if (!isAttacking && !isJumping)
         {
             isAttacking = true;
-            ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
-                                                              //Detect enemies whose in range
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-            foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
+            if (isAttacking)
             {
-                enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
+                ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
+                                                    //Detect enemies whose in range
+                
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+                foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
+                {
+                    enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
+                }
+                AttackCompleted();
             }
-            ChangeAnimationState(PLAYER_IDLE);
-            isAttacking = false;
+            
         }
-        
 
+    }
 
+    void AttackCompleted()
+    {
+        isAttacking = false;
+        //ChangeAnimationState(beforeState);
     }
 
 
@@ -145,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveInput = value.Get<Vector2>();
             Debug.Log(moveInput);
+            Run();
         }
         
     }
@@ -159,10 +178,19 @@ public class PlayerMovement : MonoBehaviour
             ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(0f, jumpSpeed);
-            ChangeAnimationState(PLAYER_IDLE);
-            isJumping = false;
+            //ChangeAnimationState(PLAYER_IDLE);
+            if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacle")))
+            {
+                JumpCompleted();
+            }
         }
         
+    }
+
+    void JumpCompleted()
+    {
+        isJumping = false;
+        //ChangeAnimationState(beforeState);
     }
 
     void OnDash(InputValue value)
@@ -172,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //dash animation
             //rb.velocity = new Vector2(dashDistance * moveInput.x,0f);  
-            StartCoroutine(Dash(1));
+            StartCoroutine(Dash(direction));
         }
         
             
@@ -190,7 +218,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Dashed");
         isDashing = true;
-        rb.velocity += new Vector2(dashDistance * direction, rb.velocity.y);
+        //rb.velocity += new Vector2(dashDistance * direction, 0f);
+        //rb.AddForce(new Vector2(dashDistance * direction, 0f));
+        if (isDashing)
+        {
+            if(direction == -1)
+            {
+                rb.velocity = Vector2.left * dashSpeed;
+            }
+            else
+            {
+                rb.velocity = Vector2.right * dashSpeed;
+            }
+        }
         yield return new WaitForSeconds(0.4f);
         isDashing = false;
     }
@@ -201,11 +241,12 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
-        if (playerHasHorizontalSpeed)
+        if (playerHasHorizontalSpeed && !isJumping)
         {
             ChangeAnimationState(PLAYER_RUN);
+            anim.
         }
-        else
+        else if(!playerHasHorizontalSpeed && !isJumping && !isAttacking)
         {
             ChangeAnimationState(PLAYER_IDLE);
         }
@@ -221,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerHasHorizontalSpeed)
         {
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1.0f);
+            
         }
 
     }
@@ -263,18 +305,17 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        //beforeState = currentState;
+        
         //animáció lejátszása
         anim.Play(newState);
+        Debug.Log(anim.GetAnimatorTransitionInfo(1));
+
 
         //Átírjuk az újra az aktuális állapotunkat
-        if(newState == PLAYER_ATTACK || newState == PLAYER_JUMP)
-        {
-            ChangeAnimationState(currentState);
-        }
-        else
-        {
-            currentState = newState;
-        }
+
+        currentState = newState;
+        
         
         
     }

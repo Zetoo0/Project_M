@@ -44,14 +44,15 @@ public class GameSession : MonoBehaviour
 
     public void ProcessPlayerDeath()
     {
-        if(playerLives > 1)
+        /*if(playerLives > 1)
         {
             StartCoroutine(TakeLife());
         }
         else
         {
             ResetGameSession();
-        }
+        }*/
+        StartCoroutine(TakeLife());
     }
 
     void ResetGameSession()
@@ -68,7 +69,7 @@ public class GameSession : MonoBehaviour
         deaths++;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-        GetComponent<PlayerMovement>().rb.transform.position = savePosition;
+        //GetComponent<PlayerMovement>().rb.transform.position = savePosition;
         playerDeathsText.text = deaths.ToString();
     }
 
