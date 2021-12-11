@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     bool isAttacking;
     bool isJumping;
     string beforeState;
+    bool isRunning = false;
 
 
 
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
         dashTime = startDashTime;
+        ChangeAnimationState(PLAYER_IDLE);
     }
 
     // Update is called once per frame
@@ -187,6 +189,10 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+
+
+
+
     void JumpCompleted()
     {
         isJumping = false;
@@ -241,14 +247,16 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
-        if (playerHasHorizontalSpeed && !isJumping)
+        if (playerHasHorizontalSpeed) //&& !isJumping && !isRunning
         {
+            //isRunning = true;
             ChangeAnimationState(PLAYER_RUN);
-            anim.
+            
         }
-        else if(!playerHasHorizontalSpeed && !isJumping && !isAttacking)
+        else// if(!playerHasHorizontalSpeed && !isJumping && !isAttacking)
         {
             ChangeAnimationState(PLAYER_IDLE);
+            //isRunning = false;
         }
         //anim.SetBool("IsRunning", playerHasHorizontalSpeed);
 
@@ -306,10 +314,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //beforeState = currentState;
-        
         //animáció lejátszása
         anim.Play(newState);
-        Debug.Log(anim.GetAnimatorTransitionInfo(1));
+        //Debug.Log(anim.GetAnimatorTransitionInfo(1));
 
 
         //Átírjuk az újra az aktuális állapotunkat

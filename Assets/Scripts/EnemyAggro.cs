@@ -43,26 +43,27 @@ public class EnemyAggro : MonoBehaviour
         }
         
         
-        if (isAgro)
+        /*if (isAgro)
         {
             isSearching = true;
-            if (!isSearching)
-            {
-                isSearching = true;
+            //if (!isSearching)
+            //{
+                //isSearching = true;
                     //StopChasingPlayer();
-                Invoke("StopChasingPlayer", 2);
+            Invoke("StopChasingPlayer", 2);
                     //StartCoroutine(StopChasingPlayer());
                 }
             }
             //Stop chasing the player
             //StopChasingPlayer();
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
-
+        */
         
 
         if (isAgro)
         {
             ChasePlayer();
+            Invoke("StopChasingPlayer", 2);
         }
 
     }
