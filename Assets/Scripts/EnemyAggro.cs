@@ -63,7 +63,7 @@ public class EnemyAggro : MonoBehaviour
         if (isAgro)
         {
             ChasePlayer();
-            Invoke("StopChasingPlayer", 2);
+            Invoke("StopChasingPlayer", 4);
         }
 
     }
