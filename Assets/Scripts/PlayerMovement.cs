@@ -67,13 +67,19 @@ public class PlayerMovement : MonoBehaviour
     bool isJumping;
     string beforeState;
     bool isRunning = false;
+    public bool canDoubleJump = false;
 
+    int extraJumps;
+    public int extraJumpsValue;
+    int jumpCount;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        jumpCount = 0;
+        extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
@@ -173,23 +179,34 @@ public class PlayerMovement : MonoBehaviour
     void OnJump(InputValue value)
     {
         if (!isAlive) { return; }
+       
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
-        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacle")) && !isJumping && !isAttacking)
+        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacle")) && !isJumping && !isAttacking || jumpCount < extraJumps)
         {
             isJumping = true;
             ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
-            rb.velocity += new Vector2(0f, jumpSpeed);
+            rb.velocity += new Vector2(moveInput.x, jumpSpeed);
+            jumpCount++;
+            JumpCountCheck();
             //ChangeAnimationState(PLAYER_IDLE);
-            if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacle")))
+            /*if (isGrounded)
             {
                 JumpCompleted();
-            }
+            }*/
+
+
         }
-        
+
     }
 
-
+    void JumpCountCheck()
+    {
+        if(jumpCount == extraJumps)
+        {
+            jumpCount = 0;
+        }
+    }
 
 
 

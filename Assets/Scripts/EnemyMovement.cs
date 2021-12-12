@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 1.0f;
     Rigidbody2D rb;
     CapsuleCollider2D bodyCollider;
+    CircleCollider2D wallCheck;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -28,12 +29,23 @@ public class EnemyMovement : MonoBehaviour
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
+        wallCheck = GetComponent<CircleCollider2D>();
     }
 
     void Update()
     {
         Hit();
         //Invoke("FlipEnemyFaceing", 5);
+        //CheckWall();
+    }
+
+
+    void CheckWall()
+    {
+        if (wallCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            FlipEnemyFaceing();
+        }
     }
 
     void Hit()
@@ -61,20 +73,34 @@ public class EnemyMovement : MonoBehaviour
         {
             ChangeAnimationState(ENEMY_DEATH);
             Die();
-        }
+        }   
     }
 
+    void BombGoblinAttack()
+    {
+       
+    }
 
 
     void OnTriggerExit2D(Collider2D other)
     {
-        moveSpeed = -moveSpeed;
-        FlipEnemyFaceing();
+            moveSpeed = -moveSpeed;
+            FlipEnemyFaceing();
+        
+        
     }
 
     public void FlipEnemyFaceing()
     {
         transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), 1.0f);
+        if(transform.localScale.x == -1)
+        {
+            GetComponent<EnemyAggro>().isFacingLeft = true;
+        }
+        else
+        {
+            GetComponent<EnemyAggro>().isFacingLeft = false;
+        }
     }
 
  

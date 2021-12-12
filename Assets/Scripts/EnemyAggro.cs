@@ -18,7 +18,7 @@ public class EnemyAggro : MonoBehaviour
 
     Rigidbody2D rb;
 
-    bool isFacingLeft;
+    public bool isFacingLeft = true;
     bool isAgro = false;
     bool isSearching = false;
 
