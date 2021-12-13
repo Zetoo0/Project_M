@@ -363,7 +363,7 @@
                     "id": "5ffaddd0-74d7-4fc2-8a58-078a14813535",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 },
                 {
                     "name": "ScrollWheel",
