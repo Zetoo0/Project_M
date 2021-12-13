@@ -189,11 +189,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity += new Vector2(moveInput.x, jumpSpeed);
             jumpCount++;
             JumpCountCheck();
-            //ChangeAnimationState(PLAYER_IDLE);
-            /*if (isGrounded)
-            {
-                JumpCompleted();
-            }*/
+            JumpCompleted();
 
 
         }
