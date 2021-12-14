@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,16 +10,28 @@ public class LevelExit : MonoBehaviour
     public Animator transition;
 
     const string CROSSFADE_START = "Crossfade_Start";
+    TimeSpan mapTime;
+    DateTime mapStart;
 
-  
+    void Start()
+    {
+        mapStart = DateTime.Now;
+        Debug.Log("Map elején kezdem: "+mapStart);
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        MapTime();
         StartCoroutine(NextLevel());
+        
 
 
-        
-        
+    }
+
+    void MapTime()
+    {
+        mapTime = DateTime.Now - mapStart;
+        Debug.Log("Map Time: " + mapTime);
     }
 
     public IEnumerator NextLevel()
@@ -37,6 +50,7 @@ public class LevelExit : MonoBehaviour
         FindObjectOfType<Scene_Persist>().ResetScenePersist();
 
         SceneManager.LoadScene(nextSceneIndex);
-
+        mapStart = DateTime.Now;
+        Debug.Log("Új pálya: " + mapStart);
     }
 }

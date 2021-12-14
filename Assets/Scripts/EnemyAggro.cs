@@ -73,7 +73,7 @@ public class EnemyAggro : MonoBehaviour
         if (transform.position.x < Player.position.x)
         {
             //enemy is the left side and the player is on the right so move right
-            rb.velocity = new Vector2(moveSpeed, 0f);
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
             isFacingLeft = false;
@@ -81,7 +81,7 @@ public class EnemyAggro : MonoBehaviour
         else
         {
             //enemy is the right side and the player is on the left so move left
-            rb.velocity = new Vector2(-moveSpeed, 0f);
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
             isFacingLeft = true;

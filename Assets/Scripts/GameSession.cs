@@ -15,10 +15,11 @@ public class GameSession : MonoBehaviour
     public Vector2 savePosition;
     //public Rigidbody2D savePoint;
     //public Rigidbody2D player;
-
+    public DateTime mapStart;
 
     void Awake()
     {
+        
         int numOfGameSessions = FindObjectsOfType<GameSession>().Length;
         if (numOfGameSessions > 1)
         {

@@ -114,6 +114,9 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
+        anim.SetFloat("velocityY",rb.velocity.y);
+        anim.SetFloat("velocityX", rb.velocity.x);
+
         //animáció lejátszása
         anim.Play(newState);
         
