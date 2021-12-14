@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
         dashTime = startDashTime;
-        ChangeAnimationState(PLAYER_IDLE);
+        //ChangeAnimationState(PLAYER_IDLE);
     }
 
     // Update is called once per frame
@@ -317,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
 
         //hogyha az aktuális animáció = a paraméterrel akkor returnöli

@@ -2051,6 +2051,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 3.021534
       objectReference: {fileID: 0}
+    - target: {fileID: 4546430348496856723, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 44.995064
+      objectReference: {fileID: 0}
     - target: {fileID: 4546430348582231700, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
       propertyPath: m_RootOrder
@@ -37863,6 +37868,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 504010681797847747, guid: f51af280d8ebfd341a2153195a1c97d0,
         type: 3}
+      propertyPath: m_TileAnchor.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 504010681797847747, guid: f51af280d8ebfd341a2153195a1c97d0,
+        type: 3}
+      propertyPath: m_TileAnchor.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 504010681797847747, guid: f51af280d8ebfd341a2153195a1c97d0,
+        type: 3}
       propertyPath: m_Tiles.Array.size
       value: 249
       objectReference: {fileID: 0}
@@ -47868,6 +47883,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253178137100505565, guid: e622ecc2902404a41a3c5c1fb4d77786,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253178137100505565, guid: e622ecc2902404a41a3c5c1fb4d77786,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7253178137100505565, guid: e622ecc2902404a41a3c5c1fb4d77786,
         type: 3}

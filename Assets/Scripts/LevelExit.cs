@@ -36,10 +36,10 @@ public class LevelExit : MonoBehaviour
 
     public IEnumerator NextLevel()
     {
-
+        GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
         //transition.Play(CROSSFADE_START);
-        transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(LevelLoadSpeed);
+        transition.SetTrigger("Start");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
