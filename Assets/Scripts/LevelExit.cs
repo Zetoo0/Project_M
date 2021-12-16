@@ -13,6 +13,11 @@ public class LevelExit : MonoBehaviour
     TimeSpan mapTime;
     DateTime mapStart;
 
+    private void Awake()
+    {
+        
+    }
+
     void Start()
     {
         mapStart = DateTime.Now;
@@ -32,11 +37,14 @@ public class LevelExit : MonoBehaviour
     {
         mapTime = DateTime.Now - mapStart;
         Debug.Log("Map Time: " + mapTime);
+        mapStart = DateTime.Now;
+        mapTime = TimeSpan.Zero;
+        Debug.Log(mapTime);
     }
 
     public IEnumerator NextLevel()
     {
-        GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
+        //GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
         //transition.Play(CROSSFADE_START);
         yield return new WaitForSecondsRealtime(LevelLoadSpeed);
         transition.SetTrigger("Start");
@@ -50,7 +58,7 @@ public class LevelExit : MonoBehaviour
         FindObjectOfType<Scene_Persist>().ResetScenePersist();
 
         SceneManager.LoadScene(nextSceneIndex);
-        mapStart = DateTime.Now;
+        
         Debug.Log("Új pálya: " + mapStart);
     }
 }
