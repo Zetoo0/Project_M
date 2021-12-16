@@ -72,7 +72,8 @@ public class PlayerMovement : MonoBehaviour
     int extraJumps;
     public int extraJumpsValue;
     int jumpCount;
-
+    bool canJump;
+    bool isGrounded;
 
 
     // Start is called before the first frame update
@@ -179,16 +180,15 @@ public class PlayerMovement : MonoBehaviour
     void OnJump(InputValue value)
     {
         if (!isAlive) { return; }
-       
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
-        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacle")) && !isJumping && !isAttacking || jumpCount < extraJumps)
+        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) || value.isPressed && jumpCount < extraJumps)//!isJumping && !isAttacking 
         {
             isJumping = true;
             ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(moveInput.x, jumpSpeed);
             jumpCount++;
-            JumpCountCheck();
+            //JumpCountCheck();
             JumpCompleted();
 
 
@@ -196,19 +196,23 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
+
     void JumpCountCheck()
     {
-        if(jumpCount == extraJumps)
-        {
-            jumpCount = 0;
-        }
+        
     }
 
 
 
     void JumpCompleted()
     {
-        isJumping = false;
+        if(feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacles")))
+        {
+            isJumping = false;
+            jumpCount = 0;
+        }
+
         //ChangeAnimationState(beforeState);
     }
 

@@ -9,14 +9,16 @@ public class LootBox : MonoBehaviour
     string currentState;
     [SerializeField] GameObject potion;
     [SerializeField] Transform dropPosition;
+    GameObject[] objects;
 
     //ANIMATIONS
     const string LOOTBOX_OPEN = "lootbox_open_animation";
 
     void Start()
     {
-        anim = GetComponent<Animator>();    
-
+        anim = GetComponent<Animator>();
+        potion = GetComponent<GameObject>();
+        dropPosition = GetComponent<Transform>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -25,10 +27,13 @@ public class LootBox : MonoBehaviour
         {
             //anim.SetTrigger("Opened");
             ChangeAnimationState(LOOTBOX_OPEN);
-            Instantiate(potion,dropPosition);
+            Instantiate(potion);
+            //Debug.Log("Drop hopp!");
             wasCollected = true;
         }
     }
+
+    
 
     void ChangeAnimationState(string newState)
     {
