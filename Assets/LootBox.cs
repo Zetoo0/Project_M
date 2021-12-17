@@ -17,8 +17,8 @@ public class LootBox : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        potion = GetComponent<GameObject>();
-        dropPosition = GetComponent<Transform>();
+        //potion = GetComponent<GameObject>();
+        //dropPosition = GetComponent<Transform>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -27,7 +27,7 @@ public class LootBox : MonoBehaviour
         {
             //anim.SetTrigger("Opened");
             ChangeAnimationState(LOOTBOX_OPEN);
-            Instantiate(potion);
+            potion.SetActive(true);
             //Debug.Log("Drop hopp!");
             wasCollected = true;
         }
