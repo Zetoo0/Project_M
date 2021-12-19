@@ -7,5 +7,6 @@ public class UserLog
 {
     public string name;
     public int point;
+    public string maptime;
     
 }

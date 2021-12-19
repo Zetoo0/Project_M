@@ -6,11 +6,6 @@ app.get('/', (req, res) => {
     res.send('Hello Unity Developers!');
 })
 
-let enemy = {
-    "name" : "slime",
-    "healt" : 20,
-    "attack" : 5
-}
 
 app.get('/user', (req, res) => {
     var mysql = require('mysql')
@@ -85,7 +80,7 @@ app.get('/user', (req, res) => {
 
     connection.connect();
 
-    connection.query('INSERT INTO score VALUES (NULL, "'+req.body.name+'","'+ req.body.password +'","' + req.body.birthdate + '");', function (err, rows, fields) {
+    connection.query('INSERT INTO score VALUES (NULL, "'+req.body.point+'","'+ req.body.name +'","' + req.body.maptime + '");', function (err, rows, fields) {
     if (err) throw err;
 
     console.log("sikerült");

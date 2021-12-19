@@ -9,9 +9,10 @@ public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerLives = 3;
     int deaths = 0;
-    int playerScore = 0;
+    public int playerScore = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
+    [SerializeField] GameObject dead;
     public Vector2 savePosition;
     //public Rigidbody2D savePoint;
     //public Rigidbody2D player;
@@ -40,6 +41,7 @@ public class GameSession : MonoBehaviour
         //player = GetComponent<Rigidbody2D>();
         //savePoint = GetComponent<Rigidbody2D>();
         savePosition = new Vector2(5f, 5f);
+        dead.SetActive(false);
 
     }
 
@@ -53,7 +55,13 @@ public class GameSession : MonoBehaviour
         {
             ResetGameSession();
         }*/
+        DeadTextOut();
         StartCoroutine(TakeLife());
+    }
+
+    void DeadTextOut()
+    {
+        dead.SetActive(true);  
     }
 
     void ResetGameSession()
@@ -65,7 +73,8 @@ public class GameSession : MonoBehaviour
 
     IEnumerator TakeLife()
     {
-        yield return new WaitForSecondsRealtime(2);
+
+        yield return new WaitForSecondsRealtime(5);
         //playerLives--;
         deaths++;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

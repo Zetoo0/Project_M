@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class LevelExit : MonoBehaviour
 {
@@ -12,11 +13,11 @@ public class LevelExit : MonoBehaviour
     const string CROSSFADE_START = "Crossfade_Start";
     TimeSpan mapTime;
     DateTime mapStart;
+    public string mapTimeInString;
+    [SerializeField] public string postURL;
+    
 
-    private void Awake()
-    {
-        
-    }
+
 
     void Start()
     {
@@ -26,20 +27,63 @@ public class LevelExit : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
-        StartCoroutine(NextLevel());
+        StartPost();
+        //StartCoroutine(NextLevel());
         
 
 
     }
 
+    void StartPost()
+    {
+        var userData = new UserLog()//A post metódushoz az adatok elõkészítése
+        {
+            name = "testIT2",
+            point = 250,
+            maptime = mapTimeInString
+        };
+
+        /*Debug.Log(userData.maptime);
+        Debug.Log(userData.name);
+        Debug.Log(userData.point);*/
+
+        StartCoroutine(PostData(postURL, userData));
+    }
+
+    public IEnumerator PostData(string url, UserLog userLog)//paraméterek ugye az url és egy olyan opcionális paraméter amit testreszabhatunk a saját adatainkkal, attól függ mit szeretnénk küldeni
+    {
+        var jsonData = JsonUtility.ToJson(userLog);//A kapott adatot jsonné konvertálja
+        Debug.Log(jsonData);
+
+        using (UnityWebRequest www = UnityWebRequest.Post(url, jsonData))//Unitywebrequest segitségével tudunk postolni
+        {
+            www.SetRequestHeader("content-type", "application/json");
+            www.uploadHandler.contentType = "application/json";
+            www.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonData));//az adat elõkészítése 
+
+            yield return www.SendWebRequest();//yield return segítségével továbbítjuk az adatot az adatbázisba
+
+            if (www.isNetworkError)
+            {
+                Debug.Log(www.error);
+            }
+
+
+        }
+    }
+
+
     void MapTime()
     {
         mapTime = DateTime.Now - mapStart;
-        Debug.Log("Map Time: " + mapTime);
+        mapTimeInString = mapTime.TotalSeconds.ToString();
+        Debug.Log("Map Time: " + mapTimeInString);
         mapStart = DateTime.Now;
         mapTime = TimeSpan.Zero;
         Debug.Log(mapTime);
+
     }
 
     public IEnumerator NextLevel()
