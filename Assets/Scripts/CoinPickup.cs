@@ -6,7 +6,7 @@ public class CoinPickup : MonoBehaviour
 {
     [SerializeField] AudioClip coinPickUpSFX;
     [SerializeField] int pointsForPickUp = 125;
-    Vector2 coinPickupUp = new Vector2(0f, 1f);
+    //Vector2 coinPickupUp = new Vector2(0f, 1f);
 
     [SerializeField] bool wasCollected = false;
     Animator anim;
@@ -26,7 +26,7 @@ public class CoinPickup : MonoBehaviour
         {
             //anim.SetTrigger("PickedUp");
             ChangeAnimationState(COIN_PICKUP);
-            gameObject.transform.position = coinPickupUp;
+            //gameObject.transform.position = coinPickupUp;
             wasCollected = true;
             FindObjectOfType<GameSession>().AddToScore(pointsForPickUp);
             AudioSource.PlayClipAtPoint(coinPickUpSFX, Camera.main.transform.position);

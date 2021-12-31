@@ -5,14 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    
+
     [Header("Objects")]
     [SerializeField] float baseSpeed = 10.0f;
     [SerializeField] public float baseJumpSpeed = 10.0f;
     [SerializeField] float climbSpeed = 5.0f;
     [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform gun;
-    [SerializeField] AudioClip bulletSound;
+    //[SerializeField] GameObject bullet;
+    //[SerializeField] Transform gun;
+    //[SerializeField] AudioClip bulletSound;
+    [SerializeField] AudioClip swishSound;
 
     [Header("Dash")]
     bool isDashing;
@@ -26,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem dust;
 
 
-
+    
     [Header("PlayerBasics")]
     Vector2 moveInput;
     public Rigidbody2D rb;
@@ -135,23 +138,24 @@ public class PlayerMovement : MonoBehaviour
             {
                 ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
                                                     //Detect enemies whose in range
-                
+                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
                 foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
                 {
                     enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
                 }
-                AttackCompleted();
             }
             
         }
+        AttackCompleted();
+
 
     }
 
     void AttackCompleted()
     {
         isAttacking = false;
-        //ChangeAnimationState(beforeState);
+        //ChangeAnimationState(PLAYER_IDLE);
     }
 
 
@@ -243,7 +247,13 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         //rb.velocity += new Vector2(dashDistance * direction, 0f);
         //rb.AddForce(new Vector2(dashDistance * direction, 0f));
-        if (isDashing)
+        rb.velocity += new Vector2(dashDistance * moveInput.x, 0f);
+        rb.AddForce(new Vector2(dashDistance * moveInput.x, 0f));
+
+
+
+
+        /*if (isDashing)
         {
             if(direction == -1)
             {
@@ -253,7 +263,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = Vector2.right * dashSpeed;
             }
-        }
+        }*/
         yield return new WaitForSeconds(0.4f);
         isDashing = false;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LootBox : MonoBehaviour
 {
-    bool wasCollected;
+    bool wasCollected = false;
     Animator anim;
     string currentState;
     [SerializeField] GameObject potion;
@@ -13,6 +13,14 @@ public class LootBox : MonoBehaviour
 
     //ANIMATIONS
     const string LOOTBOX_OPEN = "lootbox_open_animation";
+
+    enum Chest
+    {
+        open,
+        close
+    };
+
+    Chest chestState = Chest.close;
 
     void Start()
     {
@@ -23,14 +31,31 @@ public class LootBox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.tag == "Player" && !wasCollected)
         {
+            switch (chestState)
+            {
+                case Chest.close:
+                    ChangeAnimationState(LOOTBOX_OPEN);
+                    potion.SetActive(true);
+                    wasCollected = true;
+                    break;
+                case Chest.open:
+                    return;
+            }
+
+
             //anim.SetTrigger("Opened");
+            /*
             ChangeAnimationState(LOOTBOX_OPEN);
             potion.SetActive(true);
+            
             //Debug.Log("Drop hopp!");
-            wasCollected = true;
+            wasCollected = true;*/
         }
+
+        
     }
 
     

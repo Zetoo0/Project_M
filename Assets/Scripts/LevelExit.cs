@@ -10,7 +10,7 @@ public class LevelExit : MonoBehaviour
     [SerializeField] float LevelLoadSpeed = 1f;
     public Animator transition;
 
-    const string CROSSFADE_START = "Crossfade_Start";
+    const string CUSTOM_START= "Custom_Start";
     TimeSpan mapTime;
     DateTime mapStart;
     public string mapTimeInString;
@@ -23,14 +23,15 @@ public class LevelExit : MonoBehaviour
     {
         mapStart = DateTime.Now;
         Debug.Log("Map elején kezdem: "+mapStart);
+        //transition = GetComponent<Animator>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
-        StartPost();
-        //StartCoroutine(NextLevel());
+        //StartPost();
+        StartCoroutine(NextLevel());
         
 
 
@@ -90,8 +91,10 @@ public class LevelExit : MonoBehaviour
     {
         //GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
         //transition.Play(CROSSFADE_START);
+        //transition.Play(CUSTOM_END);
+        
         yield return new WaitForSecondsRealtime(LevelLoadSpeed);
-        transition.SetTrigger("Start");
+        GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 

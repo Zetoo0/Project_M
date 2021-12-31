@@ -73,13 +73,14 @@ public class EnemyMovement : MonoBehaviour
         {
             ChangeAnimationState(ENEMY_DEATH);
             Die();
-        }   
+        }
+        else
+        {
+            ChangeAnimationState(ENEMY_IDLE);
+        }
     }
 
-    void BombGoblinAttack()
-    {
-       
-    }
+    
 
 
     void OnTriggerExit2D(Collider2D other)

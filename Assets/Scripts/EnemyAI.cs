@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
 
-    BoxCollider2D playerDetect;
+    //BoxCollider2D playerDetect;
 
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        playerDetect = GetComponent<BoxCollider2D>();
+        //playerDetect = GetComponent<BoxCollider2D>();
 
         InvokeRepeating("UpdatePath", 0f, .5f);
 

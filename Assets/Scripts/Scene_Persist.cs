@@ -16,10 +16,29 @@ public class Scene_Persist : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    
     public void ResetScenePersist()
     {
         Destroy(gameObject);        
     }
+    
+    /*
+    [SerializeField] GameObject persistentObjectPrefab;
 
+    static bool hasSpawned = false;
+
+    private void Awake()
+    {
+        if (hasSpawned) return;
+
+        SpawnPersistentObjects();
+
+        hasSpawned = true;
+    }
+    private void SpawnPersistentObjects()
+    {
+        GameObject persistentObject = Instantiate(persistentObjectPrefab);
+        DontDestroyOnLoad(persistentObject);
+    }
+    */
 }
