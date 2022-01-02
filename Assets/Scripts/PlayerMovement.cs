@@ -57,13 +57,18 @@ public class PlayerMovement : MonoBehaviour
     PotionHolder potion;
 
     //ANIMATION STATES
-    string currentState;
+    /*string currentState;
     const string PLAYER_IDLE = "Metroid_Idle";
     const string PLAYER_RUN = "MetroidVania_Running";
     const string PLAYER_JUMP = "Player_Jump";
     const string PLAYER_ATTACK = "Player_Attack_Sword";
-    const string PLAYER_DEATH = "MetroidVania_Death";
-   
+    const string PLAYER_DEATH = "MetroidVania_Death";*/
+
+    //ANIMATION TRIGGERS AND BOOLS
+    const string deathAnimationTrigger = "Dying";
+    const string jumpAnimationTrigger = "Jumping";
+    const string attackAnimationTrigger = "Attack";
+    const string runningAnimationBool = "IsRunning";
 
 
     bool isAttacking;
@@ -90,11 +95,13 @@ public class PlayerMovement : MonoBehaviour
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
         dashTime = startDashTime;
+        anim.SetBool("IsRunning", false);
+
         //ChangeAnimationState(PLAYER_IDLE);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!isAlive) { return; }
         Run();
@@ -136,7 +143,8 @@ public class PlayerMovement : MonoBehaviour
             isAttacking = true;
             if (isAttacking)
             {
-                ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
+                anim.SetTrigger(attackAnimationTrigger);
+                //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
                                                     //Detect enemies whose in range
                 AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -155,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
     void AttackCompleted()
     {
         isAttacking = false;
+        anim.SetBool(runningAnimationBool, true);
         //ChangeAnimationState(PLAYER_IDLE);
     }
 
@@ -188,7 +197,8 @@ public class PlayerMovement : MonoBehaviour
         if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) || value.isPressed && jumpCount < extraJumps)//!isJumping && !isAttacking 
         {
             isJumping = true;
-            ChangeAnimationState(PLAYER_JUMP);
+            anim.SetTrigger("Jumping");
+            //ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(moveInput.x, jumpSpeed);
             jumpCount++;
@@ -213,7 +223,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if(feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacles")))
         {
+            anim.SetBool(runningAnimationBool, true);
             isJumping = false;
+
             jumpCount = 0;
         }
 
@@ -274,17 +286,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
-        if (playerHasHorizontalSpeed) //&& !isJumping && !isRunning
-        {
-            //isRunning = true;
-            ChangeAnimationState(PLAYER_RUN);
-            
-        }
-        else// if(!playerHasHorizontalSpeed && !isJumping && !isAttacking)
-        {
-            ChangeAnimationState(PLAYER_IDLE);
-            //isRunning = false;
-        }
+        anim.SetBool(runningAnimationBool, playerHasHorizontalSpeed);
         //anim.SetBool("IsRunning", playerHasHorizontalSpeed);
 
 
@@ -324,14 +326,15 @@ public class PlayerMovement : MonoBehaviour
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards","Trap")))
         {
             isAlive = false;
-            ChangeAnimationState(PLAYER_DEATH);
+            anim.SetTrigger(deathAnimationTrigger);
+            //ChangeAnimationState(PLAYER_DEATH);
             //anim.SetTrigger("Dying");
             rb.velocity = deathKick;
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 
-    public void ChangeAnimationState(string newState)
+    /*public void ChangeAnimationState(string newState)
     {
 
         //hogyha az aktuális animáció = a paraméterrel akkor returnöli
@@ -352,7 +355,7 @@ public class PlayerMovement : MonoBehaviour
         
         
         
-    }
+    }*/
   
 
 
