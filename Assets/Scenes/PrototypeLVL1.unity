@@ -766,6 +766,25 @@ Transform:
   m_Father: {fileID: 683740246}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &402604254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1342391356277959267, guid: d29d4523378973141a6e394eae370cc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 642355420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &402604255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402604254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092bc924072ff74d81327f4c7f4ca9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poiName: FIRST LOOT!!
 --- !u!1001 &418012102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1057,6 +1076,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8611ab13532cda4881a79750bafc248, type: 3}
+--- !u!1 &505831767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2749707198061242751, guid: a7afda9c06f44654ab2902057baaa8ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 951679204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &505831768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505831767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4de10744810694e908f2fb06c6ce6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: GoblinUwuw
 --- !u!1 &512594147 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9163715678411759894, guid: 349bdf46fb306034b9308424c6ce7287,
@@ -2103,6 +2141,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2075642293}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &813948030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813948032}
+  - component: {fileID: 813948031}
+  m_Layer: 0
+  m_Name: ACHIVEMENT SYSTEM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &813948031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813948030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0a505e8011fa74daa252ac264d309a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &813948032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813948030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.059017, y: 11.945312, z: -1838.2129}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &831160562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,12 +2276,12 @@ PrefabInstance:
     - target: {fileID: 4546430347577307655, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5212631
+      value: 0.034339905
       objectReference: {fileID: 0}
     - target: {fileID: 4546430347577307655, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.351435
+      value: 10.344169
       objectReference: {fileID: 0}
     - target: {fileID: 4546430347577307655, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
@@ -7499,6 +7580,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1761395447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1761395449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7885428376523125322, guid: 48f9c59461fd24241ab9d60056ca14ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 1761395447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1761395450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761395449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092bc924072ff74d81327f4c7f4ca9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poiName: First Loot!!!
 --- !u!1001 &1825429352
 PrefabInstance:
   m_ObjectHideFlags: 0

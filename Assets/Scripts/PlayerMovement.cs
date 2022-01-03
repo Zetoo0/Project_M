@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     const string jumpAnimationTrigger = "Jumping";
     const string attackAnimationTrigger = "Attack";
     const string runningAnimationBool = "IsRunning";
+    const string isAttackCompletedBool = "IsAttackCompleted";
 
 
     bool isAttacking;
@@ -95,9 +96,7 @@ public class PlayerMovement : MonoBehaviour
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
         dashTime = startDashTime;
-        anim.SetBool("IsRunning", false);
 
-        //ChangeAnimationState(PLAYER_IDLE);
     }
 
     // Update is called once per frame
@@ -153,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
                     enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
                 }
             }
+
             
         }
         AttackCompleted();
@@ -163,8 +163,7 @@ public class PlayerMovement : MonoBehaviour
     void AttackCompleted()
     {
         isAttacking = false;
-        anim.SetBool(runningAnimationBool, true);
-        //ChangeAnimationState(PLAYER_IDLE);
+        anim.SetBool(isAttackCompletedBool, true);
     }
 
 
@@ -184,7 +183,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         {
             moveInput = value.Get<Vector2>();
-            //Debug.Log(moveInput);
             Run();
         }
         
@@ -198,11 +196,9 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
             anim.SetTrigger("Jumping");
-            //ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(moveInput.x, jumpSpeed);
             jumpCount++;
-            //JumpCountCheck();
             JumpCompleted();
 
 
@@ -237,8 +233,6 @@ public class PlayerMovement : MonoBehaviour
         if(!isAlive) { return;  }
         if (value.isPressed && !isDashing)
         {
-            //dash animation
-            //rb.velocity = new Vector2(dashDistance * moveInput.x,0f);  
             StartCoroutine(Dash(direction));
         }
         
@@ -257,25 +251,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Dashed");
         isDashing = true;
-        //rb.velocity += new Vector2(dashDistance * direction, 0f);
-        //rb.AddForce(new Vector2(dashDistance * direction, 0f));
         rb.velocity += new Vector2(dashDistance * moveInput.x, 0f);
         rb.AddForce(new Vector2(dashDistance * moveInput.x, 0f));
 
 
 
 
-        /*if (isDashing)
-        {
-            if(direction == -1)
-            {
-                rb.velocity = Vector2.left * dashSpeed;
-            }
-            else
-            {
-                rb.velocity = Vector2.right * dashSpeed;
-            }
-        }*/
+        
         yield return new WaitForSeconds(0.4f);
         isDashing = false;
     }
@@ -287,7 +269,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = playerVelocity;
 
         anim.SetBool(runningAnimationBool, playerHasHorizontalSpeed);
-        //anim.SetBool("IsRunning", playerHasHorizontalSpeed);
 
 
     }
@@ -309,7 +290,6 @@ public class PlayerMovement : MonoBehaviour
         if (!feetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
             rb.gravityScale = gravityScaleAtStart;
-            //anim.SetBool("IsClimbing", false);
             return;
         }
         Vector2 climbVelocity = new Vector2(rb.velocity.x, moveInput.y * climbSpeed);
@@ -317,7 +297,6 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = 0.0f;
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         
-        //anim.SetBool("IsClimbing", playerHasVerticalSpeed);
 
     }
 
@@ -327,8 +306,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isAlive = false;
             anim.SetTrigger(deathAnimationTrigger);
-            //ChangeAnimationState(PLAYER_DEATH);
-            //anim.SetTrigger("Dying");
             rb.velocity = deathKick;
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
