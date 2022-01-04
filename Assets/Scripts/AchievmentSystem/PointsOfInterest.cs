@@ -17,5 +17,7 @@ public class PointsOfInterest : MonoBehaviour
             OnPointsOfInteresEntered(this.poiName);
     }
 
+    
+
 
 }

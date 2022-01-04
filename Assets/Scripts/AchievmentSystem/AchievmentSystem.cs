@@ -39,18 +39,19 @@ public class AchievmentSystem : MonoBehaviour
     {
         string achievmentKey = "achievment" + enemyName;
         killedEnemy++;
-
+        
         switch (killedEnemy)
         {
+
             case 1:
                 PlayerPrefs.SetInt(achievmentKey, 1);
                 killedEnemy = 1;
-                Debug.Log("Unlocked for your first killed " + enemyName);
+                Debug.Log("You're a real " + enemyName + " kid killer");
                 break;
             case 10:
                 PlayerPrefs.SetInt(achievmentKey, 10);
                 killedEnemy = 10;
-                Debug.Log("Unlocked for your tenth killed " + enemyName);
+                Debug.Log(enemyName + "Slayer");
                 break;
             default:
                 killedEnemy++;
