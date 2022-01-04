@@ -57,20 +57,21 @@ public class PlayerMovement : MonoBehaviour
     PotionHolder potion;
 
     //ANIMATION STATES
-    /*string currentState;
+    string currentState;
     const string PLAYER_IDLE = "Metroid_Idle";
     const string PLAYER_RUN = "MetroidVania_Running";
     const string PLAYER_JUMP = "Player_Jump";
     const string PLAYER_ATTACK = "Player_Attack_Sword";
-    const string PLAYER_DEATH = "MetroidVania_Death";*/
+    const string PLAYER_DEATH = "MetroidVania_Death";
 
     //ANIMATION TRIGGERS AND BOOLS
-    const string deathAnimationTrigger = "Dying";
+    /*const string deathAnimationTrigger = "Dying";
     const string jumpAnimationTrigger = "Jumping";
     const string attackAnimationTrigger = "Attack";
     const string runningAnimationBool = "IsRunning";
     const string isAttackCompletedBool = "IsAttackCompleted";
-
+    const string isJumpingAnimationBool = "IsJumping";
+    const string isGroundedAnimatinBool = "IsGrounded";*/
 
     bool isAttacking;
     bool isJumping;
@@ -107,7 +108,47 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         ClimbLadder();
         Die();
+
         //direction = transform.localScale.x; 
+    }
+
+
+    void OnPause(InputValue value)
+    {
+        if(!isAlive) { return; }
+        if(value.isPressed && !GameIsPaused())
+        {
+            Time.timeScale = 0;
+        }
+        else if(value.isPressed && GameIsPaused())
+        {
+            Time.timeScale = 1;
+        }
+
+
+
+    }
+
+  
+
+    bool GameIsPaused()
+    {
+        bool gameIsPaused = false;
+
+        if(Time.timeScale == 0)
+        {
+            gameIsPaused = true;
+        }
+        else
+        {
+            gameIsPaused = false;
+        }
+        
+
+
+
+        return gameIsPaused;
+
     }
 
     void OnTriggerEnter2D(Collider2D collison)
@@ -137,15 +178,14 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         //Instantiate(bullet, gun.position, transform.rotation);
         //AudioSource.PlayClipAtPoint(bulletSound, Camera.main.transform.position);
-        if (!isAttacking && !isJumping)
+        if (!isAttacking && !isJumping && value.isPressed)
         {
             isAttacking = true;
             if (isAttacking)
             {
-                anim.SetTrigger(attackAnimationTrigger);
+                ChangeAnimationState(PLAYER_ATTACK);
                 //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
                                                     //Detect enemies whose in range
-                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
                 foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
                 {
@@ -162,8 +202,15 @@ public class PlayerMovement : MonoBehaviour
 
     void AttackCompleted()
     {
+        if (HasPlayerHorizontalSpeed())
+        {
+            ChangeAnimationState(PLAYER_RUN);
+            }
+        else if (!HasPlayerHorizontalSpeed())
+        {
+            ChangeAnimationState(PLAYER_IDLE);
+        }
         isAttacking = false;
-        anim.SetBool(isAttackCompletedBool, true);
     }
 
 
@@ -195,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
         if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) || value.isPressed && jumpCount < extraJumps)//!isJumping && !isAttacking 
         {
             isJumping = true;
-            anim.SetTrigger("Jumping");
+            ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(moveInput.x, jumpSpeed);
             jumpCount++;
@@ -206,20 +253,29 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+   
 
-    void JumpCountCheck()
+    bool HasPlayerHorizontalSpeed()
     {
-        
+        bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+
+        return playerHasHorizontalSpeed;
+
     }
-
-
+        
 
     void JumpCompleted()
     {
         if(feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacles")))
         {
-            anim.SetBool(runningAnimationBool, true);
+            if (HasPlayerHorizontalSpeed())
+            {
+                ChangeAnimationState(PLAYER_RUN);
+            }
+            else if (!HasPlayerHorizontalSpeed())
+            {
+                ChangeAnimationState(PLAYER_IDLE);
+            }
             isJumping = false;
 
             jumpCount = 0;
@@ -268,7 +324,14 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
-        anim.SetBool(runningAnimationBool, playerHasHorizontalSpeed);
+        if (HasPlayerHorizontalSpeed())
+        {
+            ChangeAnimationState(PLAYER_RUN);
+        }
+        else if (!HasPlayerHorizontalSpeed())
+        {
+            ChangeAnimationState(PLAYER_IDLE);
+        }
 
 
     }
@@ -305,13 +368,13 @@ public class PlayerMovement : MonoBehaviour
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards","Trap")))
         {
             isAlive = false;
-            anim.SetTrigger(deathAnimationTrigger);
+            ChangeAnimationState(PLAYER_DEATH);
             rb.velocity = deathKick;
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 
-    /*public void ChangeAnimationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
 
         //hogyha az aktuális animáció = a paraméterrel akkor returnöli
@@ -332,7 +395,7 @@ public class PlayerMovement : MonoBehaviour
         
         
         
-    }*/
+    }
   
 
 

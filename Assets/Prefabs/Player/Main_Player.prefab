@@ -4878,6 +4878,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2950899673139124415}
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: deathKick.x
       value: 17
       objectReference: {fileID: 0}
@@ -4892,6 +4896,10 @@ PrefabInstance:
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: baseJumpSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
+      propertyPath: startDashTime
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: respawnPoint.x
