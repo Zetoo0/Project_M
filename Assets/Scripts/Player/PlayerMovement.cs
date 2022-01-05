@@ -86,6 +86,9 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
 
 
+    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -199,20 +202,20 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void OnJump(InputValue value)
+    IEnumerator OnJump(InputValue value)
     {
-        if (!isAlive) { return; }
+        
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) || value.isPressed && jumpCount < extraJumps)//!isJumping && !isAttacking 
         {
+
             isJumping = true;
             ChangeAnimationState(PLAYER_JUMP);
             CreateDust();
             rb.velocity += new Vector2(moveInput.x, jumpSpeed);
             jumpCount++;
             JumpCompleted();
-
-
+            yield return new WaitForSecondsRealtime(0.5f);
         }
 
     }
@@ -288,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
-        if (HasPlayerHorizontalSpeed())
+        if (HasPlayerHorizontalSpeed() && !feetCollider.CompareTag("Platform"))
         {
             ChangeAnimationState(PLAYER_RUN);
         }
