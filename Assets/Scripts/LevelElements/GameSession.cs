@@ -13,6 +13,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] GameObject dead;
+    [SerializeField] TextMeshProUGUI playerDeathText;
     public Vector2 savePosition;
     //public Rigidbody2D savePoint;
     //public Rigidbody2D player;
@@ -61,7 +62,8 @@ public class GameSession : MonoBehaviour
 
     void DeadTextOut()
     {
-        dead.SetActive(true);  
+        playerDeathText.gameObject.SetActive(true);
+        //dead.SetActive(true);  
     }
 
     void ResetGameSession()

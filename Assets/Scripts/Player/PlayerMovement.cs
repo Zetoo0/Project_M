@@ -113,43 +113,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void OnPause(InputValue value)
-    {
-        if(!isAlive) { return; }
-        if(value.isPressed && !GameIsPaused())
-        {
-            Time.timeScale = 0;
-        }
-        else if(value.isPressed && GameIsPaused())
-        {
-            Time.timeScale = 1;
-        }
-
-
-
-    }
-
-  
-
-    bool GameIsPaused()
-    {
-        bool gameIsPaused = false;
-
-        if(Time.timeScale == 0)
-        {
-            gameIsPaused = true;
-        }
-        else
-        {
-            gameIsPaused = false;
-        }
-        
-
-
-
-        return gameIsPaused;
-
-    }
+ 
 
     void OnTriggerEnter2D(Collider2D collison)
     {

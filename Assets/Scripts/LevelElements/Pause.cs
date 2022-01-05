@@ -1,18 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Pause : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static bool  gameIsPaused = false;
+
+
+    void OnPause(InputValue value)
     {
-        
+
+
+        if (value.isPressed)
+        {
+            if (gameIsPaused)
+            {
+                Resume();
+            }   
+            else
+            {
+                PauseTheGame();
+            }
+        }
+
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void Resume()
     {
-        
+        Debug.Log("Resum");
+        Time.timeScale = 1f;
+        gameIsPaused = false;
     }
+
+    void PauseTheGame()
+    {
+        Debug.Log("Pause");
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+
+
+
+    static bool GameIsPaused(bool value)
+    {
+        bool gameIsPaused;
+        if (value)
+        {
+            gameIsPaused = true;
+        }
+        else
+        {
+            gameIsPaused = false;
+        }
+
+        return gameIsPaused;
+
+
+    }
+
+
+
 }
