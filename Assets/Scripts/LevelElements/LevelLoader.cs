@@ -9,8 +9,5 @@ public class LevelLoader : MonoBehaviour
     public void FirstLevel()
     {
         SceneManager.LoadScene(1);
-
-
-
-    }
+     }
 }

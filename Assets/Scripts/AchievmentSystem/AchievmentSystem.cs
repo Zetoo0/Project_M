@@ -57,10 +57,6 @@ public class AchievmentSystem : MonoBehaviour
                 killedEnemy++;
                 Debug.Log("Killed enemies: " + killedEnemy);
                 break;
-
-
         }
     }
-
-
 }

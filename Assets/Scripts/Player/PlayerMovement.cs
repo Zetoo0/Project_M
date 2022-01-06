@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (!isAlive) { return; }
+        SetCursorStateLocked();
         Run();
         FlipSprite();
         ClimbLadder();
@@ -115,9 +116,15 @@ public class PlayerMovement : MonoBehaviour
         //direction = transform.localScale.x; 
     }
 
-
+    void OnNavigation(InputValue value)
+    {
+        value.Get<Vector2>();
+    }
  
-
+    void SetCursorStateLocked()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void OnTriggerEnter2D(Collider2D collison)
     {
         if (collison.tag == "JumpBoostPotion" && !isPickedUp)
