@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (!isAlive) { return; }
-        SetCursorStateLocked();
+        //SetCursorStateLocked();
         Run();
         FlipSprite();
         ClimbLadder();

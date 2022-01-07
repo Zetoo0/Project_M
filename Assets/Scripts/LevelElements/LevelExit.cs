@@ -31,7 +31,7 @@ public class LevelExit : MonoBehaviour
         //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
         //StartPost();
-        StartCoroutine(NextLevel());
+        NextLevel();
         
 
 
@@ -87,13 +87,13 @@ public class LevelExit : MonoBehaviour
 
     }
 
-    public IEnumerator NextLevel()
+    public void NextLevel()
     {
         //GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
         //transition.Play(CROSSFADE_START);
         //transition.Play(CUSTOM_END);
         
-        yield return new WaitForSecondsRealtime(LevelLoadSpeed);
+        //yield return new WaitForSecondsRealtime(LevelLoadSpeed);
         GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;

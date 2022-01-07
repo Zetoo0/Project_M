@@ -83,7 +83,8 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
         //GetComponent<PlayerMovement>().rb.transform.position = savePosition;
         playerDeathsText.text = deaths.ToString();
-        dead.SetActive(false);
+        //dead.SetActive(false);
+        playerDeathText.gameObject.SetActive(false);
     }
 
     public void AddToScore(int pointsToAdd)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 public class ResumeGameButton : MonoBehaviour
 {
     GameObject pauseMenu;
@@ -9,7 +10,6 @@ public class ResumeGameButton : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;    
+        GetComponent<Pause>().Resume();
     }
 }

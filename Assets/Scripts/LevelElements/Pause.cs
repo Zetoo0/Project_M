@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class Pause : MonoBehaviour
 {
 
-    public static bool  gameIsPaused = false;
+    public bool  gameIsPaused = false;
     [SerializeField] GameObject pauseMenu;  
     GameState gameState;
     TextMeshProUGUI text;
@@ -17,6 +17,7 @@ public class Pause : MonoBehaviour
     void Start()
     {
         pauseMenu.SetActive(false);
+        DontDestroyOnLoad(pauseMenu);
     }
 
 
@@ -43,7 +44,7 @@ public class Pause : MonoBehaviour
 
 
 
-    void Resume()
+    public void Resume()
     {
         pauseMenu.SetActive(false);
         gameState = GameState.Gameplay;
@@ -56,6 +57,7 @@ public class Pause : MonoBehaviour
     void PauseTheGame()
     {
         pauseMenu.SetActive(true);
+        
         //SceneManager.LoadScene(0);
         gameState = GameState.Paused;
         Debug.Log("Pause");

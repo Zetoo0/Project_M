@@ -6,7 +6,7 @@ public class AchievmentSystem : MonoBehaviour
 {
     int killedEnemy = 0;
 
-    void Start()
+    private void Start()
     {
         PlayerPrefs.DeleteAll();
 
@@ -22,7 +22,7 @@ public class AchievmentSystem : MonoBehaviour
             PointsOfInterest_OnPointsOfInterestEntered;
     }*/
 
-    void PointsOfInterest_OnPointsOfInterestEntered(string poiName)
+    private void PointsOfInterest_OnPointsOfInterestEntered(string poiName)
     {
         string achievmentKey = "achievment" + poiName;
 
@@ -35,7 +35,7 @@ public class AchievmentSystem : MonoBehaviour
 
     }
 
-    void PlayerBasedAchievments_OnKilledEnemy(string enemyName)
+   private void PlayerBasedAchievments_OnKilledEnemy(string enemyName)
     {
         string achievmentKey = "achievment" + enemyName;
         killedEnemy++;
