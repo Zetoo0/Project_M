@@ -12,7 +12,7 @@ public class Pause : MonoBehaviour
     [SerializeField] GameObject pauseMenu;  
     GameState gameState;
     TextMeshProUGUI text;
-    [SerializeField]PlayerInput playerInput;
+    //[SerializeField]PlayerInput playerInput;
 
     void Start()
     {

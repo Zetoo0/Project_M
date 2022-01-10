@@ -12,11 +12,7 @@ public class GameSession : MonoBehaviour
     public int playerScore = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
-    [SerializeField] GameObject dead;
     [SerializeField] TextMeshProUGUI playerDeathText;
-    public Vector2 savePosition;
-    //public Rigidbody2D savePoint;
-    //public Rigidbody2D player;
     public DateTime mapStart;
 
     void Awake()
@@ -39,10 +35,6 @@ public class GameSession : MonoBehaviour
     {
         playerDeathsText.text = deaths.ToString();
         playerScoreText.text = playerScore.ToString();
-        //player = GetComponent<Rigidbody2D>();
-        //savePoint = GetComponent<Rigidbody2D>();
-        savePosition = new Vector2(5f, 5f);
-        dead.SetActive(false);
 
     }
 
@@ -63,7 +55,6 @@ public class GameSession : MonoBehaviour
     void DeadTextOut()
     {
         playerDeathText.gameObject.SetActive(true);
-        //dead.SetActive(true);  
     }
 
     void ResetGameSession()
@@ -76,15 +67,15 @@ public class GameSession : MonoBehaviour
     IEnumerator TakeLife()
     {
 
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(1);
         //playerLives--;
         deaths++;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         //GetComponent<PlayerMovement>().rb.transform.position = savePosition;
-        playerDeathsText.text = deaths.ToString();
+        //playerDeathsText.text = deaths.ToString();
         //dead.SetActive(false);
-        playerDeathText.gameObject.SetActive(false);
+        //playerDeathText.gameObject.SetActive(false);
     }
 
     public void AddToScore(int pointsToAdd)

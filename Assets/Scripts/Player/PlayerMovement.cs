@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dash")]
     bool isDashing;
-    float dashDistance = 15.0f;
+    float dashDistance = 30.0f;
     public float dashSpeed;
     private float dashTime;
     public float startDashTime;

@@ -640,7 +640,6 @@ GameObject:
   - component: {fileID: 504010681150563450}
   - component: {fileID: 504010681150563448}
   - component: {fileID: 504010681150563451}
-  - component: {fileID: 504010681150563449}
   m_Layer: 9
   m_Name: Background_Tiles
   m_TagString: Untagged
@@ -7840,38 +7839,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!60 &504010681150563449
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504010681150563453}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -1.283968, y: 12.411661}
-      - {x: -18.016386, y: 12.790783}
-      - {x: -18.102074, y: -2.865703}
-      - {x: 13.209208, y: -2.8898623}
-      - {x: 13.276337, y: 12.003111}
-      - {x: 13.264933, y: 12.53461}
-      - {x: 13.26453, y: 13.056535}
 --- !u!1 &504010681341543056
 GameObject:
   m_ObjectHideFlags: 0
