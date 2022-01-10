@@ -73,9 +73,9 @@ public class GameSession : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         //GetComponent<PlayerMovement>().rb.transform.position = savePosition;
-        //playerDeathsText.text = deaths.ToString();
+        playerDeathsText.text = deaths.ToString();
         //dead.SetActive(false);
-        //playerDeathText.gameObject.SetActive(false);
+        playerDeathText.gameObject.SetActive(false);
     }
 
     public void AddToScore(int pointsToAdd)

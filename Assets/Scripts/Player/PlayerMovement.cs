@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_JUMP = "Player_Jump";
     const string PLAYER_ATTACK = "Player_Attack_Sword";
     const string PLAYER_DEATH = "MetroidVania_Death";
+    const string PLAYER_DASH = "Player_Dash";
 
     //ANIMATION TRIGGERS AND BOOLS
     /*const string deathAnimationTrigger = "Dying";
@@ -280,6 +281,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash(float direction)
     {
         Debug.Log("Dashed");
+        ChangeAnimationState(PLAYER_DASH);
         isDashing = true;
         rb.velocity += new Vector2(dashDistance * moveInput.x, 0f);
         rb.AddForce(new Vector2(dashDistance * moveInput.x, 0f));
