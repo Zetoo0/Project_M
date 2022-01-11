@@ -92,9 +92,8 @@ public class LevelExit : MonoBehaviour
         //GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
         //transition.Play(CROSSFADE_START);
         //transition.Play(CUSTOM_END);
-        
+        Debug.Log("Next LEvel");
         //yield return new WaitForSecondsRealtime(LevelLoadSpeed);
-        GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
@@ -105,7 +104,7 @@ public class LevelExit : MonoBehaviour
         FindObjectOfType<Scene_Persist>().ResetScenePersist();
 
         SceneManager.LoadScene(nextSceneIndex);
-        
+        GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
         Debug.Log("Új pálya: " + mapStart);
     }
 }
