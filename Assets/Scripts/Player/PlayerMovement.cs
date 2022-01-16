@@ -8,86 +8,67 @@ public class PlayerMovement : MonoBehaviour
     
 
     [Header("Objects")]
-    [SerializeField] float baseSpeed = 10.0f;
-    [SerializeField] public float baseJumpSpeed = 10.0f;
-    [SerializeField] float climbSpeed = 5.0f;
-    [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
-    //[SerializeField] GameObject bullet;
-    //[SerializeField] Transform gun;
-    //[SerializeField] AudioClip bulletSound;
-    [SerializeField] AudioClip swishSound;
+    [SerializeField] private float baseSpeed = 10.0f;   
+   // [SerializeField] public float baseJumpSpeed = 10.0f;
+    [SerializeField] private float climbSpeed = 5.0f;
+    [SerializeField] private Vector2 deathKick = new Vector2(10f, 10f);
+    [SerializeField] private AudioClip swishSound;
 
     [Header("Dash")]
-    bool isDashing;
-    float dashDistance = 30.0f;
-    public float dashSpeed;
-    private float dashTime;
-    public float startDashTime;
-    float direction;
+    private bool isDashing;
+    private float dashDistance = 30.0f;
 
     [Header("Particles")]
-    public ParticleSystem dust;
+    [SerializeField] private ParticleSystem dust;
 
+    [Header("Audio")]
 
     
     [Header("PlayerBasics")]
-    Vector2 moveInput;
+    private Vector2 moveInput;
     public Rigidbody2D rb;
-    Animator anim;
-    CapsuleCollider2D bodyCollider;
-    BoxCollider2D feetCollider;
-    float gravityScaleAtStart;
-    bool isAlive = true;
-    //int deaths = 0;
+    private Animator anim;
+    private CapsuleCollider2D bodyCollider;
+    private BoxCollider2D feetCollider;
+    private float gravityScaleAtStart;
+    private bool isAlive = true;
     public float jumpSpeed;
 
     [Header("Attack")]
     public int damage = 20;
-    public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayers;
+    public Transform attackPoint;
 
     [Header("Potion")]
-    public bool isPickedUp = false;
-    public float activeTime = 5f;
-
-    [Header("CheckPoint")]
-    private Vector3 respawnPoint;
-
-    PotionHolder potion;
-
-    //ANIMATION STATES
-    string currentState;
-    const string PLAYER_IDLE = "Metroid_Idle";
-    const string PLAYER_RUN = "MetroidVania_Running";
-    const string PLAYER_JUMP = "Player_Jump";
-    const string PLAYER_ATTACK = "Player_Attack_Sword";
-    const string PLAYER_DEATH = "MetroidVania_Death";
-    const string PLAYER_DASH = "Player_Dash";
-
-    //ANIMATION TRIGGERS AND BOOLS
-    /*const string deathAnimationTrigger = "Dying";
-    const string jumpAnimationTrigger = "Jumping";
-    const string attackAnimationTrigger = "Attack";
-    const string runningAnimationBool = "IsRunning";
-    const string isAttackCompletedBool = "IsAttackCompleted";
-    const string isJumpingAnimationBool = "IsJumping";
-    const string isGroundedAnimatinBool = "IsGrounded";*/
-
-    bool isAttacking;
-    bool isJumping;
-    string beforeState;
-    bool isRunning = false;
-    public bool canDoubleJump = false;
-
-    int extraJumps;
-    public int extraJumpsValue;
-    int jumpCount;
-    bool canJump;
-    bool isGrounded;
-
+    public bool isItemPickedUp = false;
+    //public float activeTime = 5f;
 
     
+
+
+    //ANIMATION STATES
+    [Header("AnimationStates")]
+    private string currentState;
+    private const string PLAYER_IDLE = "Player_Idle";
+    private const string PLAYER_RUN = "Player_Running";
+    private const string PLAYER_JUMP = "Player_Jump";
+    private const string PLAYER_ATTACK = "Player_Attack_Sword";
+    private const string PLAYER_DEATH = "Player_Death";
+    private const string PLAYER_DASH = "Player_Dash";
+
+
+    private bool isAttacking;
+    public bool isJumping;
+    //public bool canDoubleJump = false;
+
+    private int extraJumps;
+    [SerializeField] private int extraJumpsValue;
+    private int jumpCount;
+   
+
+
+
 
 
     // Start is called before the first frame update
@@ -100,8 +81,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
-        dashTime = startDashTime;
-
+        //transform.position = savePosition;
     }
 
     // Update is called once per frame
@@ -117,10 +97,9 @@ public class PlayerMovement : MonoBehaviour
         //direction = transform.localScale.x; 
     }
 
-    void OnNavigation(InputValue value)
-    {
-        value.Get<Vector2>();
-    }
+   
+    
+    
  
     void SetCursorStateLocked()
     {
@@ -128,13 +107,13 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collison)
     {
-        if (collison.tag == "JumpBoostPotion" && !isPickedUp)
+        if (collison.tag == "JumpBoostPotion" && !isItemPickedUp)
         {
-            isPickedUp = true;
+            isItemPickedUp = true;
             Debug.Log("POOOTION");
             //jumpSpeed = 20f;
             GetComponent<PotionHolder>().state = PotionHolder.PotionState.pickedUp;
-            Destroy(collison.gameObject);
+            collison.gameObject.SetActive(false);
             //yield return new WaitForSecondsRealtime(activeTime);
             //jumpSpeed = baseJumpSpeed;
             //Debug.Log("Inactive");
@@ -159,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
             if (isAttacking)
             {
                 ChangeAnimationState(PLAYER_ATTACK);
+                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
                 //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
                                                     //Detect enemies whose in range
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -252,9 +232,10 @@ public class PlayerMovement : MonoBehaviour
                 ChangeAnimationState(PLAYER_IDLE);
             }
             isJumping = false;
-
             jumpCount = 0;
+           
         }
+
 
         //ChangeAnimationState(beforeState);
     }
@@ -264,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
         if(!isAlive) { return;  }
         if (value.isPressed && !isDashing)
         {
-            StartCoroutine(Dash(direction));
+            StartCoroutine(Dash());
         }
         
             
@@ -278,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
     }
    
 
-    IEnumerator Dash(float direction)
+    IEnumerator Dash()
     {
         Debug.Log("Dashed");
         ChangeAnimationState(PLAYER_DASH);
@@ -358,6 +339,8 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+
+        
 
         //beforeState = currentState;
         //animáció lejátszása

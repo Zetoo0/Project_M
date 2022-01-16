@@ -6,7 +6,6 @@ public class CoinPickup : MonoBehaviour
 {
     [SerializeField] AudioClip coinPickUpSFX;
     [SerializeField] int pointsForPickUp = 125;
-    //Vector2 coinPickupUp = new Vector2(0f, 1f);
 
     [SerializeField] bool wasCollected = false;
     Animator anim;

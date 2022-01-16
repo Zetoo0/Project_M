@@ -35,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         Hit();
-        StartCoroutine(FlipEnemyFaceing());
+        //InvokeRepeating("FlipEnemyFaceing", 5f,100);
         CheckWall();
     }
 
@@ -91,9 +91,9 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-    public IEnumerator FlipEnemyFaceing()
+    public void FlipEnemyFaceing()
     {
-        yield return new WaitForSecondsRealtime(5);
+        Debug.Log("Flip");
         transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), 1.0f);
         if(transform.localScale.x == -1)
         {

@@ -487,6 +487,12 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.height
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4546430347577307897, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
+        type: 3}
+      propertyPath: m_CustomBlends
+      value: 
+      objectReference: {fileID: 11400000, guid: cf91214690bef3b41a661c018241f219,
+        type: 2}
     - target: {fileID: 4546430348278700495, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
       propertyPath: m_BiasX

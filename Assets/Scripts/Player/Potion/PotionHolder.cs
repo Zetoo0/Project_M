@@ -1,24 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PotionHolder : MonoBehaviour
 {
     public Potion potion;
-    float activeTime;
+    public float activeTime;
     //public KeyCode key;
 
     public enum PotionState
     {
         pickedUp,
-        //active,
         notPickedUp
     }
 
     public PotionState state = PotionState.notPickedUp;
 
+     void Start()
+    {
+        activeTime = potion.activeTime;
+    }
+
+
     void Update()
     {
+        /*
+        if(state == PotionState.pickedUp)
+        {
+            potion.Activate(gameObject);
+            if(activeTime > 0)
+            {
+                StartCoroutine(CountDown());    
+            }
+            if(activeTime == 0)
+            {
+                state = PotionState.notPickedUp;
+                Debug.Log("Inactive");
+                GetComponent<PlayerMovement>().isPickedUp = false;
+                GetComponent<PlayerMovement>().jumpSpeed = 15;    
+            }
+        }*/
+
         switch (state)
         {                
             case PotionState.pickedUp:
@@ -26,7 +49,7 @@ public class PotionHolder : MonoBehaviour
                 //if (Input.GetKeyDown(key))
                 //{
                 potion.Activate(gameObject);
-                activeTime = potion.activeTime;
+                //activeTime = potion.activeTime;
                 //}
                 if(activeTime > 0)
                 {
@@ -36,9 +59,20 @@ public class PotionHolder : MonoBehaviour
                 else
                 {
                     state = PotionState.notPickedUp;
+                    Debug.Log("Inactive");
+                    GetComponent<PlayerMovement>().isItemPickedUp = false;
+                    GetComponent<PlayerMovement>().jumpSpeed = 15;    
+
                 }
                 break;
 
         }
     }
+
+    /*IEnumerator CountDown()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        activeTime--;
+    }*/
+
 }
