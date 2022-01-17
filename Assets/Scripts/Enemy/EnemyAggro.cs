@@ -76,7 +76,7 @@ public class EnemyAggro : MonoBehaviour
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
-            isFacingLeft = false;
+            isFacingLeft = true;
         }
         else
         {
@@ -84,7 +84,7 @@ public class EnemyAggro : MonoBehaviour
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
-            isFacingLeft = true;
+            isFacingLeft = false;
         }
     }
 
