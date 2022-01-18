@@ -7,6 +7,9 @@ public class EnemyAggro : MonoBehaviour
     [SerializeField]
     public Transform Player;
 
+    MonoBehaviour mono = new MonoBehaviour();
+
+
     [SerializeField]
     public float agroRange;
 
@@ -16,14 +19,16 @@ public class EnemyAggro : MonoBehaviour
     [SerializeField]
     public Transform castPoint;
 
+
     Rigidbody2D rb;
 
-    public bool isFacingLeft = true;
+    public bool isFacingLeft;
     bool isAgro = false;
     bool isSearching = false;
 
     const string ENEMY_RUN = "Enemy_Run";
 
+   
 
     void Start()
     {
@@ -70,13 +75,13 @@ public class EnemyAggro : MonoBehaviour
 
     void ChasePlayer()
     {
-        if (transform.position.x < Player.position.x)
+        if (Player.position.x > transform.position.x)
         {
             //enemy is the left side and the player is on the right so move right
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
-            isFacingLeft = true;
+            isFacingLeft = false;
         }
         else
         {
@@ -84,7 +89,7 @@ public class EnemyAggro : MonoBehaviour
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
-            isFacingLeft = false;
+            isFacingLeft = true;
         }
     }
 
