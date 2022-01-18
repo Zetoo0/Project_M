@@ -14,17 +14,12 @@ public class DestroyablePlatform : MonoBehaviour
         platformIsNotActive = false;
     }
 
-    public void Update()
-    {
-        /*if (platformIsNotActive)
-        {
-            StartCoroutine(ActivatePlatform());
-        }*/
-    }
+    
 
     IEnumerator ActivatePlatform()
     {
         yield return new WaitForSecondsRealtime(3);
+        platformIsNotActive = false;
         CheckerCollider.enabled = true;
         DestroyThisPlatform.SetActive(true);
 
@@ -41,9 +36,10 @@ public class DestroyablePlatform : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log("Collided");
+        //Debug.Log("Collided");
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Collided with the player");
             StartCoroutine(DestroyPlatform());
         }
     }
