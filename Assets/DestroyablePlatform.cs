@@ -4,58 +4,80 @@ using UnityEngine;
 
 public class DestroyablePlatform : MonoBehaviour
 {
-    float time;
+    bool platformIsNotActive;
+    [SerializeField] GameObject DestroyThisPlatform;
+    //[SerializeField] GameObject[] platforms;
+    [SerializeField] BoxCollider2D CheckerCollider;
 
-     void Start()
+    public void Start()
     {
-        time = 0;
+        platformIsNotActive = false;
     }
 
-
-
-    private void Update()
+    public void Update()
     {
-        Debug.Log(time);
+        /*if (platformIsNotActive)
+        {
+            StartCoroutine(ActivatePlatform());
+        }*/
+    }
+
+    IEnumerator ActivatePlatform()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        CheckerCollider.enabled = true;
+        DestroyThisPlatform.SetActive(true);
+
+        /*for(int i = 0; i <= platforms.Length; i++)
+        {
+            if (!platforms[i].active)
+            {
+                yield return new WaitForSecondsRealtime(1);
+                platforms[i].SetActive(true);
+            }
+        }*/
     }
 
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (gameObject.active && collision.gameObject.tag == "Player")
+        Debug.Log("Collided");
+        if (collision.gameObject.tag == "Player")
         {
             StartCoroutine(DestroyPlatform());
         }
-        if(!gameObject.activeSelf)
-        {
-            Invoke("ActivatePlatform", 5);
-        }
     }
-
-    void ActivatePlatform()
-    {
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
-    }
-
-
-    //private void Update()
-    //{
-    //;
-
-
-    //}
 
     IEnumerator DestroyPlatform()
     {
         yield return new WaitForSecondsRealtime(3);
-        if (gameObject.active)
+        if (!platformIsNotActive)
         {
-            gameObject.SetActive(false);
+            platformIsNotActive = true;
+            DestroyThisPlatform.SetActive(false);
+            CheckerCollider.enabled = false;
+            StartCoroutine(ActivatePlatform());
+        }
+
+    }
+
+    
+
+    /*IEnumerator DestroyPlatforms()
+    {
+        for (int i = 0; i < platforms.Length; i++)
+        {
+            if (platforms[i].active)
+            {
+                Debug.Log(platforms[i].name);
+                yield return new WaitForSecondsRealtime(3);
+                platforms[i].SetActive(false);
+                StartCoroutine(ActivatePlatform());
+                gameObject.SetActive(false);
+            }
         }
         
-    }
+    }*/
 
 
 
