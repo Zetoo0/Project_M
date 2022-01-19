@@ -20,6 +20,7 @@ public class EnemyAggro : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool isFacingLeft;
+    bool isSearching;
     private bool isAgro = false;
 
     const string ENEMY_RUN = "Enemy_Run";
