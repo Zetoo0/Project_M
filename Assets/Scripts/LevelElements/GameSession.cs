@@ -7,13 +7,11 @@ using TMPro;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
-    int deaths = 0;
+    public int deaths = 0;
     public int playerScore = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] TextMeshProUGUI playerDeathText;
-    public DateTime mapStart;
 
     void Awake()
     {

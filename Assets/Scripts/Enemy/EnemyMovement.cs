@@ -11,9 +11,9 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Health")]
     public int maxHealth = 100;
-    int currentHealth;
+    private int currentHealth;
     Animator anim;
-    string currentState;
+    private string currentState;
 
     //ANIMATION STATES
     public const string ENEMY_IDLE = "Enemy_Idle";

@@ -11,8 +11,8 @@ public class LevelExit : MonoBehaviour
     public Animator transition;
 
     const string CUSTOM_START= "Custom_Start";
-    TimeSpan mapTime;
-    DateTime mapStart;
+    private TimeSpan mapTime;
+    private DateTime mapStart;
     public string mapTimeInString;
     [SerializeField] public string postURL;
     
@@ -43,7 +43,9 @@ public class LevelExit : MonoBehaviour
         {
             name = "testIT2",
             point = 250,
-            maptime = mapTimeInString
+            deaths = GetComponent<GameSession>().deaths,
+            maptime = mapTimeInString,
+            date = DateTime.Now.ToString()
         };
 
         /*Debug.Log(userData.maptime);

@@ -7,6 +7,7 @@ public class UserLog
 {
     public string name;
     public int point;
+    public int deaths;
     public string maptime;
-    
+    public string date;
 }

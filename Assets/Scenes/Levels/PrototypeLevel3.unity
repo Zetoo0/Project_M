@@ -1767,9 +1767,9 @@ GameObject:
   - component: {fileID: 502949083}
   - component: {fileID: 502949085}
   - component: {fileID: 502949084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DestroyablePlatform2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79896,9 +79896,9 @@ GameObject:
   - component: {fileID: 1111600111}
   - component: {fileID: 1111600113}
   - component: {fileID: 1111600112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DestroyablePlatform3
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81155,9 +81155,9 @@ GameObject:
   - component: {fileID: 1306083752}
   - component: {fileID: 1306083754}
   - component: {fileID: 1306083753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DestroyablePlatform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81468,9 +81468,9 @@ GameObject:
   - component: {fileID: 1375524371}
   - component: {fileID: 1375524374}
   - component: {fileID: 1375524373}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tileset_32x32(new)_26 (3)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81599,9 +81599,9 @@ GameObject:
   - component: {fileID: 1398321352}
   - component: {fileID: 1398321353}
   - component: {fileID: 1398321354}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DestroyablePlatform1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

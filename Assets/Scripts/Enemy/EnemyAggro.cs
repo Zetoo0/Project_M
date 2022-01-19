@@ -5,26 +5,22 @@ using UnityEngine;
 public class EnemyAggro : MonoBehaviour
 {
     [SerializeField]
-    public Transform Player;
-
-    MonoBehaviour mono = new MonoBehaviour();
-
+    public Transform player;        
 
     [SerializeField]
-    public float agroRange;
+    private float agroRange;
 
     [SerializeField]
-    public float moveSpeed;
+    private float moveSpeed;
 
     [SerializeField]
-    public Transform castPoint;
+    private Transform castPoint;
 
 
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     public bool isFacingLeft;
-    bool isAgro = false;
-    bool isSearching = false;
+    private bool isAgro = false;
 
     const string ENEMY_RUN = "Enemy_Run";
 
@@ -75,7 +71,7 @@ public class EnemyAggro : MonoBehaviour
 
     void ChasePlayer()
     {
-        if (Player.position.x > transform.position.x)
+        if (player.position.x > transform.position.x)
         {
             //enemy is the left side and the player is on the right so move right
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
