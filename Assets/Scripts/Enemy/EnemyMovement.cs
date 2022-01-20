@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     CircleCollider2D wallCheck;
 
     [Header("Health")]
-    public int maxHealth = 100;
+    [SerializeField] public int maxHealth = 100;
     private int currentHealth;
     Animator anim;
     private string currentState;
@@ -83,13 +83,13 @@ public class EnemyMovement : MonoBehaviour
     
 
 
-    void OnTriggerExit2D(Collider2D other)
+    /*void OnTriggerExit2D(Collider2D other)
     {
             moveSpeed = -moveSpeed;
             FlipEnemyFaceing();
         
         
-    }
+    }*/
 
     public void FlipEnemyFaceing()
     {
@@ -117,8 +117,6 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        anim.SetFloat("velocityY",rb.velocity.y);
-        anim.SetFloat("velocityX", rb.velocity.x);
 
         //animáció lejátszása
         anim.Play(newState);

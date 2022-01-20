@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class Pause : MonoBehaviour
 {
 
-    public bool  gameIsPaused = false;
+    public bool  gameIsPaused = false;  
     [SerializeField] GameObject pauseMenu;  
     GameState gameState;
     TextMeshProUGUI text;
