@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyablePlatform : MonoBehaviour
+public class DisappearingPlatform : MonoBehaviour
 {
     bool platformIsNotActive;
     [SerializeField] GameObject DestroyThisPlatform;
-    //[SerializeField] GameObject[] platforms;
     [SerializeField] BoxCollider2D CheckerCollider;
 
     public void Start()

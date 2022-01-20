@@ -9,12 +9,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] private float baseSpeed = 10.0f;   
-   // [SerializeField] public float baseJumpSpeed = 10.0f;
     [SerializeField] private float climbSpeed = 5.0f;
     [SerializeField] private Vector2 deathKick = new Vector2(10f, 10f);
     [SerializeField] private AudioClip swishSound;
 
-    [Header("Dash")]
     private bool isDashing;
     private float dashDistance = 30.0f;
 
@@ -42,13 +40,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Potion")]
     public bool isItemPickedUp = false;
-    //public float activeTime = 5f;
 
     
 
 
     //ANIMATION STATES
-    [Header("AnimationStates")]
     private string currentState;
     private const string PLAYER_IDLE = "Player_Idle";
     private const string PLAYER_RUN = "Player_Running";
