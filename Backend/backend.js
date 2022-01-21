@@ -13,12 +13,12 @@ app.get('/user', (req, res) => {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'projectGame'
+        database: 'metroidvania_project'
     })
 
     connection.connect();
 
-    connection.query('SELECT * FROM user', function (err, rows, fields) {
+    connection.query('SELECT users.username,users.email,users.password FROM users', function (err, rows, fields) {
     if (err) throw err;
 
     res.send(rows);
@@ -81,6 +81,27 @@ app.get('/user', (req, res) => {
     connection.connect();
 
     connection.query('INSERT INTO score VALUES (NULL, "'+req.body.point+'","'+ req.body.name +'","' + req.body.maptime + '");', function (err, rows, fields) {
+    if (err) throw err;
+
+    console.log("sikerült");
+    res.send("Sikerült felvinni");
+    })
+
+    connection.end();
+  })
+
+  app.post('/user_create', (req, res) => {
+    var mysql = require('mysql')
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'metroidvania_project'
+    })
+
+    connection.connect();
+
+    connection.query('INSERT INTO users VALUES (NULL, "'+req.body.username+'","'+ req.body.email +'","' + req.body.password + '", NULL, NULL);', function (err, rows, fields) {
     if (err) throw err;
 
     console.log("sikerült");

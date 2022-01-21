@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +7,8 @@ public class DisappearingPlatform : MonoBehaviour
     bool platformIsNotActive;
     [SerializeField] GameObject DestroyThisPlatform;
     [SerializeField] BoxCollider2D CheckerCollider;
+    [SerializeField] float destroyTime;
+    [SerializeField] float activateTime;
 
     public void Start()
     {
@@ -17,7 +19,7 @@ public class DisappearingPlatform : MonoBehaviour
 
     IEnumerator ActivatePlatform()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(activateTime);
         platformIsNotActive = false;
         CheckerCollider.enabled = true;
         DestroyThisPlatform.SetActive(true);
@@ -45,7 +47,7 @@ public class DisappearingPlatform : MonoBehaviour
 
     IEnumerator DestroyPlatform()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(destroyTime);
         if (!platformIsNotActive)
         {
             platformIsNotActive = true;
@@ -55,7 +57,7 @@ public class DisappearingPlatform : MonoBehaviour
         }
 
     }
-
+        
     
 
     /*IEnumerator DestroyPlatforms()
