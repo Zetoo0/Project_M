@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         //Instantiate(bullet, gun.position, transform.rotation);
         //AudioSource.PlayClipAtPoint(bulletSound, Camera.main.transform.position);
-        if (!isAttacking && !isJumping && value.isPressed)
+        if (!isAttacking && value.isPressed)
         {
             isAttacking = true;
             if (isAttacking)
@@ -143,10 +143,10 @@ public class PlayerMovement : MonoBehaviour
                     enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
                 }
             }
+            AttackCompleted();
 
-            
+
         }
-        AttackCompleted();
 
 
     }
@@ -160,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         else if (!HasPlayerHorizontalSpeed())
         {
             ChangeAnimationState(PLAYER_IDLE);
+            
         }
         isAttacking = false;
     }

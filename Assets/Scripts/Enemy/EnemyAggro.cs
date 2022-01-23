@@ -34,6 +34,12 @@ public class EnemyAggro : MonoBehaviour
 
     void Update()
     {
+        EnemyAggroState();
+        CheckFaceing();
+    }
+
+    void EnemyAggroState()
+    {
         //Distance to player
         //float distToPlayer = Vector2.Distance(transform.position, Player.position);
         if (CanSeePlayer(agroRange))
@@ -43,8 +49,8 @@ public class EnemyAggro : MonoBehaviour
             isAgro = true;
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Run");
         }
-        
-        
+
+
         /*if (isAgro)
         {
             isSearching = true;
@@ -60,7 +66,7 @@ public class EnemyAggro : MonoBehaviour
             //StopChasingPlayer();
             //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
         */
-        
+
 
         if (isAgro)
         {
@@ -70,19 +76,34 @@ public class EnemyAggro : MonoBehaviour
 
     }
 
+    void CheckFaceing()
+    {
+        if (transform.localScale.x == -1)
+        {
+            isFacingLeft = true;
+        }
+        else
+        {
+            isFacingLeft = false;
+        }
+    }
+
+
     void ChasePlayer()
     {
+       // rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+
         if (player.position.x > transform.position.x)
         {
-            //enemy is the left side and the player is on the right so move right
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            //enemy is the left side and the player is on the left so move right
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);
             isFacingLeft = false;
         }
-        else
+        else if (player.position.x < transform.position.x)
         {
-            //enemy is the right side and the player is on the left so move left
+            //enemy is the right side and the player is on the left so move right
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState(ENEMY_RUN);

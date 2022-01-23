@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 public class UserSystem : MonoBehaviour
 {
     [SerializeField] string getURL;
+    StreamWriter sw_users = new StreamWriter("userDatas.txt");
 
     List<UserData> userData;
     //StreamWriter sw_Users = new StreamWriter("userDatas.txt");
@@ -38,6 +39,16 @@ public class UserSystem : MonoBehaviour
                     result = "{\"result\":" + result + "}";
 
                     var resultList = JsonHelper.FromJson<UserData>(result);
+
+                    foreach(var data in resultList)
+                    {
+                        sw_users.Write(data);
+                    }
+
+                    Debug.Log("Succesfull write! :)");
+
+                    sw_users.Flush();
+                    sw_users.Close();
 
                     /*for(int i = 0; i <= resultList.Count; i++)
                     {

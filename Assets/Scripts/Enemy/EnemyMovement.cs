@@ -97,11 +97,11 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), 1.0f);
         if(transform.localScale.x == -1)
         {
-            GetComponent<EnemyAggro>().isFacingLeft = false;
-        }
-        else
-        {
             GetComponent<EnemyAggro>().isFacingLeft = true;
+        }
+        else if(transform.localScale.x == 1)
+        {
+            GetComponent<EnemyAggro>().isFacingLeft = false;
         }
 
     }
