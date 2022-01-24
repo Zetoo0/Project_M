@@ -2523,7 +2523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba4afb7ef30ef548ae65b679566f8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 467194358}
+  player: {fileID: 0}
   agroRange: 3
   moveSpeed: 3
   castPoint: {fileID: 359904568}
@@ -5374,6 +5374,11 @@ PrefabInstance:
         type: 3}
       propertyPath: postURL
       value: localhost:3000/score_upload
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}

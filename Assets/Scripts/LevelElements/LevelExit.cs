@@ -30,8 +30,8 @@ public class LevelExit : MonoBehaviour
     {
         //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
-        //StartPost();
-        NextLevel();
+        StartPost();
+        //NextLevel();
         
 
 
@@ -41,11 +41,10 @@ public class LevelExit : MonoBehaviour
     {
         var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
-            name = "testIT2",
-            point = 250,
+            name = "tesztb",
+            point = GetComponent<GameSession>().playerScore,
             deaths = GetComponent<GameSession>().deaths,
-            maptime = mapTimeInString,
-            date = DateTime.Now.ToString()
+            maptime = mapTimeInString
         };
 
         /*Debug.Log(userData.maptime);
@@ -94,7 +93,7 @@ public class LevelExit : MonoBehaviour
         //GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
         //transition.Play(CROSSFADE_START);
         //transition.Play(CUSTOM_END);
-        Debug.Log("Next LEvel");
+        Debug.Log("Next Level");
         //yield return new WaitForSecondsRealtime(LevelLoadSpeed);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;

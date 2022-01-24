@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using UnityEngine.Networking;
+using TMPro;
 
 [System.Serializable]
 public class UserSystem : MonoBehaviour
@@ -11,12 +12,23 @@ public class UserSystem : MonoBehaviour
     [SerializeField] string getURL;
     StreamWriter sw_users = new StreamWriter("userDatas.txt");
 
-    List<UserData> userData;
+    //List<UserData> userData;
     //StreamWriter sw_Users = new StreamWriter("userDatas.txt");
+
+    [SerializeField] TextMeshProUGUI playerUserNameText;
+
+
+    public string userName = "";
 
     private void Start()
     {
         StartCoroutine(Get(getURL));
+        //Debug.Log(userData);
+    }
+
+    public void SetUserName()
+    {
+        userName = playerUserNameText.text.ToString();
     }
 
     public IEnumerator Get(string url)
@@ -35,21 +47,9 @@ public class UserSystem : MonoBehaviour
                 {
                     //Handle the result
                     var result = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                    Debug.Log(result);
-                    result = "{\"result\":" + result + "}";
-
-                    var resultList = JsonHelper.FromJson<UserData>(result);
-
-                    foreach(var data in resultList)
-                    {
-                        sw_users.Write(data);
-                    }
-
-                    Debug.Log("Succesfull write! :)");
-
-                    sw_users.Flush();
-                    sw_users.Close();
-
+                    //Debug.Log(result);
+                    result = "{ " + result + "}";
+                    var resultRoot = JsonHelper.FromJson<UserData>(result);
                     /*for(int i = 0; i <= resultList.Count; i++)
                     {
                         userData.Add(resultList[i]);

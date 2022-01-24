@@ -82991,6 +82991,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+        type: 3}
+      propertyPath: postURL
+      value: localhost:3000/score_upload
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+        type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 201908178}
     - target: {fileID: 7603868177315299880, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
       propertyPath: m_Name

@@ -13,7 +13,7 @@ app.get('/user', (req, res) => {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'metroidvania_project'
+        database: 's4_project_M'
     })
 
     connection.connect();
@@ -33,7 +33,7 @@ app.get('/user', (req, res) => {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'projectGame'
+        database: 's4_project_M'
     })
 
     connection.connect();
@@ -54,7 +54,7 @@ app.get('/user', (req, res) => {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'projectGame'
+        database: 's4_project_M'
     })
 
     connection.connect();
@@ -69,18 +69,21 @@ app.get('/user', (req, res) => {
     connection.end();
   })
 
+
+  let dt=new Date();
+  let teljesdat=dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate();
   app.post('/score_upload', (req, res) => {
     var mysql = require('mysql')
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'projectGame'
+        database: 's4_project_M'
     })
 
     connection.connect();
 
-    connection.query('INSERT INTO score VALUES (NULL, "'+req.body.point+'","'+ req.body.name +'","' + req.body.maptime + '");', function (err, rows, fields) {
+    connection.query('INSERT INTO statisztika VALUES (NULL, "'+req.body.point+'","'+ req.body.name +'","' + req.body.maptime + '","' + teljesdat + ');', function (err, rows, fields) {
     if (err) throw err;
 
     console.log("sikerült");
@@ -95,8 +98,8 @@ app.get('/user', (req, res) => {
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: '',
-        database: 'metroidvania_project'
+        password: '', 
+        database: 's4_project_M'
     })
 
     connection.connect();
@@ -111,8 +114,29 @@ app.get('/user', (req, res) => {
     connection.end();
   })
 
+  app.post('/deleteErtekeles', (req, res) => {
+    var mysql = require('mysql')
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '', 
+        database: 's4_project_M'
+    })
+
+    connection.connect();
+
+    connection.query('DELETE FROM ertekeles where ertekeles_id=' + req.body.bevitel1 , function (err, rows, fields) {
+    if (err) throw err;
+
+    console.log("sikerült");  
+    res.send("Sikeres törlés");
+    })
+
+    connection.end();
+  })
 
 
 
-app.listen(3000, () => console.log('started and listening.'));
+
+app.listen(3000, () => console.log('started and listening'));
 
