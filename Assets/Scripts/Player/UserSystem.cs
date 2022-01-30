@@ -12,7 +12,8 @@ public class UserSystem : MonoBehaviour
     [SerializeField] string getURL;
     StreamWriter sw_users = new StreamWriter("userDatas.txt");
 
-    //List<UserData> userData;
+    List<UserData> userData;
+    UserData userDat;
     //StreamWriter sw_Users = new StreamWriter("userDatas.txt");
 
     [SerializeField] TextMeshProUGUI playerUserNameText;

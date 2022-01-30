@@ -75,19 +75,19 @@ app.get('/user', (req, res) => {
   app.post('/score_upload', (req, res) => {
     var mysql = require('mysql')
     var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 's4_project_M'
+        host: 's1.siralycore.hu:3306',
+        user: 'u4_9RLV2vf67y',
+        password: 'Ir^TAk@I^WuhckV=xMuBXKNf',
+        database: 's4_Project_M'
     })
 
     connection.connect();
 
-    connection.query('INSERT INTO statisztika VALUES (NULL, "'+req.body.point+'","'+ req.body.name +'","' + req.body.maptime + '","' + teljesdat + ');', function (err, rows, fields) {
+    connection.query('INSERT INTO statisztika VALUES (NULL, "'+req.body.name+'","'+ req.body.point +'","' + req.body.death + '","' + req.body.maptime + '","' + teljesdat + ');', function (err, rows, fields) {
     if (err) throw err;
 
     console.log("sikerült");
-    res.send("Sikerült felvinni");
+    res.send("Sikerült felvinni a statisztikába");
     })
 
     connection.end();

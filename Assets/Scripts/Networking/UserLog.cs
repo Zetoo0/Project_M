@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class UserLog
 {
-    public string name;
-    public int point;
-    public int deaths;
-    public string maptime;
+    public string name { get; set; }
+    public int point { get; set; }
+    public int death { get; set; }
+    public string maptime { get; set; }
     //public string date;
 }

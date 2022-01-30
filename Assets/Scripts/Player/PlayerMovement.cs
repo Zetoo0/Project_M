@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
             //jumpSpeed = baseJumpSpeed;
             //Debug.Log("Inactive");
             //isPickedUp = false;
-        }
+        }   
         /*else if(collison.tag == "Stone")
         {
             collison.attachedRigidbody.velocity = new Vector2(10f, 0f);

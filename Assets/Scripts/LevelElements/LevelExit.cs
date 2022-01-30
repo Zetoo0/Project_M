@@ -24,6 +24,7 @@ public class LevelExit : MonoBehaviour
         mapStart = DateTime.Now;
         Debug.Log("Map elején kezdem: "+mapStart);
         //transition = GetComponent<Animator>();
+        StartPost();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -43,7 +44,7 @@ public class LevelExit : MonoBehaviour
         {
             name = "tesztb",
             point = GetComponent<GameSession>().playerScore,
-            deaths = GetComponent<GameSession>().deaths,
+            death = GetComponent<GameSession>().deaths,
             maptime = mapTimeInString
         };
 

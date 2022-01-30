@@ -9,9 +9,20 @@ public class GameSession : MonoBehaviour
 {
     public int deaths = 0;
     public int playerScore = 0;
+    public int pickedUpCollectible = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] TextMeshProUGUI playerDeathText;
+    [SerializeField] TextMeshProUGUI playerCollectiblesText;
+
+    //Collectible colors
+    const string blueCollectible = "BlueCollectible";
+    bool blueCollectibleIsPickedUp = false;
+    const string yellowCollectible = "YellowCollectible";
+    bool yellowCollectibleIsPickedUp = false;
+    const string redCollectible = "RedCollectible";
+    bool redCollectibleIsPickedUp = false;
+
 
     void Awake()
     {
@@ -51,6 +62,14 @@ public class GameSession : MonoBehaviour
         StartCoroutine(TakeLife());
     }
 
+    void CheckCollectibles()
+    {
+        if(blueCollectibleIsPickedUp && yellowCollectibleIsPickedUp && redCollectibleIsPickedUp)
+        {
+            GetComponent<SecretMap>().allCollectibleColorIsPickedUpOnTheCurrentMap = true;
+        }
+    }
+
     void DeadTextOut()
     {
         playerDeathText.gameObject.SetActive(true);
@@ -81,5 +100,23 @@ public class GameSession : MonoBehaviour
     {
         playerScore += pointsToAdd;
         playerScoreText.text = playerScore.ToString();
+    }
+
+
+    public void AddToCollectible(string color)
+    {
+        pickedUpCollectible++;
+        switch (color)
+        {
+            case blueCollectible:
+                blueCollectibleIsPickedUp = true;
+                break;
+            case yellowCollectible:
+                yellowCollectibleIsPickedUp = true;
+                break;
+            case redCollectible:
+                redCollectibleIsPickedUp = true;
+                break;
+        }
     }
 }
