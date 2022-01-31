@@ -7,16 +7,17 @@ public class InputPost : MonoBehaviour
 {
     [SerializeField] public string postURL;//A backend küldésére szolgáló url
 
-    void Start()
+   
+
+    public void StartPost()
     {
-        /*var userData = new UserLog()//A post metódushoz az adatok elõkészítése
+        var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
-            name = "eci",
-            point = 250
+            name = "testname",
+            point = 666
         };
 
         StartCoroutine(PostData(postURL, userData));//Coroutine segítségével indítjuk a metódust
-        */
     }
 
     public IEnumerator PostData(string url, UserLog userLog)//paraméterek ugye az url és egy olyan opcionális paraméter amit testreszabhatunk a saját adatainkkal, attól függ mit szeretnénk küldeni

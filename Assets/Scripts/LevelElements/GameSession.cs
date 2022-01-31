@@ -13,7 +13,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] TextMeshProUGUI playerDeathText;
-    [SerializeField] TextMeshProUGUI playerCollectiblesText;
+    //[SerializeField] TextMeshProUGUI playerCollectiblesText;
 
     //Collectible colors
     const string blueCollectible = "BlueCollectible";
@@ -42,10 +42,16 @@ public class GameSession : MonoBehaviour
 
      void Start()
     {
+
         playerScore = 0;
         playerDeathsText.text = deaths.ToString();
         playerScoreText.text = playerScore.ToString();
 
+    }
+
+     void Update()
+    {
+        CheckCollectibles();
     }
 
     public void ProcessPlayerDeath()

@@ -19,9 +19,9 @@ public class Collectible_Orb : MonoBehaviour
         if(collision.tag == "Player")
         {
             anim.Play(collectedAnimation);
-            GetComponent<GameSession>().pickedUpCollectible++;
+           // GetComponent<GameSession>().pickedUpCollectible++;
             FindObjectOfType<GameSession>().AddToCollectible(color);
-            gameObject.SetActive(false);
+            gameObject.active = false;
         }
     }
 }
