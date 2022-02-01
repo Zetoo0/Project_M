@@ -33,8 +33,8 @@ public class LevelExit : MonoBehaviour
     {
         //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
-        StartPost();
-        //NextLevel();
+        //StartPost();
+        NextLevel();
         
 
 
