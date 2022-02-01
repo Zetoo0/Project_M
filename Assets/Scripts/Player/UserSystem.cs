@@ -9,27 +9,28 @@ using TMPro;
 [System.Serializable]
 public class UserSystem : MonoBehaviour
 {
-    [SerializeField] string getURL;
-    StreamWriter sw_users = new StreamWriter("userDatas.txt");
+   // [SerializeField] string getURL;
+    //StreamWriter sw_users = new StreamWriter("userDatas.txt");
 
-    List<UserData> userData;
-    UserData userDat;
+   // List<UserData> userData;
+   // UserData userDat;
     //StreamWriter sw_Users = new StreamWriter("userDatas.txt");
 
     [SerializeField] TextMeshProUGUI playerUserNameText;
 
 
-    public string userName = "";
+    public string userName;
 
-    private void Start()
+    void Start()
     {
-        StartCoroutine(Get(getURL));
+        //StartCoroutine(Get(getURL));
         //Debug.Log(userData);
     }
 
     public void SetUserName()
     {
         userName = playerUserNameText.text.ToString();
+        Debug.Log("Succesfull set " + userName);
     }
 
     public IEnumerator Get(string url)

@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    public GameObject userPanel;
+    public void usernamePanel()
+    {
+        userPanel.SetActive(true);
+    }
+
     public void FirstLevel()
     {
         SceneManager.LoadScene(1);
-     }
+    }
 }

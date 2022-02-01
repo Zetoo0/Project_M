@@ -107,7 +107,7 @@ app.get('/user', (req, res) => {
     connection.connect();
     let dt=new Date();
     let teljesdat=dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate();
-    connection.query('INSERT INTO statisztika VALUES (NULL, "'+req.body.name+'",'+ req.body.point + ',' + req.body.death + ',"' + req.body.maptime + '",' + teljesdat + ');', function (err, rows, fields) {
+    connection.query('INSERT INTO statisztika VALUES (NULL, "'+req.body.name+'",'+ req.body.point + ',' + req.body.death + ',"' + req.body.maptime + '","' + teljesdat + '");', function (err, rows, fields) {
     if (err) throw err;
 
     console.log("sikerült");

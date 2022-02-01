@@ -206,8 +206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1456331278}
-        m_TargetAssemblyTypeName: UserSystem, Assembly-CSharp
+      - m_Target: {fileID: 1456331279}
+        m_TargetAssemblyTypeName: UserName, Assembly-CSharp
         m_MethodName: SetUserName
         m_Mode: 1
         m_Arguments:
@@ -734,7 +734,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1455272049}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
-        m_MethodName: FirstLevel
+        m_MethodName: usernamePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1095,7 +1095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac08ef1daf8de99489d5d49200eb4f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getURL: localhost:3000/user
   playerUserNameText: {fileID: 0}
   userName: 
 --- !u!1 &1048616029
@@ -1162,12 +1161,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048616029}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 474426875}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1048616032
@@ -1694,6 +1693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2cfb0cde9c3204aaf60d2d3edbf828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userPanel: {fileID: 1456331274}
 --- !u!114 &1455272050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,6 +1756,7 @@ GameObject:
   - component: {fileID: 1456331277}
   - component: {fileID: 1456331276}
   - component: {fileID: 1456331278}
+  - component: {fileID: 1456331279}
   m_Layer: 5
   m_Name: usernamePanel
   m_TagString: Untagged
@@ -1835,9 +1836,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac08ef1daf8de99489d5d49200eb4f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getURL: 
   playerUserNameText: {fileID: 0}
   userName: 
+--- !u!114 &1456331279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456331274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af37e7823dfa5564cb3b1b3bad66d95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: 
+  usernameInputField: {fileID: 0}
 --- !u!1 &1532300760
 GameObject:
   m_ObjectHideFlags: 0

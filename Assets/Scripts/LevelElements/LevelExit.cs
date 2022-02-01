@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using System.IO;
 
 public class LevelExit : MonoBehaviour
 {
@@ -13,9 +14,10 @@ public class LevelExit : MonoBehaviour
     const string CUSTOM_START= "Custom_Start";
     private TimeSpan mapTime;
     private DateTime mapStart;
-    public string mapTimeInString;
+    public string mapTimeInString;  
     [SerializeField] public string postURL;
-    
+
+    List<UserLog> userDataList = new List<UserLog>();
 
 
 
@@ -24,7 +26,7 @@ public class LevelExit : MonoBehaviour
         mapStart = DateTime.Now;
         Debug.Log("Map elején kezdem: "+mapStart);
         //transition = GetComponent<Animator>();
-        StartPost();
+       // StartPost();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -38,15 +40,36 @@ public class LevelExit : MonoBehaviour
 
     }
 
+    public void WriteDataToFile(UserLog data)
+    {
+        string path = "UserDatas.csv";
+        FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+        StreamWriter sw_out = new StreamWriter(fs);
+        sw_out.WriteLine("UserName;Point;Death;Maptime");
+        sw_out.Write(data.name);
+        sw_out.Write(";");
+        sw_out.Write(data.point);
+        sw_out.Write(";");
+        sw_out.Write(data.death);
+        sw_out.Write(";");
+        sw_out.Write(data.maptime);
+        sw_out.Write("\n");
+    }
+
     void StartPost()
     {
+
+        
         var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
-            name = "tesztb",
-            point = 250,
-            death = 2,
-            maptime = "17"
+            name = GetComponent<UserSystem>().userName,
+            point = GetComponent<GameSession>().playerScore,
+            death = GetComponent<GameSession>().deaths,
+            maptime = mapTimeInString
         };
+
+        WriteDataToFile(userData);
+        
 
         /*Debug.Log(userData.maptime);
         Debug.Log(userData.name);
