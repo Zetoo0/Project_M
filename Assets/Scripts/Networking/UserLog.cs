@@ -7,7 +7,7 @@ public class UserLog
 {
     public string name;
     public int point;
-    //public int death { get; set; }
-    //public string maptime { get; set; }
+    public int death;
+    public string maptime;
     //public string date;
 }
