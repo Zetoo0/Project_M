@@ -9,5 +9,4 @@ public class UserLog
     public int point;
     public int death;
     public string maptime;
-    //public string date;
 }

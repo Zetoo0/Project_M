@@ -10,7 +10,7 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] float LevelLoadSpeed = 1f;
     public Animator transition;
-
+    
     const string CUSTOM_START= "Custom_Start";
     private TimeSpan mapTime;
     private DateTime mapStart;
@@ -23,7 +23,6 @@ public class LevelExit : MonoBehaviour
     int userPoint;
     int userDeaths;
     string userMapTime;
-
 
     void Start()
     {
@@ -39,7 +38,7 @@ public class LevelExit : MonoBehaviour
         MapTime();
         SetUserDatasForPost();
         StartPost();
-        //NextLevel();
+        NextLevel();
         
 
 
@@ -77,18 +76,16 @@ public class LevelExit : MonoBehaviour
         
         var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
-            name = userName,//GetComponent<UserName>().username,
+            name = userName,
             point = userPoint,
             death = userDeaths,
             maptime = userMapTime
         };
 
-        WriteDataToFile(userData);
+        //WriteDataToFile(userData);
         
 
-        /*Debug.Log(userData.maptime);
-        Debug.Log(userData.name);
-        Debug.Log(userData.point);*/
+      
 
         StartCoroutine(PostData(postURL, userData));
     }
