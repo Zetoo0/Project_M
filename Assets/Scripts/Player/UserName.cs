@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UserName : MonoBehaviour
 {
-    public string username;
+    public static string username;
+    PlayerPrefs playerUserName;
     [SerializeField]TMP_InputField usernameInputField;
 
     public void SetUserName()
@@ -14,5 +15,5 @@ public class UserName : MonoBehaviour
         username = usernameInputField.text;
         Debug.Log(username);
         SceneManager.LoadScene(1);
-    }
+    }   
 }

@@ -7,8 +7,8 @@ using TMPro;
 
 public class GameSession : MonoBehaviour
 {
-    public int deaths = 0;
-    public int playerScore = 0;
+    public static int deaths = 0;
+    public static int playerScore = 0;
     public int pickedUpCollectible = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;

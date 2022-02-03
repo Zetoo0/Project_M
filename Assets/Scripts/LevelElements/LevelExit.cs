@@ -63,8 +63,9 @@ public class LevelExit : MonoBehaviour
 
     void SetUserDatasForPost()
     {
-        userPoint = GetComponent<GameSession>().playerScore;
-        userDeaths = GetComponent<GameSession>().deaths;
+        userName = UserName.username;
+        userPoint = GameSession.playerScore;
+        userDeaths = GameSession.deaths;
         userMapTime = mapTimeInString;
     }
 
