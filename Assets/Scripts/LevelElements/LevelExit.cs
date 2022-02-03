@@ -22,7 +22,7 @@ public class LevelExit : MonoBehaviour
     public string userName;
     int userPoint;
     int userDeaths;
-    string userMapTime;
+    string userMapTime; 
 
     void Start()
     {
