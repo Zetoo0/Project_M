@@ -19,6 +19,10 @@ public class LevelExit : MonoBehaviour
 
     List<UserLog> userDataList = new List<UserLog>();
 
+    public string userName;
+    int userPoint;
+    int userDeaths;
+    string userMapTime;
 
 
     void Start()
@@ -33,8 +37,9 @@ public class LevelExit : MonoBehaviour
     {
         //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
-        //StartPost();
-        NextLevel();
+        SetUserDatasForPost();
+        StartPost();
+        //NextLevel();
         
 
 
@@ -56,16 +61,25 @@ public class LevelExit : MonoBehaviour
         sw_out.Write("\n");
     }
 
+    void SetUserDatasForPost()
+    {
+        userPoint = GetComponent<GameSession>().playerScore;
+        userDeaths = GetComponent<GameSession>().deaths;
+        userMapTime = mapTimeInString;
+    }
+
+    
+
     void StartPost()
     {
 
         
         var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
-            name = GetComponent<UserSystem>().userName,
-            point = GetComponent<GameSession>().playerScore,
-            death = GetComponent<GameSession>().deaths,
-            maptime = mapTimeInString
+            name = userName,//GetComponent<UserName>().username,
+            point = userPoint,
+            death = userDeaths,
+            maptime = userMapTime
         };
 
         WriteDataToFile(userData);
