@@ -14,6 +14,8 @@ public class LootBox : MonoBehaviour
     //ANIMATIONS
     const string LOOTBOX_OPEN = "lootbox_open_animation";
 
+
+    //Chest states
     enum Chest
     {
         open,
@@ -25,18 +27,17 @@ public class LootBox : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        //potion = GetComponent<GameObject>();
-        //dropPosition = GetComponent<Transform>();
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
         if (collision.tag == "Player" && !wasCollected)
         {
             switch (chestState)
             {
-                case Chest.close:
+                case Chest.close://Chect kinyitása, ha zárva van
                     ChangeAnimationState(LOOTBOX_OPEN);
                     potion.SetActive(true);
                     wasCollected = true;
@@ -46,13 +47,7 @@ public class LootBox : MonoBehaviour
             }
 
 
-            //anim.SetTrigger("Opened");
-            /*
-            ChangeAnimationState(LOOTBOX_OPEN);
-            potion.SetActive(true);
             
-            //Debug.Log("Drop hopp!");
-            wasCollected = true;*/
         }
 
         

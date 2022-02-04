@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class UserLog
+public class UserLog//User datas
 {
     public string name;
     public int point;

@@ -28,13 +28,10 @@ public class LevelExit : MonoBehaviour
     {
         mapStart = DateTime.Now;
         Debug.Log("Map elején kezdem: "+mapStart);
-        //transition = GetComponent<Animator>();
-       // StartPost();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //int playerScore = GetComponent<GameSession>().playerScore;
         MapTime();
         SetUserDatasForPost();
         StartPost();
@@ -60,7 +57,7 @@ public class LevelExit : MonoBehaviour
         sw_out.Write("\n");
     }
 
-    void SetUserDatasForPost()
+    void SetUserDatasForPost()// User adatok beállítása
     {
         userName = UserName.username;
         userPoint = GameSession.playerScore;
@@ -113,7 +110,7 @@ public class LevelExit : MonoBehaviour
     }
 
 
-    void MapTime()
+    void MapTime()//A végigvitt map idejének kiszámítása és eltárolása
     {
         mapTime = DateTime.Now - mapStart;
         mapTimeInString = mapTime.TotalSeconds.ToString();
@@ -124,13 +121,9 @@ public class LevelExit : MonoBehaviour
 
     }
 
-    public void NextLevel()
+    public void NextLevel()//Következõ szintre lépés, ha nincs több pálya akkor visszadob a menübe
     {
-        //GetComponent<PlayerMovement>().ChangeAnimationState("Player_NextLevel");
-        //transition.Play(CROSSFADE_START);
-        //transition.Play(CUSTOM_END);
         Debug.Log("Next Level");
-        //yield return new WaitForSecondsRealtime(LevelLoadSpeed);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 

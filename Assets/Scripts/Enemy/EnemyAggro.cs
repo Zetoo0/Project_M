@@ -89,9 +89,8 @@ public class EnemyAggro : MonoBehaviour
     }
 
 
-    void ChasePlayer()
+    void ChasePlayer()//A player után futás, checkeli, hogy melyik oldalt található a player
     {
-       // rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
         if (player.position.x > transform.position.x)
         {
@@ -120,6 +119,7 @@ public class EnemyAggro : MonoBehaviour
         //yield return new WaitForSecondsRealtime(5); 
     }
 
+    //Látja-e az ellenség a Playert, RayCasttal megoldva
     bool CanSeePlayer(float distance)
     {
         bool value = false;

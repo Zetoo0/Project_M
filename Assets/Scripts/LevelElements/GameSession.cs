@@ -9,11 +9,10 @@ public class GameSession : MonoBehaviour
 {
     public static int deaths = 0;
     public static int playerScore = 0;
-    public int pickedUpCollectible = 0;
+    public static int pickedUpCollectible = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] TextMeshProUGUI playerDeathText;
-    //[SerializeField] TextMeshProUGUI playerCollectiblesText;
 
     //Collectible colors
     const string blueCollectible = "BlueCollectible";
@@ -56,14 +55,6 @@ public class GameSession : MonoBehaviour
 
     public void ProcessPlayerDeath()
     {
-        /*if(playerLives > 1)
-        {
-            StartCoroutine(TakeLife());
-        }
-        else
-        {
-            ResetGameSession();
-        }*/
         DeadTextOut();
         StartCoroutine(TakeLife());
     }
@@ -88,7 +79,7 @@ public class GameSession : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator TakeLife()
+    IEnumerator TakeLife()//Respawn/Újraéledés
     {
 
         yield return new WaitForSecondsRealtime(1);
@@ -102,7 +93,7 @@ public class GameSession : MonoBehaviour
         playerDeathText.gameObject.SetActive(false);
     }
 
-    public void AddToScore(int pointsToAdd)
+    public void AddToScore(int pointsToAdd)//Ponthoz hozzáadás
     {
         playerScore += pointsToAdd;
         playerScoreText.text = playerScore.ToString();
