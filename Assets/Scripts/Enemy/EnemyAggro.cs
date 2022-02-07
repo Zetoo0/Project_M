@@ -123,11 +123,11 @@ public class EnemyAggro : MonoBehaviour
     bool CanSeePlayer(float distance)
     {
         bool value = false;
-        var castDistance = distance;
+        var castDistance = -distance;
 
         if (isFacingLeft)
         {
-            castDistance = -distance;
+            castDistance = distance;
         }
 
 

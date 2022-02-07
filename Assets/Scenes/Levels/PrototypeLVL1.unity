@@ -5378,7 +5378,7 @@ PrefabInstance:
     - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
       propertyPath: postURL
-      value: localhost:3000/statisztika_upload
+      value: http://s1.siralycore.hu:25502/statisztika_upload
       objectReference: {fileID: 0}
     - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
@@ -50323,7 +50323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2077968525
 SpriteRenderer:
   m_ObjectHideFlags: 0
