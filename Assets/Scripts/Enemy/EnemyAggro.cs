@@ -72,6 +72,7 @@ public class EnemyAggro : MonoBehaviour
         {
             ChasePlayer();
             Invoke("StopChasingPlayer", 4);
+            GetComponent<EnemyMovement>().FlipEnemyFaceing();
         }
 
     }
@@ -131,9 +132,9 @@ public class EnemyAggro : MonoBehaviour
         }
 
 
-        Vector2 endPosition = castPoint.position + Vector3.right * castDistance;//== new Vector3(position.x * distance)
+        Vector2 endPosition = castPoint.position + Vector3.right * castDistance ;//== new Vector3(position.x * distance)
         RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position, endPosition,LayerMask.GetMask("MoveableObstacle","Player","Ground"));
-
+        
         if (rcHit.collider != null)
         {
             if (rcHit.collider.gameObject.CompareTag("Player"))
