@@ -39,9 +39,9 @@ public class GameSession : MonoBehaviour
         }
     }
 
-     void Start()
+    void Start()
     {
-
+        deaths = 0;
         playerScore = 0;
         playerDeathsText.text = deaths.ToString();
         playerScoreText.text = playerScore.ToString();
@@ -52,6 +52,8 @@ public class GameSession : MonoBehaviour
     {
         CheckCollectibles();
     }
+
+
 
     public void ProcessPlayerDeath()
     {

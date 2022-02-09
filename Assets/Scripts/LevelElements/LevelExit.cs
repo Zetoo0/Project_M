@@ -24,6 +24,8 @@ public class LevelExit : MonoBehaviour
     int userDeaths;
     string userMapTime; 
 
+    [SerializeField] int levelId;
+
     void Start()
     {
         mapStart = DateTime.Now;
@@ -76,7 +78,8 @@ public class LevelExit : MonoBehaviour
             name = userName,
             point = userPoint,
             death = userDeaths,
-            maptime = userMapTime
+            maptime = userMapTime,
+            levelId = levelId
         };
 
         //WriteDataToFile(userData);
@@ -107,6 +110,27 @@ public class LevelExit : MonoBehaviour
 
 
         }
+
+        CheckLevelNumber();
+
+        
+
+    }
+
+    void CheckLevelNumber()
+    {
+        if(levelId == 3)
+        {
+            ClearStaticUserDatas();
+        }
+    }
+
+    void ClearStaticUserDatas()
+    {
+        GameSession.playerScore = 0;
+        GameSession.deaths = 0;
+        Debug.Log(GameSession.playerScore);
+        Debug.Log("Sikeresen tisztítva");
     }
 
 

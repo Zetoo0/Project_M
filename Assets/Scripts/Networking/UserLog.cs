@@ -9,4 +9,5 @@ public class UserLog//User datas
     public int point;
     public int death;
     public string maptime;
+    public int levelId;
 }
