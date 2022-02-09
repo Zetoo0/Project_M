@@ -7,9 +7,9 @@ using TMPro;
 
 public class GameSession : MonoBehaviour
 {
-    public static int deaths = 0;
-    public static int playerScore = 0;
-    public static int pickedUpCollectible = 0;
+    public int deaths = 0;
+    public int playerScore = 0;
+    public int pickedUpCollectible = 0;
     [SerializeField] TextMeshProUGUI playerDeathsText;
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] TextMeshProUGUI playerDeathText;
@@ -33,6 +33,7 @@ public class GameSession : MonoBehaviour
         }
         else
         {
+            playerScore = 0;
             DontDestroyOnLoad(gameObject);
             //DontDestroyOnLoad(player);
             //DontDestroyOnLoad(savePoint);
@@ -41,8 +42,8 @@ public class GameSession : MonoBehaviour
 
     void Start()
     {
-        deaths = 0;
-        playerScore = 0;
+       //deaths = 0;
+       // playerScore = 0;
         playerDeathsText.text = deaths.ToString();
         playerScoreText.text = playerScore.ToString();
 
@@ -53,6 +54,10 @@ public class GameSession : MonoBehaviour
         CheckCollectibles();
     }
 
+    public void ResetGameSessionBetweenLevels()
+    {
+        Destroy(gameObject);
+    }
 
 
     public void ProcessPlayerDeath()
@@ -74,17 +79,19 @@ public class GameSession : MonoBehaviour
         playerDeathText.gameObject.SetActive(true);
     }
 
-    void ResetGameSession()
+    public void ResetGameSession()
     {
         FindObjectOfType<Scene_Persist>().ResetScenePersist();
-        SceneManager.LoadScene(0);
         Destroy(gameObject);
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator TakeLife()//Respawn/Újraéledés
     {
 
         yield return new WaitForSecondsRealtime(1);
+        playerScore = 0;
+        playerScoreText.text = "0";
         //playerLives--;
         deaths++;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

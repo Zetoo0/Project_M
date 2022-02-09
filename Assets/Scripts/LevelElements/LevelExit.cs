@@ -35,8 +35,8 @@ public class LevelExit : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         MapTime();
-        SetUserDatasForPost();
-        StartPost();
+       // SetUserDatasForPost();
+       // StartPost();
         NextLevel();
         
 
@@ -62,8 +62,8 @@ public class LevelExit : MonoBehaviour
     void SetUserDatasForPost()// User adatok beállítása
     {
         userName = UserName.username;
-        userPoint = GameSession.playerScore;
-        userDeaths = GameSession.deaths;
+        userPoint = GetComponent<GameSession>().playerScore;
+        userDeaths = GetComponent<GameSession>().deaths;
         userMapTime = mapTimeInString;
     }
 
@@ -75,17 +75,18 @@ public class LevelExit : MonoBehaviour
         
         var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
-            name = userName,
-            point = userPoint,
-            death = userDeaths,
-            maptime = userMapTime,
+            name = UserName.username,
+            point = GetComponent<GameSession>().playerScore,
+            death = GetComponent<GameSession>().deaths,
+            maptime = mapTimeInString,
             levelId = levelId
         };
 
         //WriteDataToFile(userData);
-        
 
-      
+       // CheckLevelNumber();
+
+
 
         StartCoroutine(PostData(postURL, userData));
     }
@@ -103,6 +104,8 @@ public class LevelExit : MonoBehaviour
 
             yield return www.SendWebRequest();//yield return segítségével továbbítjuk az adatot az adatbázisba
 
+
+
             if (www.isNetworkError)
             {
                 Debug.Log(www.error);
@@ -111,27 +114,26 @@ public class LevelExit : MonoBehaviour
 
         }
 
-        CheckLevelNumber();
 
         
 
     }
 
-    void CheckLevelNumber()
+   /* void CheckLevelNumber()
     {
         if(levelId == 3)
         {
             ClearStaticUserDatas();
         }
-    }
+    }*/
 
-    void ClearStaticUserDatas()
+   /* void ClearStaticUserDatas()
     {
         GameSession.playerScore = 0;
         GameSession.deaths = 0;
         Debug.Log(GameSession.playerScore);
         Debug.Log("Sikeresen tisztítva");
-    }
+    }*/
 
 
     void MapTime()//A végigvitt map idejének kiszámítása és eltárolása
@@ -156,6 +158,7 @@ public class LevelExit : MonoBehaviour
             nextSceneIndex = 0;
         }
         FindObjectOfType<Scene_Persist>().ResetScenePersist();
+        FindObjectOfType<GameSession>().ResetGameSessionBetweenLevels();
 
         SceneManager.LoadScene(nextSceneIndex);
         GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
