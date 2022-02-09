@@ -24,14 +24,6 @@ public class DisappearingPlatform : MonoBehaviour
         CheckerCollider.enabled = true;
         DestroyThisPlatform.SetActive(true);
 
-        /*for(int i = 0; i <= platforms.Length; i++)
-        {
-            if (!platforms[i].active)
-            {
-                yield return new WaitForSecondsRealtime(1);
-                platforms[i].SetActive(true);
-            }
-        }*/
     }
 
 

@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()
     {
         Debug.Log("Dashed");
-        ChangeAnimationState(PLAYER_DASH);
+       // ChangeAnimationState(PLAYER_DASH);
         isDashing = true;
         rb.velocity += new Vector2(dashDistance * moveInput.x, 0f);
         rb.AddForce(new Vector2(dashDistance * moveInput.x, 0f));
