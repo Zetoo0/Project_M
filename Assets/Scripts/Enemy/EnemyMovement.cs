@@ -10,8 +10,8 @@ public class EnemyMovement : MonoBehaviour
     CircleCollider2D wallCheck;
 
     [Header("Health")]
-    [SerializeField] public int maxHealth = 100;
-    private int currentHealth;
+    [SerializeField] private int maxHealth;
+    public int currentHealth;
     Animator anim;
     private string currentState;
 

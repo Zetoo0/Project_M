@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Objects")]
     [SerializeField] private float baseSpeed = 10.0f;   
     [SerializeField] private float climbSpeed = 5.0f;
-    [SerializeField] private Vector2 deathKick = new Vector2(10f, 10f);
+    [SerializeField] private Vector2 deathKick = new Vector2(10f, 10f);     
     [SerializeField] private AudioClip swishSound;
 
     private bool isDashing;
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed;
 
     [Header("Attack")]
-    public int damage = 20;
+    [SerializeField]public int damage;
     public float attackRange;
     public LayerMask enemyLayers;
     public Transform attackPoint;
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
 
 
- 
+    ShowDPS showDps;
 
 
 
@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
+        showDps = GetComponent<ShowDPS>();
         //transform.position = savePosition;
     }
 
@@ -140,8 +141,13 @@ public class PlayerMovement : MonoBehaviour
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
                 foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
                 {
-                    enemy.GetComponent<EnemyMovement>().TakeDamage(damage);
+                    enemy.GetComponent<EnemyMovement>().TakeDamage(damage / 2);
+                    Debug.Log(enemy.GetComponent<EnemyMovement>().currentHealth);
+                    StartCoroutine(showDps.ShowDamage(damage / 2));
                 }
+
+               
+
             }
             AttackCompleted();
 
