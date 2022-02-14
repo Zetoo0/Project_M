@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed;
 
     [Header("Attack")]
-    [SerializeField]public int damage;
+    public static int damage = 50;
     public float attackRange;
     public LayerMask enemyLayers;
     public Transform attackPoint;
@@ -63,8 +63,9 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
 
 
-    ShowDPS showDps;
-
+    [SerializeField]Transform damagePopUp;
+    [SerializeField] Transform popUpPosition;
+    //[SerializeField] Vector3 damagePopUpPosition;
 
 
     // Start is called before the first frame update
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
-        showDps = GetComponent<ShowDPS>();
+       // showDps = GetComponentInChildren<ShowDPS>();
         //transform.position = savePosition;
     }
 
@@ -141,9 +142,9 @@ public class PlayerMovement : MonoBehaviour
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
                 foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
                 {
-                    enemy.GetComponent<EnemyMovement>().TakeDamage(damage / 2);
+                    enemy.GetComponent<EnemyMovement>().TakeDamage(damage / 2); 
                     Debug.Log(enemy.GetComponent<EnemyMovement>().currentHealth);
-                    StartCoroutine(showDps.ShowDamage(damage / 2));
+                    Instantiate(damagePopUp, popUpPosition.position, Quaternion.identity);
                 }
 
                
