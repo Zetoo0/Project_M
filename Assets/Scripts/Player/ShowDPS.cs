@@ -9,11 +9,14 @@ public class ShowDPS : MonoBehaviour
     //[SerializeField]Transform damagePosition;
     TextMeshPro damageTextPos;
     Animator anim;
-    private string animationName = "DmgTextFloat";
+    private string nonCritAnimationName = "DmgTextFloat";
+    private string critAnimationName = "CritDamageTextFloat";
     string currentState;
 
     private float disappearTime = 1.0f;
     private float stopper = 0.0f;
+
+    public static bool isCritted;
 
     void Awake()
     {
@@ -26,7 +29,19 @@ public class ShowDPS : MonoBehaviour
         damageTextPos = GetComponent<TextMeshPro>();
         damageTextPos.SetText(PlayerMovement.damage.ToString());
         anim = GetComponent<Animator>();
-        anim.Play(animationName);
+        IsCrit();
+    }
+
+    void IsCrit()
+    {
+        if (isCritted)
+        {
+            anim.Play(critAnimationName);
+        }
+        else
+        {
+            anim.Play(nonCritAnimationName);
+        }
     }
 
     void Update()

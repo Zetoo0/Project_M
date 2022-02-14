@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed;
 
     [Header("Attack")]
-    public static int damage = 50;
+    public static int damage;
     public float attackRange;
     public LayerMask enemyLayers;
     public Transform attackPoint;
@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isAttacking;
     public bool isJumping;
-    //public bool canDoubleJump = false;
 
     private int extraJumps;
     [SerializeField] private int extraJumpsValue;
@@ -65,7 +64,16 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]Transform damagePopUp;
     [SerializeField] Transform popUpPosition;
-    //[SerializeField] Vector3 damagePopUpPosition;
+
+    [Header("Damage")]
+    int critDamage = 50;
+    int normalDamage = 25;
+    float critPercent = 50;
+    int critMin = 0;
+    int critMax = 100;
+    System.Random rnd = new System.Random();
+    static public bool isCritted;
+    
 
 
     // Start is called before the first frame update
@@ -78,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
-       // showDps = GetComponentInChildren<ShowDPS>();
-        //transform.position = savePosition;
     }
 
     // Update is called once per frame
@@ -92,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
         ClimbLadder();
         Die();
 
-        //direction = transform.localScale.x; 
     }
 
    
@@ -142,20 +147,85 @@ public class PlayerMovement : MonoBehaviour
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
                 foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
                 {
+                    damage = DamageCalculate();
+                    Debug.Log(damage);
                     enemy.GetComponent<EnemyMovement>().TakeDamage(damage / 2); 
                     Debug.Log(enemy.GetComponent<EnemyMovement>().currentHealth);
                     Instantiate(damagePopUp, popUpPosition.position, Quaternion.identity);
                 }
-
-               
-
             }
             AttackCompleted();
+        }
+    }
+
+    public int DamageCalculate()
+    {
 
 
+        int critResult = Random.Range(critMin, critMax); //Same as using C# own System just include the numbers rnd.Next(critMin, critMax);
+        if (!IsCrit(critResult))
+        {
+            return normalDamage;
+        }
+        else
+        {
+            return critDamage;
+        }
+
+    }
+
+    static bool IsCrit(int result)
+    {
+        bool isCrit;
+        int critPercent = 50;
+
+        if (CritChanceValue())
+        {
+            if (result < critPercent)
+            {
+                ShowDPS.isCritted = false;
+                return isCrit = false;
+
+            }
+            else
+            {
+                ShowDPS.isCritted = true;
+                return isCrit = true;
+            }
+        }
+        else
+        {
+            if (result > critPercent)
+            {
+                ShowDPS.isCritted = false;
+                return isCrit = false;
+
+            }
+            else
+            {
+                ShowDPS.isCritted = true;
+                return isCrit = true;
+            }
         }
 
 
+    }
+
+    static bool CritChanceValue()
+    {
+        bool itShouldBeLittle;
+        int littleOrBiggerNum = Random.Range(1, 2);
+        if (littleOrBiggerNum == 1)
+        {
+            return itShouldBeLittle = true;
+        }
+        else
+        {
+            return itShouldBeLittle = false;
+        }
+
+
+        
     }
 
     void AttackCompleted()
