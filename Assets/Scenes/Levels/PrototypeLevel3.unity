@@ -3218,10 +3218,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1606182944}
     m_Modifications:
+    - target: {fileID: 9163715678411759888, guid: 349bdf46fb306034b9308424c6ce7287,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163715678411759888, guid: 349bdf46fb306034b9308424c6ce7287,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759889, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
@@ -3231,7 +3241,7 @@ PrefabInstance:
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
@@ -3298,6 +3308,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FatBooba(Enemy)
       objectReference: {fileID: 0}
+    - target: {fileID: 9163715678411759900, guid: 349bdf46fb306034b9308424c6ce7287,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 349bdf46fb306034b9308424c6ce7287, type: 3}
 --- !u!1001 &846745551
@@ -3345,12 +3360,12 @@ PrefabInstance:
     - target: {fileID: 2749707198061242738, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2749707198061242738, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13
+      value: -14.44
       objectReference: {fileID: 0}
     - target: {fileID: 2749707198061242738, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
@@ -3400,7 +3415,7 @@ PrefabInstance:
     - target: {fileID: 2749707198061242739, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2749707198061242751, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
@@ -85239,10 +85254,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1606182944}
     m_Modifications:
+    - target: {fileID: 9163715678411759888, guid: 349bdf46fb306034b9308424c6ce7287,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163715678411759888, guid: 349bdf46fb306034b9308424c6ce7287,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759889, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
@@ -85252,7 +85277,7 @@ PrefabInstance:
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
@@ -85267,7 +85292,7 @@ PrefabInstance:
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.779968
+      value: -28.476
       objectReference: {fileID: 0}
     - target: {fileID: 9163715678411759890, guid: 349bdf46fb306034b9308424c6ce7287,
         type: 3}
@@ -85318,6 +85343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FatBooba(Enemy) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163715678411759900, guid: 349bdf46fb306034b9308424c6ce7287,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 349bdf46fb306034b9308424c6ce7287, type: 3}
