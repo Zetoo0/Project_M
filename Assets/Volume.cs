@@ -9,7 +9,7 @@ public class Volume : MonoBehaviour
 
    public void ChangeVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+        audioMixer.SetFloat("volume", volume);
         Debug.Log("Volume is changed to " + volume);
     }
 }

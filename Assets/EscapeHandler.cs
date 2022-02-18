@@ -1,47 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class EscapeHandler : MonoBehaviour
 {
     [SerializeField]   GameObject userPanelEsc;
     [SerializeField]   GameObject settingsPanelEsc;
 
-    void Update()
-    {
-        ExitFromActive();    
-    }
 
-    void ExitFromActive()
+
+    void OnEscape(InputValue value)
     {
-        if ()
+        if (value.isPressed)
         {
             if (IsUserPanelEnabled())
             {
-                userPanelEsc.SetActive(false);
+                userPanelEsc.active = false;
             }
             else if (IsSettingsPanelEnabled())
             {
-                settingsPanelEsc.SetActive(false);
+                settingsPanelEsc.active = false;
             }
         }
+        else
+        {
+            return;
+        }
+
+
+        
 
     }
 
     bool IsUserPanelEnabled()
     {
 
+        bool isEnabled;
+        if (userPanelEsc.active == true)
+        {
+            return isEnabled = true;
+        }
+        else
+        {
+            return isEnabled = false;
+        }
 
-        bool isEnabled = userPanelEsc.activeInHierarchy;
 
-        return isEnabled;
+
     }
 
     bool IsSettingsPanelEnabled()
     {
-        bool isEnabled = settingsPanelEsc.activeInHierarchy;
-
-        return isEnabled;
+        bool isEnabled;
+        if (settingsPanelEsc.active == true)
+        {
+            return isEnabled = true;
+        }
+        else
+        {
+            return isEnabled = false;
+        }
 
     }
 
