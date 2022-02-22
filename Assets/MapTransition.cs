@@ -13,17 +13,13 @@ public class MapTransition : MonoBehaviour
     void Start()
     {
         transition = GetComponent<Animator>();
-
+        ChangeAnimationState(CUSTOM_END);
     }
 
     public void ChangeAnimationState(string newState)
     {
         transition.Play(newState);
-       
 
-        
-
-       
     }
 
 

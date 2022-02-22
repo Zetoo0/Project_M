@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class BackToMenu : MonoBehaviour
 {
+    [SerializeField] GameObject pauseMenuGO;
     public void ExitToMenu()
     {
-        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+        Destroy(pauseMenuGO);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }

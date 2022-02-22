@@ -1429,6 +1429,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+        type: 3}
+      propertyPath: pauseMenuGO
+      value: 
+      objectReference: {fileID: 1381393414}
     - target: {fileID: 7603868177315299880, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
       propertyPath: m_Name
@@ -1604,6 +1609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44421c934b81a84fa6b78dc66c082e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuGO: {fileID: 0}
 --- !u!114 &1043723914
 MonoBehaviour:
   m_ObjectHideFlags: 0

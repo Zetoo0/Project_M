@@ -7,8 +7,11 @@ using UnityEngine.Audio;
 public class SoundValueText : MonoBehaviour
 {
 
-    TextMeshProUGUI text;
-    AudioMixer audioMixer;
-    float value;
+    [SerializeField] TextMeshProUGUI valueText;
+
+    void Update()
+    {
+        valueText.text = Volume.volumeVol.ToString();
+    }
 
 }

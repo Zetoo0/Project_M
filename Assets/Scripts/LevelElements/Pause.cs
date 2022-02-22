@@ -10,13 +10,14 @@ public class Pause : MonoBehaviour
 
     public bool  gameIsPaused = false;  
     [SerializeField] GameObject pauseMenu;  
-    GameState gameState;
+    static public GameState gameState;
     TextMeshProUGUI text;
 
     void Start()
     {
+        gameState = GameState.Gameplay;
         pauseMenu.SetActive(false);
-        DontDestroyOnLoad(pauseMenu);
+        //DontDestroyOnLoad(pauseMenu);
     }
 
 
@@ -45,7 +46,7 @@ public class Pause : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenu.SetActive(false);
+        OpenExitButton.Exit(pauseMenu);
         gameState = GameState.Gameplay;
         Debug.Log("Resume");
         Time.timeScale = 1f;
@@ -55,7 +56,7 @@ public class Pause : MonoBehaviour
 
     void PauseTheGame()
     {
-        pauseMenu.SetActive(true);
+        OpenExitButton.Open(pauseMenu);
         
         //SceneManager.LoadScene(0);
         gameState = GameState.Paused;

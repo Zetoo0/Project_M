@@ -7,13 +7,28 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public GameObject userPanel;
+    int currentSceneIndex;
+    int nextSceneIndex;
+
     public void usernamePanel()
     {
-        userPanel.SetActive(true);
+        OpenExitButton.Open(userPanel);
+    }
+
+    void Start()
+    {
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        nextSceneIndex = currentSceneIndex + 1;
     }
 
     public void FirstLevel()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync(nextSceneIndex, LoadSceneMode.Single);
+
+    }
+
+    public void SetUserPanelInactive()
+    {
+        OpenExitButton.Exit(userPanel);
     }
 }

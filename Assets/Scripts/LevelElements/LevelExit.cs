@@ -16,15 +16,16 @@ public class LevelExit : MonoBehaviour
     private DateTime mapStart;
     public string mapTimeInString;  
     [SerializeField] public string postURL;
-
     List<UserLog> userDataList = new List<UserLog>();
 
     public string userName;
     int userPoint;
     int userDeaths;
-    string userMapTime; 
+    float userMapTime;
 
     [SerializeField] int levelId;
+
+    [SerializeField] GameObject pauseMenuGO;
 
     void Start()
     {
@@ -35,15 +36,15 @@ public class LevelExit : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         MapTime();
-       // SetUserDatasForPost();
-       // StartPost();
+        //SetUserDatasForPost();
+        StartPost();
         NextLevel();
         
 
 
     }
 
-    public void WriteDataToFile(UserLog data)
+   /* public void WriteDataToFile(UserLog data)
     {
         string path = "UserDatas.csv";
         FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
@@ -57,34 +58,39 @@ public class LevelExit : MonoBehaviour
         sw_out.Write(";");
         sw_out.Write(data.maptime);
         sw_out.Write("\n");
-    }
+    }*/
 
-    void SetUserDatasForPost()// User adatok beállítása
+   /* public void SetUserDatasForPost()// User adatok beállítása
     {
         userName = UserName.username;
         userPoint = GetComponent<GameSession>().playerScore;
         userDeaths = GetComponent<GameSession>().deaths;
         userMapTime = mapTimeInString;
-    }
+    }*/
 
-    
+
+    private void Update()
+    {
+        userMapTime += Time.deltaTime;
+    }
 
     void StartPost()
     {
 
-        
+        userPoint = FindObjectOfType<GameSession>().playerScore;
+        userDeaths = FindObjectOfType<GameSession>().deaths;
+
+
         var userData = new UserLog()//A post metódushoz az adatok elõkészítése
         {
             name = UserName.username,
-            point = GetComponent<GameSession>().playerScore,
-            death = GetComponent<GameSession>().deaths,
+            point = userPoint,
+            death = userDeaths,
             maptime = mapTimeInString,
             levelId = levelId
         };
 
-        //WriteDataToFile(userData);
-
-       // CheckLevelNumber();
+        Debug.Log("Adatok sikeres elõkészítése");
 
 
 
@@ -114,6 +120,7 @@ public class LevelExit : MonoBehaviour
 
         }
 
+        Debug.Log("Sikeres feltöltés az adatbázisba");
 
         
 
@@ -138,11 +145,11 @@ public class LevelExit : MonoBehaviour
 
     void MapTime()//A végigvitt map idejének kiszámítása és eltárolása
     {
-        mapTime = DateTime.Now - mapStart;
-        mapTimeInString = mapTime.TotalSeconds.ToString();
+        //mapTime = DateTime.Now - mapStart;
+        mapTimeInString = userMapTime.ToString();
         Debug.Log("Map Time: " + mapTimeInString);
-        mapStart = DateTime.Now;
-        mapTime = TimeSpan.Zero;
+        //mapStart = DateTime.Now;
+       // mapTime = TimeSpan.Zero;
         Debug.Log(mapTime);
 
     }
@@ -157,6 +164,7 @@ public class LevelExit : MonoBehaviour
         {
             nextSceneIndex = 0;
         }
+        Destroy(pauseMenuGO);
         FindObjectOfType<Scene_Persist>().ResetScenePersist();
         FindObjectOfType<GameSession>().ResetGameSessionBetweenLevels();
 

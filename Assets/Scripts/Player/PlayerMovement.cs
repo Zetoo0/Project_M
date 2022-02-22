@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         //Instantiate(bullet, gun.position, transform.rotation);
         //AudioSource.PlayClipAtPoint(bulletSound, Camera.main.transform.position);
-        if (!isAttacking && value.isPressed)
+        if (!isAttacking && value.isPressed && Pause.gameState == GameState.Gameplay)
         {
             isAttacking = true;
             if (isAttacking)

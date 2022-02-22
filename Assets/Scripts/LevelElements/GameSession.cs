@@ -22,6 +22,8 @@ public class GameSession : MonoBehaviour
     const string redCollectible = "RedCollectible";
     bool redCollectibleIsPickedUp = false;
 
+    private string CUSTOM_START = "Custom_Start";
+
 
     void Awake()
     {
@@ -100,6 +102,7 @@ public class GameSession : MonoBehaviour
         playerDeathsText.text = deaths.ToString();
         //dead.SetActive(false);
         playerDeathText.gameObject.SetActive(false);
+        GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
     }
 
     public void AddToScore(int pointsToAdd)//Ponthoz hozzáadás

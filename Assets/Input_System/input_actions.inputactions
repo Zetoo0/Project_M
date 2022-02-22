@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PickedUp",
+                    "type": "Button",
+                    "id": "f703884e-ef14-44c8-ad61-017bf0ecea29",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -213,6 +222,17 @@
                 },
                 {
                     "name": "",
+                    "id": "788076d5-0715-4360-a3bd-a84182b0911b",
+                    "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -301,6 +321,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2b4d223a-2af1-4612-b601-7e6608bf191f",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a6008cb6-ed91-4895-b986-d91860459738",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -362,6 +393,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2656485f-2a16-464f-8bcd-1e0cdbd933af",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "PickedUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

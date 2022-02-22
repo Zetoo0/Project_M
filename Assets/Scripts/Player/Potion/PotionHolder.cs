@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class PotionHolder : MonoBehaviour
 {
     public Potion potion;
     public float activeTime;
-    //public KeyCode key;
+    public KeyCode key;
+    bool isKeyPressed;
 
     public enum PotionState
     {
@@ -25,54 +27,50 @@ public class PotionHolder : MonoBehaviour
 
     void Update()
     {
-        /*
-        if(state == PotionState.pickedUp)
-        {
-            potion.Activate(gameObject);
-            if(activeTime > 0)
-            {
-                StartCoroutine(CountDown());    
-            }
-            if(activeTime == 0)
-            {
-                state = PotionState.notPickedUp;
-                Debug.Log("Inactive");
-                GetComponent<PlayerMovement>().isPickedUp = false;
-                GetComponent<PlayerMovement>().jumpSpeed = 15;    
-            }
-        }*/
 
-        switch (state)
+        if (isKeyPressed)
+        {
+            HandlePotion();
+        }
+
+    }
+
+    void HandlePotion()
+    {
+        if(activeTime > 0)
+        {
+            activeTime -= Time.deltaTime;
+            Debug.Log(activeTime);
+        }
+                else
+        {
+            state = PotionState.notPickedUp;
+            Debug.Log("Inactive");
+            GetComponent<PlayerMovement>().isItemPickedUp = false;
+            GetComponent<PlayerMovement>().jumpSpeed = 15;
+
+        }
+    }
+
+
+    void OnPickedUp(InputValue value)
+    {
+        switch(state)
         {                
             case PotionState.pickedUp:
                 //GetComponent<PlayerMovement>().isPickedUp == true
-                //if (Input.GetKeyDown(key))
-                //{
-                potion.Activate(gameObject);
-                //activeTime = potion.activeTime;
-                //}
-                if(activeTime > 0)
+                if (value.isPressed)
                 {
-                    activeTime -= Time.deltaTime;
-                    Debug.Log(activeTime);
+                    potion.Activate(gameObject);
+                    //activeTime = potion.activeTime;
+                    isKeyPressed = true;
                 }
-                else
-                {
-                    state = PotionState.notPickedUp;
-                    Debug.Log("Inactive");
-                    GetComponent<PlayerMovement>().isItemPickedUp = false;
-                    GetComponent<PlayerMovement>().jumpSpeed = 15;    
-
-                }
+                
                 break;
 
         }
     }
 
-    /*IEnumerator CountDown()
-    {
-        yield return new WaitForSecondsRealtime(1);
-        activeTime--;
-    }*/
+   
 
 }
