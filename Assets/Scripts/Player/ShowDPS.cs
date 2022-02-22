@@ -18,11 +18,7 @@ public class ShowDPS : MonoBehaviour
 
     public static bool isCritted;
 
-    void Awake()
-    {
-        //stopper = 0.0f;
-        //PopUp();
-    }
+  
 
     private void Start()
     {

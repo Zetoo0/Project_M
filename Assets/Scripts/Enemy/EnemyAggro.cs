@@ -132,7 +132,7 @@ public class EnemyAggro : MonoBehaviour
         }
 
 
-        Vector2 endPosition = castPoint.position + Vector3.right * castDistance ;//== new Vector3(position.x * distance)
+        Vector2 endPosition = castPoint.position + Vector3.right * castDistance ;//ugyanaz mint : new Vector3(position.x * distance)
         RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position, endPosition,LayerMask.GetMask("MoveableObstacle","Player","Ground"));
         
         if (rcHit.collider != null)

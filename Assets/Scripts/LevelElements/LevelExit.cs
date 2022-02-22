@@ -90,7 +90,7 @@ public class LevelExit : MonoBehaviour
             levelId = levelId
         };
 
-        Debug.Log("Adatok sikeres elõkészítése");
+       // Debug.Log("Adatok sikeres elõkészítése");
 
 
 
@@ -120,7 +120,7 @@ public class LevelExit : MonoBehaviour
 
         }
 
-        Debug.Log("Sikeres feltöltés az adatbázisba");
+       // Debug.Log("Sikeres feltöltés az adatbázisba");
 
         
 
