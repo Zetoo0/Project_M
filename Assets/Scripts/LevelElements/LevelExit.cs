@@ -165,7 +165,7 @@ public class LevelExit : MonoBehaviour
             nextSceneIndex = 0;
         }
 
-
+        FindObjectOfType<GameSession>().ResetGameSessionBetweenLevels();
         SceneManager.LoadScene(nextSceneIndex);
        // Debug.Log("Új pálya: " + mapStart);
     }
@@ -210,4 +210,3 @@ public class LevelExit : MonoBehaviour
 
 //  Destroy(pauseMenuGO);
 //FindObjectOfType<Scene_Persist>().ResetScenePersist();
-//   FindObjectOfType<GameSession>().ResetGameSessionBetweenLevels();

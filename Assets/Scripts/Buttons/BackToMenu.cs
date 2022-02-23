@@ -9,6 +9,8 @@ public class BackToMenu : MonoBehaviour
     public void ExitToMenu()
     {
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        FindObjectOfType<GameSession>().ResetGameSession();
         Destroy(pauseMenuGO);
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }

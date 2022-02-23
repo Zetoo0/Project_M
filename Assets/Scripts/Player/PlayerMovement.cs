@@ -79,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
+        Time.timeScale = 1.0f;
         jumpCount = 0;
         extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
@@ -86,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
-        SetCursorStateLocked();
+       // SetCursorStateLocked();
     }
 
     // Update is called once per frame
