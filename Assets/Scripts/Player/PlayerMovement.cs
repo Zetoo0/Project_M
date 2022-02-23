@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
+        SetCursorStateLocked();
     }
 
     // Update is called once per frame
@@ -351,7 +352,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+       // bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
@@ -369,9 +370,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void FlipSprite()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+       // bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
 
-        if (playerHasHorizontalSpeed)
+        if (HasPlayerHorizontalSpeed())
         {
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1.0f);
             
