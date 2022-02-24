@@ -271,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
     {
         
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
-        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) || value.isPressed && jumpCount < extraJumps)//!isJumping && !isAttacking 
+        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) && Pause.gameState == GameState.Gameplay || value.isPressed && jumpCount < extraJumps && Pause.gameState == GameState.Gameplay)//!isJumping && !isAttacking 
         {
 
             isJumping = true;
