@@ -11,8 +11,6 @@ public class JumpPotion : Potion
     {
         PlayerMovement player = parent.GetComponent<PlayerMovement>();
         player.jumpSpeed = jumpspeed;
-        Debug.Log("JumpSpeed set to " + jumpspeed);
-        
+        Debug.Log("JumpSpeed set to " + jumpspeed); 
     }
-
 }

@@ -15,6 +15,7 @@ public class SoundValueText : MonoBehaviour
     {
         volume = Mathf.Clamp(Volume.volumeVol, 100.0f, 0.0f);
         volOut = Volume.volumeVout;
+        //valueText.text = Volume.auSlider.normalizedValue.ToString();
         valueText.text = volOut.ToString();
     }
 

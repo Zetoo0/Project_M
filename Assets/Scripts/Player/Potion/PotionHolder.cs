@@ -67,10 +67,6 @@ public class PotionHolder : MonoBehaviour
                 }
                 
                 break;
-
         }
     }
-
-   
-
 }

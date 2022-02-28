@@ -94,13 +94,10 @@ public class GameSession : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         playerScore = 0;
         playerScoreText.text = "0";
-        //playerLives--;
         deaths++;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-        //GetComponent<PlayerMovement>().rb.transform.position = savePosition;
         playerDeathsText.text = deaths.ToString();
-        //dead.SetActive(false);
         playerDeathText.gameObject.SetActive(false);
         GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
     }

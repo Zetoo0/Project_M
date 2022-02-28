@@ -41,38 +41,17 @@ public class EnemyAggro : MonoBehaviour
     void EnemyAggroState()
     {
         //Distance to player
-        //float distToPlayer = Vector2.Distance(transform.position, Player.position);
         if (CanSeePlayer(agroRange))
         {
             //Chase the player
-            //ChasePlayer();
             isAgro = true;
-            //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Run");
         }
-
-
-        /*if (isAgro)
-        {
-            isSearching = true;
-            //if (!isSearching)
-            //{
-                //isSearching = true;
-                    //StopChasingPlayer();
-            Invoke("StopChasingPlayer", 2);
-                    //StartCoroutine(StopChasingPlayer());
-                }
-            }
-            //Stop chasing the player
-            //StopChasingPlayer();
-            //rb.GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
-        */
-
 
         if (isAgro)
         {
             ChasePlayer();
             Invoke("StopChasingPlayer", 4);
-            GetComponent<EnemyMovement>().FlipEnemyFaceing();
+          //  GetComponent<EnemyMovement>().FlipEnemyFaceing();
         }
 
     }
@@ -113,11 +92,13 @@ public class EnemyAggro : MonoBehaviour
 
     void StopChasingPlayer()
     {
-        isAgro = false;
-        isSearching = false;
-        rb.velocity = new Vector2(0f, 0f);
-        GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
-        //yield return new WaitForSecondsRealtime(5); 
+        if (!CanSeePlayer(agroRange))
+        {
+            isAgro = false;
+            isSearching = false;
+            rb.velocity = new Vector2(0f, 0f);
+            GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
+        }
     }
 
     //Látja-e az ellenség a Playert, RayCasttal megoldva
@@ -130,7 +111,6 @@ public class EnemyAggro : MonoBehaviour
         {
             castDistance = distance;
         }
-
 
         Vector2 endPosition = castPoint.position + Vector3.right * castDistance ;//ugyanaz mint : new Vector3(position.x * distance)
         RaycastHit2D rcHit = Physics2D.Linecast(castPoint.position, endPosition,LayerMask.GetMask("MoveableObstacle","Player","Ground"));
