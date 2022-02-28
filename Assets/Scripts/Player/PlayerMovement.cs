@@ -91,6 +91,12 @@ public class PlayerMovement : MonoBehaviour
        // SetCursorStateLocked();
     }
 
+
+    void Awake()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -266,10 +272,10 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
+    
     IEnumerator OnJump(InputValue value)
     {
-        
+        if(!isAlive) { yield return new WaitForSecondsRealtime(0); }
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) && Pause.gameState == GameState.Gameplay || value.isPressed && jumpCount < extraJumps && Pause.gameState == GameState.Gameplay)//!isJumping && !isAttacking 
         {
@@ -325,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
         
-            
+               
         
         
     }
@@ -338,6 +344,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash()
     {
+        if(!isAlive) { yield return new WaitForSecondsRealtime(0); }
         Debug.Log("Dashed");
        // ChangeAnimationState(PLAYER_DASH);
         isDashing = true;
@@ -354,6 +361,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
+        if(!isAlive) { return; }
        // bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
@@ -373,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
     public void FlipSprite()
     {
        // bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-
+       
         if (HasPlayerHorizontalSpeed())
         {
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1.0f);
@@ -384,6 +392,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
+        if(!isAlive) { return; }
         if (!feetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
             rb.gravityScale = gravityScaleAtStart;
@@ -399,13 +408,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
+        if(!isAlive) { return; }  
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards","Trap")))
         {
-            isAlive = false;
-            ChangeAnimationState(PLAYER_DEATH);
-            rb.velocity = deathKick;
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            ProcessDeath();
         }
+    }
+
+    void ProcessDeath()
+    {
+        isAlive = false;
+        ChangeAnimationState(PLAYER_DEATH);
+        rb.velocity = deathKick;
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
 
     public void ChangeAnimationState(string newState)

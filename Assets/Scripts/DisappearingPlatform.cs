@@ -15,15 +15,12 @@ public class DisappearingPlatform : MonoBehaviour
         platformIsNotActive = false;
     }
 
-    
-
     IEnumerator ActivatePlatform()
     {
         yield return new WaitForSecondsRealtime(activateTime);
         platformIsNotActive = false;
         CheckerCollider.enabled = true;
         DestroyThisPlatform.SetActive(true);
-
     }
 
 
@@ -49,26 +46,5 @@ public class DisappearingPlatform : MonoBehaviour
         }
 
     }
-        
-    
-
-    /*IEnumerator DestroyPlatforms()
-    {
-        for (int i = 0; i < platforms.Length; i++)
-        {
-            if (platforms[i].active)
-            {
-                Debug.Log(platforms[i].name);
-                yield return new WaitForSecondsRealtime(3);
-                platforms[i].SetActive(false);
-                StartCoroutine(ActivatePlatform());
-                gameObject.SetActive(false);
-            }
-        }
-        
-    }*/
-
-
-
-
+       
 }

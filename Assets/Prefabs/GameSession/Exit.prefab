@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5540124189722834415}
   - component: {fileID: 6888819794525624032}
   - component: {fileID: 5226518576238350406}
+  - component: {fileID: 1536501762}
   m_Layer: 14
   m_Name: Exit
   m_TagString: Untagged
@@ -122,3 +123,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76847376cf84f3045be01503afdd781f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelLoadSpeed: 1
+  transition: {fileID: 0}
+  mapTimeInString: 
+  postURL: http://s1.siralycore.hu:25502/statisztika_upload
+  userName: 
+  levelId: 2
+  pauseMenuGO: {fileID: 0}
+  exitTimeText: {fileID: 0}
+--- !u!114 &1536501762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603868177315299880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092bc924072ff74d81327f4c7f4ca9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poiName: First Level, First thoughts

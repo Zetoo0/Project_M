@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.IO;
+using UnityEngine.UI;
+using TMPro;
 
 public class LevelExit : MonoBehaviour
 {
@@ -27,6 +29,8 @@ public class LevelExit : MonoBehaviour
 
     [SerializeField] GameObject pauseMenuGO;
 
+    [SerializeField] TextMeshProUGUI exitTimeText;
+
     void Start()
     {
         mapStart = DateTime.Now;
@@ -38,7 +42,7 @@ public class LevelExit : MonoBehaviour
         MapTime();
         //SetUserDatasForPost();
         StartPost();
-        NextLevel();
+        StartCoroutine(NextLevel());
         
 
 
@@ -126,27 +130,12 @@ public class LevelExit : MonoBehaviour
 
     }
 
-   /* void CheckLevelNumber()
-    {
-        if(levelId == 3)
-        {
-            ClearStaticUserDatas();
-        }
-    }*/
-
-   /* void ClearStaticUserDatas()
-    {
-        GameSession.playerScore = 0;
-        GameSession.deaths = 0;
-        Debug.Log(GameSession.playerScore);
-        Debug.Log("Sikeresen tisztítva");
-    }*/
-
-
     void MapTime()//A végigvitt map idejének kiszámítása és eltárolása
     {
         //mapTime = DateTime.Now - mapStart;
         mapTimeInString = userMapTime.ToString();
+        ExitTimeTextOut(mapTimeInString);
+        userMapTime = 0;            
         Debug.Log("Map Time: " + mapTimeInString);
         //mapStart = DateTime.Now;
        // mapTime = TimeSpan.Zero;
@@ -154,8 +143,9 @@ public class LevelExit : MonoBehaviour
 
     }
 
-    public void NextLevel()//Következõ szintre lépés, ha nincs több pálya akkor visszadob a menübe
+    public IEnumerator NextLevel()//Következõ szintre lépés, ha nincs több pálya akkor visszadob a menübe
     {
+        yield return new WaitForSecondsRealtime(3);
         Debug.Log("Next Level");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
@@ -164,11 +154,19 @@ public class LevelExit : MonoBehaviour
         {
             nextSceneIndex = 0;
         }
-
+        exitTimeText.gameObject.SetActive(false);
         FindObjectOfType<GameSession>().ResetGameSessionBetweenLevels();
         SceneManager.LoadScene(nextSceneIndex);
        // Debug.Log("Új pálya: " + mapStart);
     }
+
+    void ExitTimeTextOut(string time)
+    {
+        exitTimeText.gameObject.SetActive(true);
+        exitTimeText.text = "MAP TIME: \n\n" + time;
+    }
+
+
 }
 
 
