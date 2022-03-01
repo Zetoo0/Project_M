@@ -448,6 +448,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2454616234663923084, guid: baf1a3b261200314087edb6391d8a385,
         type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bbcd1a682bbbea947b3a64a3a77e7495, type: 3}
+    - target: {fileID: 2454616234663923084, guid: baf1a3b261200314087edb6391d8a385,
+        type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
@@ -512,6 +517,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2454616234663923090, guid: baf1a3b261200314087edb6391d8a385,
+        type: 3}
+      propertyPath: auMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
+        type: 2}
     - target: {fileID: 2454616234663923091, guid: baf1a3b261200314087edb6391d8a385,
         type: 3}
       propertyPath: m_SortingLayer
@@ -691,6 +702,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2454616234663923090, guid: baf1a3b261200314087edb6391d8a385,
+        type: 3}
+      propertyPath: auMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
+        type: 2}
     - target: {fileID: 2454616234663923091, guid: baf1a3b261200314087edb6391d8a385,
         type: 3}
       propertyPath: m_SortingLayer
@@ -48838,6 +48855,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2454616234663923090, guid: baf1a3b261200314087edb6391d8a385,
         type: 3}
+      propertyPath: auMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
+        type: 2}
+    - target: {fileID: 2454616234663923090, guid: baf1a3b261200314087edb6391d8a385,
+        type: 3}
       propertyPath: coinPickUpSFX
       value: 
       objectReference: {fileID: 8300000, guid: bbcd1a682bbbea947b3a64a3a77e7495, type: 3}
@@ -49104,6 +49127,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4037190, guid: e622ecc2902404a41a3c5c1fb4d77786, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4037190, guid: e622ecc2902404a41a3c5c1fb4d77786, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4037190, guid: e622ecc2902404a41a3c5c1fb4d77786, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
@@ -49117,6 +49148,12 @@ PrefabInstance:
       propertyPath: key
       value: 106
       objectReference: {fileID: 0}
+    - target: {fileID: 4420407167346882996, guid: e622ecc2902404a41a3c5c1fb4d77786,
+        type: 3}
+      propertyPath: auMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
+        type: 2}
     - target: {fileID: 7253178137100505552, guid: e622ecc2902404a41a3c5c1fb4d77786,
         type: 3}
       propertyPath: m_Name

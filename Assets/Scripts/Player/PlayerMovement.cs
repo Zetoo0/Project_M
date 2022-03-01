@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -73,7 +74,10 @@ public class PlayerMovement : MonoBehaviour
     int critMax = 100;
     System.Random rnd = new System.Random();
     static public bool isCritted;
-    
+
+    [SerializeField] AudioMixerGroup auMixer;
+    string exposedName = "volume";
+
 
 
     // Start is called before the first frame update
@@ -150,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
             if (isAttacking)
             {
                 ChangeAnimationState(PLAYER_ATTACK);
-                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position, GetVolume());
                 //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
                                                     //Detect enemies whose in range
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -425,15 +429,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void ChangeAnimationState(string newState)
     {
-
         //hogyha az aktuális animáció = a paraméterrel akkor returnöli
         if(currentState == newState)
         {
             return;
         }
-
-        
-
         //beforeState = currentState;
         //animáció lejátszása
         anim.Play(newState);
@@ -443,12 +443,22 @@ public class PlayerMovement : MonoBehaviour
         //Átírjuk az újra az aktuális állapotunkat
 
         currentState = newState;
-        
-        
-        
     }
-  
 
+    float GetVolume()
+    {
+        float volOut;
+        bool isCanGetVol = auMixer.audioMixer.GetFloat(exposedName, out volOut); //auMixer.GetFloat(exposedName, out volOut);
+        if (isCanGetVol)
+        {
+            return volOut;
+        }
+        else
+        {
+            return 0f;
+        }
+
+    }
 
 
 }
