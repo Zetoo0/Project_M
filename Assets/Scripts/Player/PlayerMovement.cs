@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
 
     [Header("Objects")]
     [SerializeField] private float baseSpeed = 10.0f;   
@@ -96,10 +94,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void Awake()
-    {
 
-    }
 
     // Update is called once per frame
     void Update()
@@ -127,20 +122,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isItemPickedUp = true;
             Debug.Log("POOOTION");
-            //jumpSpeed = 20f;
             GetComponent<PotionHolder>().state = PotionHolder.PotionState.pickedUp;
             collison.gameObject.SetActive(false);
-            //yield return new WaitForSecondsRealtime(activeTime);
-            //jumpSpeed = baseJumpSpeed;
-            //Debug.Log("Inactive");
-            //isPickedUp = false;
-        }   
-        /*else if(collison.tag == "Stone")
-        {
-            collison.attachedRigidbody.velocity = new Vector2(10f, 0f);
-        }*/
-        
-       
+
+        }
     }
 
     void OnFire(InputValue value)

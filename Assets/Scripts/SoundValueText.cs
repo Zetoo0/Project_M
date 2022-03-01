@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Audio;
 
 public class SoundValueText : MonoBehaviour
 {
-
     [SerializeField] TextMeshProUGUI valueText;
     float volume = 100;
     float volOut;

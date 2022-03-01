@@ -100,6 +100,8 @@ public class GameSession : MonoBehaviour
         playerDeathsText.text = deaths.ToString();
         playerDeathText.gameObject.SetActive(false);
         GetComponent<MapTransition>().ChangeAnimationState(CUSTOM_START);
+       // ResetGameSessionBetweenLevels();
+
     }
 
     public void AddToScore(int pointsToAdd)//Ponthoz hozzáadás

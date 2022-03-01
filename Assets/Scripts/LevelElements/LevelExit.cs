@@ -135,7 +135,7 @@ public class LevelExit : MonoBehaviour
         //mapTime = DateTime.Now - mapStart;
         mapTimeInString = userMapTime.ToString();
         ExitTimeTextOut(mapTimeInString);
-        userMapTime = 0;            
+        userMapTime = 0;
         Debug.Log("Map Time: " + mapTimeInString);
         //mapStart = DateTime.Now;
        // mapTime = TimeSpan.Zero;
@@ -157,7 +157,7 @@ public class LevelExit : MonoBehaviour
         exitTimeText.gameObject.SetActive(false);
         FindObjectOfType<GameSession>().ResetGameSessionBetweenLevels();
         SceneManager.LoadScene(nextSceneIndex);
-       // Debug.Log("Új pálya: " + mapStart);
+        // Debug.Log("Új pálya: " + mapStart);
     }
 
     void ExitTimeTextOut(string time)
