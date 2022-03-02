@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip swishSound;
 
     private bool isDashing;
-    private float dashDistance = 30.0f;
+    private float dashDistance = 50.0f;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem dust;
@@ -335,7 +335,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isAlive) { yield return new WaitForSecondsRealtime(0); }
         Debug.Log("Dashed");
-       // ChangeAnimationState(PLAYER_DASH);
+        ChangeAnimationState(PLAYER_DASH);
         isDashing = true;
         rb.velocity += new Vector2(dashDistance * moveInput.x, 0f);
         rb.AddForce(new Vector2(dashDistance * moveInput.x, 0f));
@@ -344,7 +344,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(1.0f);
         isDashing = false;
     }
 
