@@ -81,15 +81,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
-        Time.timeScale = 1.0f;
-        jumpCount = 0;
-        extraJumps = extraJumpsValue;
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        bodyCollider = GetComponent<CapsuleCollider2D>();
-        feetCollider = GetComponent<BoxCollider2D>();
-        gravityScaleAtStart = rb.gravityScale;
+        SetStartReady();
        // SetCursorStateLocked();
     }
 
@@ -101,15 +93,31 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAlive) { return; }
         //SetCursorStateLocked();
+        UpdateUpdate();
+
+    }
+
+    void UpdateUpdate()
+    {
         Run();
         FlipSprite();
         ClimbLadder();
         Die();
-
     }
 
    
-    
+    void SetStartReady()
+    {
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
+        Time.timeScale = 1.0f;
+        jumpCount = 0;
+        extraJumps = extraJumpsValue;
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        bodyCollider = GetComponent<CapsuleCollider2D>();
+        feetCollider = GetComponent<BoxCollider2D>();
+        gravityScaleAtStart = rb.gravityScale;
+    }
     
  
     void SetCursorStateLocked()
@@ -118,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collison)
     {
-        if (collison.tag == "JumpBoostPotion" && !isItemPickedUp)
+        if (IsItemJumpPotionAndNotPickedUp(collison))
         {
             isItemPickedUp = true;
             Debug.Log("POOOTION");
@@ -128,12 +136,39 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    bool IsItemJumpPotionAndNotPickedUp(Collider2D collision)
+    {
+        bool isItemJumpPotionAndNotPickedUp;
+        if(collision.tag == "JumpBoostPotion" && !isItemPickedUp)
+        {
+            return isItemJumpPotionAndNotPickedUp = true;
+        }
+        else
+        {
+            return isItemJumpPotionAndNotPickedUp = false;
+        }
+    }
+
+    bool IsPlayerCanAttack(InputValue value)
+    {
+        bool isPlayerCanAttack;
+
+        if(!isAttacking && value.isPressed && Pause.gameState == GameState.Gameplay)
+        {
+            return isPlayerCanAttack = true;
+        }
+        else
+        {
+            return isPlayerCanAttack = false;
+        }
+    }
+
     void OnFire(InputValue value)
     {
         if (!isAlive) { return; }
         //Instantiate(bullet, gun.position, transform.rotation);
         //AudioSource.PlayClipAtPoint(bulletSound, Camera.main.transform.position);
-        if (!isAttacking && value.isPressed && Pause.gameState == GameState.Gameplay)
+        if (IsPlayerCanAttack(value))
         {
             isAttacking = true;
             if (isAttacking)
@@ -266,7 +301,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isAlive) { yield return new WaitForSecondsRealtime(0); }
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
-        if (value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground","MoveableObstacles")) && Pause.gameState == GameState.Gameplay || value.isPressed && jumpCount < extraJumps && Pause.gameState == GameState.Gameplay)//!isJumping && !isAttacking 
+        if (IsPlayerCanJump(value))//!isJumping && !isAttacking 
         {
 
             isJumping = true;
@@ -277,7 +312,19 @@ public class PlayerMovement : MonoBehaviour
             JumpCompleted();
             yield return new WaitForSecondsRealtime(0.5f);
         }
+    }
 
+    bool IsPlayerCanJump(InputValue value)
+    {
+        bool isPlayerCanJump;
+        if(value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacles")) && Pause.gameState == GameState.Gameplay || value.isPressed && jumpCount < extraJumps && Pause.gameState == GameState.Gameplay)
+        {
+            return isPlayerCanJump = true;
+        }
+        else
+        {
+            return isPlayerCanJump = false;
+        }
     }
 
    
@@ -319,10 +366,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-        
-               
-        
-        
     }
 
     void CreateDust()
@@ -339,11 +382,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         rb.velocity += new Vector2(dashDistance * moveInput.x, 0f);
         rb.AddForce(new Vector2(dashDistance * moveInput.x, 0f));
-
-
-
-
-        
+    
         yield return new WaitForSeconds(1.0f);
         isDashing = false;
     }
