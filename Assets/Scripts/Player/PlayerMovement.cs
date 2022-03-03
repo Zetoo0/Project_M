@@ -76,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioMixerGroup auMixer;
     string exposedName = "volume";
 
+    static public bool isPlayerCanMove;
+
 
 
     // Start is called before the first frame update
@@ -91,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAlive) { return; }
+        if (!isAlive || !isPlayerCanMove) { return; }
         //SetCursorStateLocked();
         UpdateUpdate();
 
@@ -108,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
    
     void SetStartReady()
     {
+        isPlayerCanMove = true;
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         Time.timeScale = 1.0f;
         jumpCount = 0;
@@ -289,7 +292,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        if (!isAlive) { return; }
+        if (!isAlive || !isPlayerCanMove) { return; }
         {
             moveInput = value.Get<Vector2>();
             Run();
@@ -389,7 +392,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        if(!isAlive) { return; }
+        if(!isAlive || !isPlayerCanMove) { return; }
        // bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
@@ -420,7 +423,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
-        if(!isAlive) { return; }
+        if(!isAlive || !isPlayerCanMove) { return; }
         if (!feetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
             rb.gravityScale = gravityScaleAtStart;

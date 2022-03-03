@@ -2240,6 +2240,31 @@ Transform:
   m_Father: {fileID: 560246639}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &876315858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7603868177315299880, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1536501760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &876315859
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876315858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6ea0a1142d22d64ea87d499f71f7ee3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &880346660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2782,12 +2807,12 @@ PrefabInstance:
     - target: {fileID: 2749707198061242743, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
       propertyPath: m_Radius
-      value: 0.4125005
+      value: 0.4550807
       objectReference: {fileID: 0}
     - target: {fileID: 2749707198061242743, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
       propertyPath: m_Offset.x
-      value: 0.019992566
+      value: -0.022588586
       objectReference: {fileID: 0}
     - target: {fileID: 2749707198061242743, guid: a7afda9c06f44654ab2902057baaa8ca,
         type: 3}
@@ -4413,12 +4438,12 @@ PrefabInstance:
     - target: {fileID: 1079272651346790007, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.210806
+      value: -14.97
       objectReference: {fileID: 0}
     - target: {fileID: 1079272651346790007, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25.996925
+      value: -25.58
       objectReference: {fileID: 0}
     - target: {fileID: 1079272651346790007, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
@@ -4480,6 +4505,12 @@ PrefabInstance:
       propertyPath: exitTimeText
       value: 
       objectReference: {fileID: 1507681476}
+    - target: {fileID: 5540124189722834415, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3934809029133181444, guid: f7d81913e8496094fbd70936e4658499,
+        type: 3}
     - target: {fileID: 7603868177315299880, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
       propertyPath: m_Name

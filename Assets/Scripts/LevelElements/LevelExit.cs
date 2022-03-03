@@ -39,6 +39,7 @@ public class LevelExit : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        PlayerMovement.isPlayerCanMove = false;
         MapTime();
         //SetUserDatasForPost();
         StartPost();

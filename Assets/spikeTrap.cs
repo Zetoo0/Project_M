@@ -44,7 +44,7 @@ public class spikeTrap : MonoBehaviour
     {
         if (isEdgeColliderTouched)
         {
-            this.transform.position += new Vector3(0.0f, -0.2f);
+            this.transform.position += new Vector3(0.0f, -0.09f);
         }
     }
 }
