@@ -67,17 +67,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("Damage")]
     int critDamage = 50;
     int normalDamage = 25;
-    float critPercent = 50;
     int critMin = 0;
     int critMax = 100;
-    System.Random rnd = new System.Random();
     static public bool isCritted;
-
-    [SerializeField] AudioMixerGroup auMixer;
-    string exposedName = "volume";
 
     static public bool isPlayerCanMove;
 
+
+    [SerializeField] Transform PotionPopUp;
+    [SerializeField] Transform PotionPopUpPosition;
+
+    [SerializeField] AudioMixerGroup auMixer;
+    string exposedName = "volume";
 
 
     // Start is called before the first frame update
@@ -131,11 +132,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsItemJumpPotionAndNotPickedUp(collison))
         {
+
+            Instantiate(PotionPopUp, PotionPopUpPosition.position, Quaternion.identity);
             isItemPickedUp = true;
             Debug.Log("POOOTION");
             GetComponent<PotionHolder>().state = PotionHolder.PotionState.pickedUp;
             collison.gameObject.SetActive(false);
-
         }
     }
 
@@ -296,7 +298,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveInput = value.Get<Vector2>();
             Run();
-        }
+        }   
         
     }
     

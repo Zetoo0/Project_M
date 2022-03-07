@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &157545537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157545538}
+  m_Layer: 8
+  m_Name: PotionPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &157545538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157545537}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7253178137100505565}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710858060
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,6 +4918,11 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
+      propertyPath: auMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
+        type: 2}
+    - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: dashTime
       value: 0.1
       objectReference: {fileID: 0}
@@ -4911,6 +4946,11 @@ PrefabInstance:
       propertyPath: swishSound
       value: 
       objectReference: {fileID: 8300000, guid: df5a66663910cce4c932711d5c829620, type: 3}
+    - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
+      propertyPath: PotionPopUp
+      value: 
+      objectReference: {fileID: 7003957396342933316, guid: 71424e70fe5722a49a93ca02af7e4d94,
+        type: 3}
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: attackPoint
       value: 
@@ -4964,6 +5004,10 @@ PrefabInstance:
       propertyPath: enemyLayers.m_Bits
       value: 2048
       objectReference: {fileID: 0}
+    - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
+      propertyPath: PotionPopUpPosition
+      value: 
+      objectReference: {fileID: 157545538}
     - target: {fileID: 1649399961, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: m_Mass
       value: 0.47014096
@@ -5073,17 +5117,17 @@ PrefabInstance:
     - target: {fileID: 6480688606938902783, guid: 15e29ccbe8482ba478391df3f5a19a1e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6480688606938902783, guid: 15e29ccbe8482ba478391df3f5a19a1e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6480688606938902783, guid: 15e29ccbe8482ba478391df3f5a19a1e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6480688606938902783, guid: 15e29ccbe8482ba478391df3f5a19a1e,
         type: 3}
@@ -5126,7 +5170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5239,5 +5283,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potion: {fileID: 11400000, guid: b8d24ceaede3d1f46b1ddae97bbe912e, type: 2}
   activeTime: 0
-  key: 0
+  key: 106
   state: 2
