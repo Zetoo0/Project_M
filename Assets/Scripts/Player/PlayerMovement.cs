@@ -198,8 +198,6 @@ public class PlayerMovement : MonoBehaviour
 
     public int DamageCalculate()
     {
-
-
         int critResult = Random.Range(critMin, critMax); //Same as using C# own System just include the numbers rnd.Next(critMin, critMax);
         if (!IsCrit(critResult))
         {
@@ -209,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return critDamage;
         }
-
     }
 
     static bool IsCrit(int result)
@@ -223,7 +220,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 ShowDPS.isCritted = false;
                 return isCrit = false;
-
             }
             else
             {
@@ -237,7 +233,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 ShowDPS.isCritted = false;
                 return isCrit = false;
-
             }
             else
             {
@@ -245,8 +240,6 @@ public class PlayerMovement : MonoBehaviour
                 return isCrit = true;
             }
         }
-
-
     }
 
     static bool CritChanceValue()
@@ -304,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
     
     IEnumerator OnJump(InputValue value)
     {
-        if(!isAlive) { yield return new WaitForSecondsRealtime(0); }
+        if(!isAlive || !isPlayerCanMove) { yield return new WaitForSecondsRealtime(0); }
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         if (IsPlayerCanJump(value))//!isJumping && !isAttacking 
         {
@@ -322,7 +315,7 @@ public class PlayerMovement : MonoBehaviour
     bool IsPlayerCanJump(InputValue value)
     {
         bool isPlayerCanJump;
-        if(value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacles")) && Pause.gameState == GameState.Gameplay || value.isPressed && jumpCount < extraJumps && Pause.gameState == GameState.Gameplay)
+        if(value.isPressed && feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "MoveableObstacles")) && Pause.gameState == GameState.Gameplay && isPlayerCanMove || value.isPressed && jumpCount < extraJumps && Pause.gameState == GameState.Gameplay && isPlayerCanMove)
         {
             return isPlayerCanJump = true;
         }
@@ -435,8 +428,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = climbVelocity;
         rb.gravityScale = 0.0f;
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
-        
-
     }
 
     void Die()
@@ -486,8 +477,5 @@ public class PlayerMovement : MonoBehaviour
         {
             return 0f;
         }
-
     }
-
-
 }

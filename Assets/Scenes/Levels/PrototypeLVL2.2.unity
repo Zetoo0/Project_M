@@ -276,12 +276,12 @@ PrefabInstance:
     - target: {fileID: 4546430347577307655, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1626.388
+      value: -1628.61
       objectReference: {fileID: 0}
     - target: {fileID: 4546430347577307655, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -35.420105
+      value: -35.440826
       objectReference: {fileID: 0}
     - target: {fileID: 4546430347577307655, guid: 2fa042692fa5e8948aa1c874ba7bcd8d,
         type: 3}
@@ -2251,6 +2251,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7375939131943869401, guid: 77b459831b97a3b4785bf14c06e77d1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7375939132339419163, guid: 77b459831b97a3b4785bf14c06e77d1e,
         type: 3}
       propertyPath: auSlider
