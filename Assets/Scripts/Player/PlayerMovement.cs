@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
             if (isAttacking)
             {
                 ChangeAnimationState(PLAYER_ATTACK);
-                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position, GetVolume());
+                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
                 //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
                                                     //Detect enemies whose in range
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);

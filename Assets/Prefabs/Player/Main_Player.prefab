@@ -4920,8 +4920,7 @@ PrefabInstance:
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: auMixer
       value: 
-      objectReference: {fileID: 24300002, guid: 5c1b399c32d1b7b478cddb0dbbc1018b,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1649399958, guid: 15e29ccbe8482ba478391df3f5a19a1e, type: 3}
       propertyPath: dashTime
       value: 0.1
