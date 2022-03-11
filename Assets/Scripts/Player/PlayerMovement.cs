@@ -447,7 +447,7 @@ public class PlayerMovement : MonoBehaviour
         FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
 
-    public static void ChangeAnimationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
         //hogyha az aktuális animáció = a paraméterrel akkor returnöli
         if(currentState == newState)
