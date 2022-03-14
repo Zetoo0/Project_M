@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform popUpPosition;
 
     [Header("Damage")]
+    Damage dmg;
     int critDamage = 50;
     int normalDamage = 25;
     int critMin = 0;
@@ -121,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
+        dmg = GetComponent<Damage>();
     }
     
  
@@ -132,13 +134,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsItemJumpPotionAndNotPickedUp(collison))
         {
-
-            Instantiate(PotionPopUp, PotionPopUpPosition.position, Quaternion.identity);
-            isItemPickedUp = true;
-            Debug.Log("POOOTION");
-            GetComponent<PotionHolder>().state = PotionHolder.PotionState.pickedUp;
-            collison.gameObject.SetActive(false);
+            CollidedWithPotion(collison);
         }
+    }
+
+    void CollidedWithPotion(Collider2D collison)
+    {
+
+        Instantiate(PotionPopUp, PotionPopUpPosition.position, Quaternion.identity);
+        isItemPickedUp = true;
+        Debug.Log("POOOTION");
+        GetComponent<PotionHolder>().state = PotionHolder.PotionState.pickedUp;
+        collison.gameObject.SetActive(false);
     }
 
     bool IsItemJumpPotionAndNotPickedUp(Collider2D collision)
@@ -178,21 +185,26 @@ public class PlayerMovement : MonoBehaviour
             isAttacking = true;
             if (isAttacking)
             {
-                ChangeAnimationState(PLAYER_ATTACK);
-                AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
-                //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
-                                                    //Detect enemies whose in range
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-                foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
-                {
-                    damage = DamageCalculate();
-                    Debug.Log(damage);
-                    enemy.GetComponent<EnemyMovement>().TakeDamage(damage / 2); 
-                    Debug.Log(enemy.GetComponent<EnemyMovement>().currentHealth);
-                    Instantiate(damagePopUp, popUpPosition.position, Quaternion.identity);
-                }
+                Attack();
             }
             AttackCompleted();
+        }
+    }
+
+    void Attack()
+    {
+        ChangeAnimationState(PLAYER_ATTACK);
+        AudioSource.PlayClipAtPoint(swishSound, Camera.main.transform.position);
+        //ChangeAnimationState(PLAYER_ATTACK);//Play attack animation
+        //Detect enemies whose in range
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)//Damage the enemy/them
+        {
+            damage = dmg.DamageCalculate();
+            Debug.Log(damage);
+            enemy.GetComponent<EnemyMovement>().TakeDamage(damage / 2);
+            Debug.Log(enemy.GetComponent<EnemyMovement>().currentHealth);
+            Instantiate(damagePopUp, popUpPosition.position, Quaternion.identity);
         }
     }
 
@@ -254,9 +266,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return itShouldBeLittle = false;
         }
-
-
-        
     }
 
     void AttackCompleted()
@@ -301,15 +310,19 @@ public class PlayerMovement : MonoBehaviour
         bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         if (IsPlayerCanJump(value))//!isJumping && !isAttacking 
         {
-
-            isJumping = true;
-            ChangeAnimationState(PLAYER_JUMP);
-            CreateDust();
-            rb.velocity += new Vector2(moveInput.x, jumpSpeed);
-            jumpCount++;
+            Jump();
             JumpCompleted();
             yield return new WaitForSecondsRealtime(0.5f);
         }
+    }
+
+    void Jump()
+    {
+        isJumping = true;
+        ChangeAnimationState(PLAYER_JUMP);
+        CreateDust();
+        rb.velocity += new Vector2(moveInput.x, jumpSpeed);
+        jumpCount++;
     }
 
     bool IsPlayerCanJump(InputValue value)

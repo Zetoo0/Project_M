@@ -18,7 +18,6 @@ public class ShowDPS : MonoBehaviour
 
     public static bool isCritted;
 
-  
 
     private void Start()
     {

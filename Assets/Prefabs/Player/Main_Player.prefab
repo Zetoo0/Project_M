@@ -5284,3 +5284,19 @@ MonoBehaviour:
   activeTime: 0
   key: 106
   state: 2
+--- !u!114 &783969945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253178137100505552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e333297adfd7f042a3dbd95e468a693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  critDamage: 50
+  normalDamage: 25
+  critMin: 0
+  critMax: 100

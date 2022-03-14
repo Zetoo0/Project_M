@@ -34,6 +34,11 @@ public class EnemyAggro : MonoBehaviour
 
     void Update()
     {
+        UpdateUpdate();
+    }
+
+    void UpdateUpdate()
+    {
         EnemyAggroState();
         CheckFaceing();
     }
@@ -51,7 +56,7 @@ public class EnemyAggro : MonoBehaviour
         {
             ChasePlayer();
             Invoke("StopChasingPlayer", 4);
-          //  GetComponent<EnemyMovement>().FlipEnemyFaceing();
+            GetComponent<EnemyMovement>().FlipEnemyFaceing();
         }
 
     }
@@ -94,9 +99,11 @@ public class EnemyAggro : MonoBehaviour
     {
         if (!CanSeePlayer(agroRange))
         {
+            //GetComponent<EnemyMovement>().FlipEnemyFaceing();
             isAgro = false;
             isSearching = false;
             rb.velocity = new Vector2(0f, 0f);
+           // GetComponent<EnemyMovement>().FlipEnemyFaceing();
             GetComponent<EnemyMovement>().ChangeAnimationState("Enemy_Idle");
         }
     }

@@ -37,14 +37,13 @@ public class spikeTrap : MonoBehaviour
     void Update()
     { 
         FallSpikes();  
-    
     }
 
     void FallSpikes()
     {
         if (isEdgeColliderTouched)
         {
-            this.transform.position += new Vector3(0.0f, -0.09f);
+            this.transform.position += new Vector3(0.0f, -0.02f);
         }
     }
 }

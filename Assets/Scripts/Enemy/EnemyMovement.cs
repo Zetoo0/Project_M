@@ -25,18 +25,28 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
+        SetStart();
+    }
+
+    void Update()
+    {
+        UpdateUpdate();
+    }
+
+    void UpdateUpdate()
+    {
+        Hit();
+        //InvokeRepeating("FlipEnemyFaceing", 5f,100);
+        CheckWall();
+    }
+
+    void SetStart()
+    {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
         wallCheck = GetComponent<CircleCollider2D>();
-    }
-
-    void Update()
-    {
-        Hit();
-        //InvokeRepeating("FlipEnemyFaceing", 5f,100);
-        CheckWall();
     }
 
 
