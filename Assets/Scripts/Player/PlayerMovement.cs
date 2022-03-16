@@ -157,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            return isItemJumpPotionAndNotPickedUp = false;
+                return isItemJumpPotionAndNotPickedUp = false;
         }
     }
 
