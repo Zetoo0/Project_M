@@ -6,22 +6,21 @@ using UnityEngine.Audio;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [Header("Objects")]
+    //SPEEDS
+    [Header("Speeds")]
     [SerializeField] private float baseSpeed = 10.0f;   
     [SerializeField] private float climbSpeed = 5.0f;
     [SerializeField] private Vector2 deathKick = new Vector2(10f, 10f);     
     [SerializeField] private AudioClip swishSound;
-
-    private bool isDashing;
     private float dashDistance = 50.0f;
 
-    [Header("Particles")]
+
     [SerializeField] private ParticleSystem dust;
 
     [Header("Audio")]
 
     
-    [Header("PlayerBasics")]
+    //MOVEMENTs
     private Vector2 moveInput;
     public Rigidbody2D rb;
     private Animator anim;
@@ -31,14 +30,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isAlive = true;
     public float jumpSpeed;
 
-    [Header("Attack")]
+    //ATTACK
     public static int damage;
     public float attackRange;
     public LayerMask enemyLayers;
     public Transform attackPoint;
 
-    [Header("Potion")]
-    public bool isItemPickedUp = false;
 
     
 
@@ -52,34 +49,30 @@ public class PlayerMovement : MonoBehaviour
     private const string PLAYER_DEATH = "Player_Death";
     private const string PLAYER_DASH = "Player_Dash";
 
-
+    //MOVEMENT BOOLEANS, DOUBLE JUMP
     private bool isAttacking;
     public bool isJumping;
-
     private int extraJumps;
     [SerializeField] private int extraJumpsValue;
     private int jumpCount;
+    static public bool isPlayerCanMove;
+    private bool isDashing;
 
 
-    [SerializeField]Transform damagePopUp;
+    [Header("Damage, Potion")]
+    //DAMAGE
+    Damage dmg;
+    static public bool isCritted;
+    [SerializeField] Transform damagePopUp;
     [SerializeField] Transform popUpPosition;
 
-    [Header("Damage")]
-    Damage dmg;
-    int critDamage = 50;
-    int normalDamage = 25;
-    int critMin = 0;
-    int critMax = 100;
-    static public bool isCritted;
-
-    static public bool isPlayerCanMove;
-
-
+    //POTION
     [SerializeField] Transform PotionPopUp;
     [SerializeField] Transform PotionPopUpPosition;
+    public bool isItemPickedUp = false;
 
-    [SerializeField] AudioMixerGroup auMixer;
-    string exposedName = "volume";
+
+
 
 
     // Start is called before the first frame update
@@ -122,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb.gravityScale;
-        dmg = GetComponent<Damage>();
+        dmg = new Damage();//GetComponent<Damage>();
     }
     
  
@@ -208,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public int DamageCalculate()
+    /*public int DamageCalculate()
     {
         int critResult = Random.Range(critMin, critMax); //Same as using C# own System just include the numbers rnd.Next(critMin, critMax);
         if (!IsCrit(critResult))
@@ -266,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return itShouldBeLittle = false;
         }
-    }
+    }*/
 
     void AttackCompleted()
     {
