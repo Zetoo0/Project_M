@@ -78,9 +78,8 @@ public class LevelExit : MonoBehaviour
         userMapTime += Time.deltaTime;
     }
 
-    void StartPost()
+    UserLog CreatePlayerData()
     {
-
         userPoint = FindObjectOfType<GameSession>().playerScore;
         userDeaths = FindObjectOfType<GameSession>().deaths;
 
@@ -94,11 +93,14 @@ public class LevelExit : MonoBehaviour
             levelId = levelId
         };
 
+        return userData;
+    }
+
+    void StartPost()
+    {
        // Debug.Log("Adatok sikeres elõkészítése");
 
-
-
-        StartCoroutine(PostData(postURL, userData));
+        StartCoroutine(PostData(postURL, CreatePlayerData()));
     }
 
     public IEnumerator PostData(string url, UserLog userLog)//paraméterek ugye az url és egy olyan opcionális paraméter amit testreszabhatunk a saját adatainkkal, attól függ mit szeretnénk küldeni
