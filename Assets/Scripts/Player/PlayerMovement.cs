@@ -471,7 +471,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = newState;
     }
 
-    float GetVolume()
+    /*float GetVolume()
     {
         float volOut;
         bool isCanGetVol = auMixer.audioMixer.GetFloat(exposedName, out volOut); //auMixer.GetFloat(exposedName, out volOut);
@@ -483,5 +483,5 @@ public class PlayerMovement : MonoBehaviour
         {
             return 0f;
         }
-    }
+    }*/
 }

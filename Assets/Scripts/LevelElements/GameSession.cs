@@ -43,11 +43,16 @@ public class GameSession : MonoBehaviour
 
     void Start()
     {
-       //deaths = 0;
-       // playerScore = 0;
+        //deaths = 0;
+        // playerScore = 0;
+        SetTextsAtStart();
+
+    }
+
+    void SetTextsAtStart()
+    {
         playerDeathsText.text = deaths.ToString();
         playerScoreText.text = playerScore.ToString();
-
     }
 
      void Update()
