@@ -7,13 +7,17 @@ public class LevelLoader : MonoBehaviour
     public GameObject userPanel;
     int currentSceneIndex;
     int nextSceneIndex;
+
     public GameObject partSelector;
     public GameObject FirstPartLevels;
     public GameObject SecondPartLevels;
     public GameObject ThirdPartLevels;
 
+    public static int chosenMapId = 1;
+
     [SerializeField]GameObject[] partPanels;
 
+  
     public void SetPartPanelsInactive()
     {
         foreach(GameObject part in partPanels)
@@ -24,7 +28,6 @@ public class LevelLoader : MonoBehaviour
             }
         }
     }
-
 
     public void SetFirstPanelActive()
     {
@@ -41,8 +44,6 @@ public class LevelLoader : MonoBehaviour
         SetPartPanelsInactive();
         OpenExitButton.Open(ThirdPartLevels);
     }
-    
-
 
     public void usernamePanel()
     {
@@ -61,8 +62,14 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
+       // CheckFirstLevel();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         nextSceneIndex = currentSceneIndex + 1;
+    }
+
+    public void LoadLevel()
+    {
+        SceneManager.LoadSceneAsync(chosenMapId, LoadSceneMode.Single);
     }
 
     public void FirstLevel()
@@ -74,6 +81,18 @@ public class LevelLoader : MonoBehaviour
     public void SetUserPanelInactive()
     {
         OpenExitButton.Exit(userPanel);
+    }
+
+    private void CheckFirstLevel()
+    {
+        if (PlayerPrefs.HasKey("part1_1"))
+        {
+            return;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("part1_1", 1);
+        }
     }
 
 

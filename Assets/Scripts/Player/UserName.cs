@@ -14,6 +14,6 @@ public class UserName : MonoBehaviour
     {
         username = usernameInputField.text;
         Debug.Log(username);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(LevelLoader.chosenMapId);
     }   
 }

@@ -27,6 +27,7 @@ public class LevelExit : MonoBehaviour
 
     [SerializeField] int levelId;
     [SerializeField] int partId;
+    [SerializeField] string levelName;
 
     [SerializeField] GameObject pauseMenuGO;
 
@@ -34,6 +35,8 @@ public class LevelExit : MonoBehaviour
 
     private string path = "";
     private string persistentPath = "";
+
+    
 
     void Start()
     {
@@ -55,7 +58,9 @@ public class LevelExit : MonoBehaviour
         string json = JsonUtility.ToJson(userData);
         Debug.Log(json);
         using StreamWriter write = new StreamWriter(savePath);
-        write.Write(json);
+        write.WriteLine(json);
+        write.Flush();
+        write.Close();
 
     }
 
@@ -63,13 +68,25 @@ public class LevelExit : MonoBehaviour
     {
         PlayerMovement.isPlayerCanMove = false;
         SetPaths();
+        SetMapUnlockedIfNotExists();
         MapTime();
         //SetUserDatasForPost();
         StartPost();
         StartCoroutine(NextLevel());
-        
+    }
 
-
+    public void SetMapUnlockedIfNotExists()
+    {
+        if (PlayerPrefs.HasKey(this.levelName))
+        {
+            Debug.Log("Már unlockoltad" + this.levelName + " " + this.levelId);
+            return;
+        }
+        else
+        {
+            Debug.Log("Unlocked map :): " + this.levelName + " " + this.levelId);
+            PlayerPrefs.SetInt(this.levelName, this.levelId);
+        }
     }
 
 

@@ -4656,6 +4656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
         type: 3}
+      propertyPath: levelName
+      value: part1_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226518576238350406, guid: 0b21fc46f24d44344b67b7d523ab1e79,
+        type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1492361621}

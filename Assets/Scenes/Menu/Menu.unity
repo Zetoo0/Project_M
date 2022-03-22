@@ -184,12 +184,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1930514714}
-  m_Father: {fileID: 991026345}
+  m_Father: {fileID: 1456331275}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.499989, y: -125.20001}
+  m_AnchoredPosition: {x: 0, y: -47.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &19839299
@@ -425,7 +425,7 @@ RectTransform:
   m_Children:
   - {fileID: 1417055732}
   m_Father: {fileID: 991026345}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -478,7 +478,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1455272049}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
-        m_MethodName: SetUserPanelInactive
+        m_MethodName: SetPartSelectorInactive
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 160393614}
   - component: {fileID: 160393613}
   - component: {fileID: 160393612}
+  - component: {fileID: 160393615}
   m_Layer: 5
   m_Name: FirstPartBt (1)
   m_TagString: Untagged
@@ -608,7 +609,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 160393613}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1455272049}
+        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+        m_MethodName: usernamePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &160393613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +660,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160393610}
   m_CullTransparentMesh: 1
+--- !u!114 &160393615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160393610}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37584104f408a64d833252879a7586f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: part1_1
+  mapId: 1
+  userPanel: {fileID: 1456331274}
 --- !u!1 &163537122
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,8 +897,9 @@ GameObject:
   - component: {fileID: 232458486}
   - component: {fileID: 232458485}
   - component: {fileID: 232458484}
+  - component: {fileID: 232458487}
   m_Layer: 5
-  m_Name: FirstPartBt (1)
+  m_Name: ThirdPFirstM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -935,11 +964,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 232458485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 232458487}
+        m_TargetAssemblyTypeName: PartCheck, Assembly-CSharp
+        m_MethodName: SetMapstartPanelActiveAndChangeChosenMapId
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &232458485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,6 +1019,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232458482}
   m_CullTransparentMesh: 1
+--- !u!114 &232458487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232458482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37584104f408a64d833252879a7586f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: part3_1
+  mapId: 4
+  userPanel: {fileID: 1456331274}
 --- !u!1 &238531542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,6 +2162,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1455272049}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: PartSelector
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1455272056}
+        m_TargetAssemblyTypeName: Maps, Assembly-CSharp
+        m_MethodName: GoThroughOnMaps
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4447,13 +4515,12 @@ RectTransform:
   - {fileID: 962840013}
   - {fileID: 1280402357}
   - {fileID: 1823774184}
-  - {fileID: 19839298}
   - {fileID: 1488986425}
   - {fileID: 1511317803}
   - {fileID: 1784770905}
   - {fileID: 109051053}
   m_Father: {fileID: 1455272048}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4473,7 +4540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.36078432, g: 0.21960786, b: 0.25490198, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5074,8 +5141,9 @@ GameObject:
   - component: {fileID: 1148821090}
   - component: {fileID: 1148821089}
   - component: {fileID: 1148821088}
+  - component: {fileID: 1148821091}
   m_Layer: 5
-  m_Name: FirstPartBt (1)
+  m_Name: SecPFirstM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5140,11 +5208,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1148821089}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1148821091}
+        m_TargetAssemblyTypeName: PartCheck, Assembly-CSharp
+        m_MethodName: SetMapstartPanelActiveAndChangeChosenMapId
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1148821089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5183,6 +5263,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148821086}
   m_CullTransparentMesh: 1
+--- !u!114 &1148821091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148821086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37584104f408a64d833252879a7586f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: part2_1
+  mapId: 3
+  userPanel: {fileID: 1456331274}
 --- !u!1 &1160787391
 GameObject:
   m_ObjectHideFlags: 0
@@ -6275,6 +6370,8 @@ GameObject:
   - component: {fileID: 1455272052}
   - component: {fileID: 1455272053}
   - component: {fileID: 1455272054}
+  - component: {fileID: 1455272055}
+  - component: {fileID: 1455272056}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -6300,14 +6397,14 @@ RectTransform:
   - {fileID: 2093603783}
   - {fileID: 547821735}
   - {fileID: 1940324428}
-  - {fileID: 1456331275}
   - {fileID: 991026345}
+  - {fileID: 1456331275}
   m_Father: {fileID: 893796124}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 1}
+  m_AnchoredPosition: {x: -24, y: -3}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1455272049
@@ -6408,6 +6505,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1940324427}
+--- !u!114 &1455272055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455272047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab82cc7c20a6104386f615ad124f7f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1455272056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455272047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea891cffdf008b42bc177c4908dac16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maps:
+  - {fileID: 1148821091}
+  - {fileID: 232458487}
 --- !u!1 &1456331274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6442,8 +6566,9 @@ RectTransform:
   - {fileID: 441319223}
   - {fileID: 1341874400}
   - {fileID: 1075077226}
+  - {fileID: 19839298}
   m_Father: {fileID: 1455272048}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6546,7 +6671,7 @@ RectTransform:
   m_Children:
   - {fileID: 160393611}
   m_Father: {fileID: 991026345}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6622,7 +6747,7 @@ RectTransform:
   m_Children:
   - {fileID: 1148821087}
   m_Father: {fileID: 991026345}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7263,7 +7388,7 @@ RectTransform:
   m_Children:
   - {fileID: 232458483}
   m_Father: {fileID: 991026345}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
