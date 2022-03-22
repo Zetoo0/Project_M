@@ -9,16 +9,7 @@ public class InputPost : MonoBehaviour
 
    
 
-    public void StartPost()
-    {
-        var userData = new UserLog()//A post metódushoz az adatok elõkészítése
-        {
-            name = "testname",
-            point = 666
-        };
-
-        StartCoroutine(PostData(postURL, userData));//Coroutine segítségével indítjuk a metódust
-    }
+   
 
     public IEnumerator PostData(string url, UserLog userLog)//paraméterek ugye az url és egy olyan opcionális paraméter amit testreszabhatunk a saját adatainkkal, attól függ mit szeretnénk küldeni
     {

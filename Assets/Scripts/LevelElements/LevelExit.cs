@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using System.IO;
 
 using TMPro;
 
@@ -11,11 +12,11 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] float LevelLoadSpeed = 1f;
     public Animator transition;
-    
-    const string CUSTOM_START= "Custom_Start";
+
+    const string CUSTOM_START = "Custom_Start";
     private TimeSpan mapTime;
     private DateTime mapStart;
-    public string mapTimeInString;  
+    public string mapTimeInString;
     [SerializeField] public string postURL;
     List<UserLog> userDataList = new List<UserLog>();
 
@@ -25,20 +26,43 @@ public class LevelExit : MonoBehaviour
     float userMapTime;
 
     [SerializeField] int levelId;
+    [SerializeField] int partId;
 
     [SerializeField] GameObject pauseMenuGO;
 
     [SerializeField] TextMeshProUGUI exitTimeText;
 
+    private string path = "";
+    private string persistentPath = "";
+
     void Start()
     {
         mapStart = DateTime.Now;
-        Debug.Log("Map elején kezdem: "+mapStart);
+        Debug.Log("Map elején kezdem: " + mapStart);
+    }
+
+    public void SetPaths()
+    {
+        path = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+    }
+
+    public void SaveData(UserLog userData)
+    {
+        string savePath = path;
+
+        Debug.Log("Sikeres mentés, elérési út: " + savePath);
+        string json = JsonUtility.ToJson(userData);
+        Debug.Log(json);
+        using StreamWriter write = new StreamWriter(savePath);
+        write.Write(json);
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement.isPlayerCanMove = false;
+        SetPaths();
         MapTime();
         //SetUserDatasForPost();
         StartPost();
@@ -48,59 +72,24 @@ public class LevelExit : MonoBehaviour
 
     }
 
-   /* public void WriteDataToFile(UserLog data)
-    {
-        string path = "UserDatas.csv";
-        FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-        StreamWriter sw_out = new StreamWriter(fs);
-        sw_out.WriteLine("UserName;Point;Death;Maptime");
-        sw_out.Write(data.name);
-        sw_out.Write(";");
-        sw_out.Write(data.point);
-        sw_out.Write(";");
-        sw_out.Write(data.death);
-        sw_out.Write(";");
-        sw_out.Write(data.maptime);
-        sw_out.Write("\n");
-    }*/
-
-   /* public void SetUserDatasForPost()// User adatok beállítása
-    {
-        userName = UserName.username;
-        userPoint = GetComponent<GameSession>().playerScore;
-        userDeaths = GetComponent<GameSession>().deaths;
-        userMapTime = mapTimeInString;
-    }*/
-
 
     private void Update()
     {
         userMapTime += Time.deltaTime;
     }
 
-    UserLog CreatePlayerData()
+    void StartPost()
     {
+    // Debug.Log("Adatok sikeres elõkészítése");
         userPoint = FindObjectOfType<GameSession>().playerScore;
         userDeaths = FindObjectOfType<GameSession>().deaths;
 
+        var userData = new UserLog(UserName.username, userPoint, userDeaths, mapTimeInString, levelId, partId);//A post metódushoz az adatok elõkészítése
+        
 
-        var userData = new UserLog()//A post metódushoz az adatok elõkészítése
-        {
-            name = UserName.username,
-            point = userPoint,
-            death = userDeaths,
-            maptime = mapTimeInString,
-            levelId = levelId
-        };
+       //SaveData(userData);
 
-        return userData;
-    }
-
-    void StartPost()
-    {
-       // Debug.Log("Adatok sikeres elõkészítése");
-
-        StartCoroutine(PostData(postURL, CreatePlayerData()));
+        StartCoroutine(PostData(postURL, userData));
     }
 
     public IEnumerator PostData(string url, UserLog userLog)//paraméterek ugye az url és egy olyan opcionális paraméter amit testreszabhatunk a saját adatainkkal, attól függ mit szeretnénk küldeni
@@ -151,7 +140,7 @@ public class LevelExit : MonoBehaviour
         Debug.Log("Next Level");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
-
+        
         if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
             nextSceneIndex = 0;
