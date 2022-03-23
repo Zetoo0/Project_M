@@ -83,17 +83,7 @@ public class LevelLoader : MonoBehaviour
         OpenExitButton.Exit(userPanel);
     }
 
-    private void CheckFirstLevel()
-    {
-        if (PlayerPrefs.HasKey("part1_1"))
-        {
-            return;
-        }
-        else
-        {
-            PlayerPrefs.SetInt("part1_1", 1);
-        }
-    }
+   
 
 
 }

@@ -29,6 +29,7 @@ public class LevelExit : MonoBehaviour
     [SerializeField] int levelId;
     [SerializeField] int partId;
     [SerializeField] string levelName;
+    [SerializeField] int saveId;
 
     [SerializeField] GameObject pauseMenuGO;
 
@@ -37,11 +38,13 @@ public class LevelExit : MonoBehaviour
     private string path = "";
     private string persistentPath = "";
 
+    [SerializeField]IsThisUnlocked _isThisUnlocked;
     
 
     void Start()
     {
         mapStart = DateTime.Now;
+        _isThisUnlocked = GetComponent<IsThisUnlocked>();
         Debug.Log("Map elején kezdem: " + mapStart);
     }
 
@@ -68,8 +71,8 @@ public class LevelExit : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement.isPlayerCanMove = false;
-        SetPaths();
-        SetMapUnlockedIfNotExists();
+        //SetPaths();
+        IsThisUnlocked.MapUnlock(levelName, saveId);
         MapTime();
         //SetUserDatasForPost();
         StartPost();
@@ -93,8 +96,9 @@ public class LevelExit : MonoBehaviour
         }
         else
         {
-            Debug.Log("Unlocked map :): " + levelName + " " + levelId);
-            PlayerPrefs.SetInt(levelName, UnityEngine.Random.Range(5,5000));
+            int saveId = UnityEngine.Random.Range(5, 5000);
+            Debug.Log("Unlocked map :): " + levelName + " " + saveId);
+            PlayerPrefs.SetInt(levelName, saveId);
             PlayerPrefs.Save();
         }
     }

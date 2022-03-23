@@ -18,7 +18,7 @@ public class PartCheck : MonoBehaviour
 
     private void Start()
     {
-        this.mapBtn = GetComponent<Button>();
+        mapBtn = GetComponent<Button>();
     }
 
     private void OnEnable()
@@ -51,12 +51,12 @@ public class PartCheck : MonoBehaviour
         {
             Debug.Log("Sikeres + " + levelName + " " + PlayerPrefs.GetInt(levelName));
             mapBtn.interactable = true;
-            return;
+            
         }
         else
         {
-            Debug.Log("Sikertelen + " + levelName + " " + PlayerPrefs.GetInt(levelName));
-            return;
+            Debug.Log("Locked + " + levelName + " " + PlayerPrefs.GetInt(levelName));
+            
         }
     }
 
@@ -68,6 +68,4 @@ public class PartCheck : MonoBehaviour
 
 
     }
-
-
 }
