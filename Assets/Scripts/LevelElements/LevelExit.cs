@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.IO;
+using UnityEngine.UI;
 
 using TMPro;
 
@@ -77,15 +78,24 @@ public class LevelExit : MonoBehaviour
 
     public void SetMapUnlockedIfNotExists()
     {
-        if (PlayerPrefs.HasKey(this.levelName))
+        int temp;
+        if (PlayerPrefs.HasKey(levelName))
         {
-            Debug.Log("Már unlockoltad" + this.levelName + " " + this.levelId);
-            return;
+            temp = PlayerPrefs.GetInt(levelName);
+            if(temp == 1)
+            {
+                Debug.Log("Már unlockoltad" + levelName + " " + levelId);
+            }
+            else
+            {
+                Debug.Log("idk");
+            }
         }
         else
         {
-            Debug.Log("Unlocked map :): " + this.levelName + " " + this.levelId);
-            PlayerPrefs.SetInt(this.levelName, this.levelId);
+            Debug.Log("Unlocked map :): " + levelName + " " + levelId);
+            PlayerPrefs.SetInt(levelName, UnityEngine.Random.Range(5,5000));
+            PlayerPrefs.Save();
         }
     }
 

@@ -21,12 +21,13 @@ public class PartCheck : MonoBehaviour
         this.mapBtn = GetComponent<Button>();
     }
 
-    /*private void OnEnable()
+    private void OnEnable()
     {
+       // PlayerPrefs.SetInt(levelName, Random.Range(5,10));
         CheckMapLockState();
-    }*/
+    }
 
-    private void IsUnlocked()
+    private void IsUnlocked()   
     {
         tempKeyValue = 0;
 
@@ -46,15 +47,15 @@ public class PartCheck : MonoBehaviour
 
     public void CheckMapLockState()
     {
-        if (PlayerPrefs.HasKey(this.levelName))
+        if (PlayerPrefs.HasKey(levelName))
         {
-            Debug.Log("Sikeres + " + this.levelName + " " + PlayerPrefs.GetInt(this.levelName));
-            mapBtn.interactable = false;
+            Debug.Log("Sikeres + " + levelName + " " + PlayerPrefs.GetInt(levelName));
+            mapBtn.interactable = true;
             return;
         }
         else
         {
-            Debug.Log("Sikertelen + " + this.levelName + " " + PlayerPrefs.GetInt(this.levelName));
+            Debug.Log("Sikertelen + " + levelName + " " + PlayerPrefs.GetInt(levelName));
             return;
         }
     }
