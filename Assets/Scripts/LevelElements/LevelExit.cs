@@ -72,7 +72,8 @@ public class LevelExit : MonoBehaviour
     {
         PlayerMovement.isPlayerCanMove = false;
         //SetPaths();
-        IsThisUnlocked.MapUnlock(levelName, saveId);
+        // IsThisUnlocked.MapUnlock(levelName, saveId);
+        CheckIfMapIsNotUnlocked();
         MapTime();
         //SetUserDatasForPost();
         StartPost();
@@ -100,6 +101,20 @@ public class LevelExit : MonoBehaviour
             Debug.Log("Unlocked map :): " + levelName + " " + saveId);
             PlayerPrefs.SetInt(levelName, saveId);
             PlayerPrefs.Save();
+        }
+    }
+
+    public void CheckIfMapIsNotUnlocked()
+    {
+        foreach(MapData map in MapMapLoading.mapDatas)
+        {
+            Debug.Log(map.partName);
+            if(map.partName == levelName)
+            {
+                map.IsUnlocked = true;
+                Debug.Log("Unlocked: " + map.partName);
+                break;
+            }
         }
     }
 

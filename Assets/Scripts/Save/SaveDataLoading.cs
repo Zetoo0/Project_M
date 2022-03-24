@@ -5,7 +5,7 @@ using System.IO;
 
 public class SaveDataLoading : MonoBehaviour
 {
-
+/*
     private string path = "";
     private string persistentPath = "";
 
@@ -24,6 +24,6 @@ public class SaveDataLoading : MonoBehaviour
         persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
     }
 
-
+*/
 
 }

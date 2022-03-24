@@ -23,8 +23,9 @@ public class PartCheck : MonoBehaviour
 
     private void OnEnable()
     {
-       // PlayerPrefs.SetInt(levelName, Random.Range(5,10));
-        CheckMapLockState();
+        // PlayerPrefs.SetInt(levelName, Random.Range(5,10));
+        // CheckMapLockState();
+        Check();
     }
 
     private void IsUnlocked()   
@@ -57,6 +58,33 @@ public class PartCheck : MonoBehaviour
         {
             Debug.Log("Locked + " + levelName + " " + PlayerPrefs.GetInt(levelName));
             
+        }
+    }
+
+    public void Check()
+    {
+        foreach(MapData mapData in MapMapLoading.mapDatas)
+        {
+            if(mapData.partName == levelName)
+            {
+                //LockedOrUnlocked()
+                if (mapData.IsUnlocked)
+                {
+                    mapBtn.interactable = true;
+                    Debug.Log("unlocked " + mapData.partName);
+                    break;
+                }
+                else
+                {
+                    mapBtn.interactable = false;
+                    Debug.Log("locked " + mapData.partName);
+                    break;
+                }
+            }
+            else
+            {
+                continue;
+            }
         }
     }
 

@@ -1,0 +1,3 @@
+partname;isunlocked
+part2_1;1
+part3_1;0
