@@ -55,82 +55,97 @@ public class MapMapLoading : MonoBehaviour
        
     }
 
+    
+    public void LoadIfFileNotExists()
+    {
+        Debug.Log(File.Exists(persistentPath));
+        List<MapData> firstStartMapLoadingForUser = new List<MapData>();
+        StreamWriter sw_ki = new StreamWriter(persistentPath);
+        MapData SecFirst = new MapData();
+        SecFirst.partName = "part2_1";
+        SecFirst.IsUnlocked = false;
+        firstStartMapLoadingForUser.Add(SecFirst);
+        MapData ThirdFirst = new MapData();
+        ThirdFirst.partName = "part3_1";
+        ThirdFirst.IsUnlocked = false;
+        firstStartMapLoadingForUser.Add(ThirdFirst);
+        foreach (MapData map in firstStartMapLoadingForUser)
+        {
+            string mapname = map.partName;
+            sw_ki.WriteLine(mapname + ";0");
+        }
+        sw_ki.Flush();
+        sw_ki.Close();
+
+        LoadFile();
+
+        /*string[] fileA = File.ReadAllLines(persistentPath);
+
+        for (int i = 1; i <= fileA.Length; i++)
+        {
+            string[] splitA = fileA[i].Split(';');
+            MapData ujMapData = new MapData();
+            ujMapData.partName = splitA[0];
+            if (splitA[1] == "1")
+            {
+                ujMapData.IsUnlocked = true;
+            }
+            else
+            {
+                ujMapData.IsUnlocked = false;
+            }
+            mapDatas.Add(ujMapData);
+        }
+
+
+
+        foreach (MapData data in mapDatas)
+        {
+            Debug.Log(data.partName);
+            Debug.Log(data.IsUnlocked);
+        }*/
+
+    }
+
+    
+
+    public void LoadFile()
+    {
+        string[] fileA = File.ReadAllLines(persistentPath);
+
+        for (int i = 0; i < fileA.Length; i++)
+        {
+            string[] splitA = fileA[i].Split(';');
+            MapData ujMapData = new MapData();
+            ujMapData.partName = splitA[0];
+            if (splitA[1] == "1")
+            {
+                ujMapData.IsUnlocked = true;
+            }
+            else
+            {
+                ujMapData.IsUnlocked = false;
+            }
+            mapDatas.Add(ujMapData);
+        }
+        foreach (MapData data in mapDatas)
+        {
+            Debug.Log(data.partName);
+            Debug.Log(data.IsUnlocked);
+        }
+    }
+
     public void LoadMapDatas()
     {
         Debug.Log(persistentPath);
         if (!File.Exists(persistentPath))
         {
-            Debug.Log(File.Exists(persistentPath));
-            List<MapData> firstStartMapLoadingForUser = new List<MapData>();
-            StreamWriter sw_ki = new StreamWriter(persistentPath);
-            MapData SecFirst = new MapData();
-            SecFirst.partName = "part2_1";
-            SecFirst.IsUnlocked = false;
-            firstStartMapLoadingForUser.Add(SecFirst);
-            MapData ThirdFirst = new MapData();
-            ThirdFirst.partName = "part3_1";
-            ThirdFirst.IsUnlocked = false;
-            firstStartMapLoadingForUser.Add(ThirdFirst);
-            foreach(MapData map in firstStartMapLoadingForUser)
-            {
-                string mapname = map.partName;
-                sw_ki.WriteLine(mapname+";0");
-            }
-            sw_ki.Flush();
-            sw_ki.Close();
-
-            string[] fileA = File.ReadAllLines(persistentPath);
-
-            for (int i = 1; i <= fileA.Length ; i++)
-            {
-                string[] splitA = fileA[i].Split(';');
-                MapData ujMapData = new MapData();
-                ujMapData.partName = splitA[0];
-                if (splitA[1] == "1")
-                {
-                    ujMapData.IsUnlocked = true;
-                }
-                else
-                {
-                    ujMapData.IsUnlocked = false;
-                }
-                mapDatas.Add(ujMapData);
-            }
-
-
-
-            foreach (MapData data in mapDatas)
-            {
-                Debug.Log(data.partName);
-                Debug.Log(data.IsUnlocked);
-            }
-
+            LoadIfFileNotExists();
         }
         else
         {
-            
-            string[] fileA = File.ReadAllLines(persistentPath);
-
-            for (int i = 0; i < fileA.Length ; i++)
-            {
-                string[] splitA = fileA[i].Split(';');
-                MapData ujMapData = new MapData();
-                ujMapData.partName = splitA[0];
-                if (splitA[1] == "1")
-                {
-                    ujMapData.IsUnlocked = true;
-                }
-                else
-                {
-                    ujMapData.IsUnlocked = false;
-                }
-                mapDatas.Add(ujMapData);
-            }
-            foreach (MapData data in mapDatas)
-            {
-                Debug.Log(data.partName);
-                Debug.Log(data.IsUnlocked);
-            }
+            LoadFile();
+           
         }
 
 

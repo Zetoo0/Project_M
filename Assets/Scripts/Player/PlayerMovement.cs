@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Attack();
             }
-            AttackCompleted();
+            StartCoroutine(AttackCompleted());
         }
     }
 
@@ -261,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }*/
 
-    void AttackCompleted()
+    IEnumerator AttackCompleted()
     {
         if (HasPlayerHorizontalSpeed())
         {
@@ -272,6 +272,7 @@ public class PlayerMovement : MonoBehaviour
             ChangeAnimationState(PLAYER_IDLE);
             
         }
+        yield return new WaitForSecondsRealtime(1); 
         isAttacking = false;
     }
 
@@ -394,11 +395,10 @@ public class PlayerMovement : MonoBehaviour
     void Run()
     {
         if(!isAlive || !isPlayerCanMove) { return; }
-       // bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         Vector2 playerVelocity = new Vector2(moveInput.x * baseSpeed, rb.velocity.y);
         rb.velocity = playerVelocity;
 
-        if (HasPlayerHorizontalSpeed() && !feetCollider.CompareTag("Platform"))
+        if (HasPlayerHorizontalSpeed()) //&& //!feetCollider.CompareTag("Platform"))
         {
             ChangeAnimationState(PLAYER_RUN);
         }
@@ -406,8 +406,6 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeAnimationState(PLAYER_IDLE);
         }
-
-
     }
 
     public void FlipSprite()
