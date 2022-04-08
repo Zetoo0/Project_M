@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public GameObject userPanel;
+    [SerializeField] GameObject logRegPanel;
     int currentSceneIndex;
     int nextSceneIndex;
 
@@ -16,6 +17,8 @@ public class LevelLoader : MonoBehaviour
     public static int chosenMapId = 1;
 
     [SerializeField]GameObject[] partPanels;
+
+
 
   
     public void SetPartPanelsInactive()
@@ -45,9 +48,14 @@ public class LevelLoader : MonoBehaviour
         OpenExitButton.Open(ThirdPartLevels);
     }
 
-    public void usernamePanel()
+   /* public void usernamePanel()
     {
         OpenExitButton.Open(userPanel);
+    }*/
+
+    public void OpenLogRegPanel()
+    {
+        OpenExitButton.Open(logRegPanel);
     }
 
     public void PartSelector()

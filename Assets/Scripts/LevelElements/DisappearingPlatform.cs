@@ -43,7 +43,6 @@ public class DisappearingPlatform : MonoBehaviour
             CheckerCollider.enabled = false;
             StartCoroutine(ActivatePlatform());
         }
-
     }
        
 }

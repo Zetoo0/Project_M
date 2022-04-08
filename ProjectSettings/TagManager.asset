@@ -11,6 +11,7 @@ TagManager:
   - JumpBoostPotion
   - CheckPoint
   - Stone
+  - GameSession
   layers:
   - Default
   - TransparentFX

@@ -130,7 +130,7 @@ public class LevelExit : MonoBehaviour
         userPoint = FindObjectOfType<GameSession>().playerScore;
         userDeaths = FindObjectOfType<GameSession>().deaths;
 
-        var userData = new UserLog(UserName.username, userPoint, userDeaths, mapTimeInString, levelId, partId);//A post metódushoz az adatok elõkészítése
+        var userData = new UserLog(UserName.userID,UserName.username, userPoint, userDeaths, mapTimeInString, levelId, partId);//A post metódushoz az adatok elõkészítése
         
 
        //SaveData(userData);

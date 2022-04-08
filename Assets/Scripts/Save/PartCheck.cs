@@ -92,7 +92,8 @@ public class PartCheck : MonoBehaviour
     {
 
         LevelLoader.chosenMapId = this.mapId;
-        OpenExitButton.Open(userPanel);
+        LevelLoading.LoadMap();
+       // OpenExitButton.Open(userPanel);
 
 
     }

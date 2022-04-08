@@ -11,7 +11,7 @@ public class BackToMenu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         MapMapLoading.SaveMapDatas();
-        PlayerPrefs.Save();
+      //  PlayerPrefs.Save();
         FindObjectOfType<GameSession>().ResetGameSession();
         Destroy(pauseMenuGO);
         SceneManager.LoadScene(0, LoadSceneMode.Single);

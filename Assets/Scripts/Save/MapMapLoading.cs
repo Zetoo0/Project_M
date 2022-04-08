@@ -34,22 +34,27 @@ public class MapMapLoading : MonoBehaviour
             Debug.Log(json);
             write.Write(json);
         }*/
-        
+
+
         StreamWriter write = new StreamWriter(persistentPath);
         
-        foreach (MapData data in mapDatas)
-        {
-            if (data.IsUnlocked)
-            {
-                write.WriteLine(data.partName + ";1");
-                Debug.Log("Írtam: 1");
-            }
-            else
-            {
-                write.WriteLine(data.partName + ";0");
-                Debug.Log("Írtam: 0");
-            }
-        }
+            
+                foreach (MapData data in mapDatas)
+                {
+                    if (data.IsUnlocked)
+                    {
+                        write.WriteLine(data.partName + ";1");
+                        Debug.Log("Írtam: 1");
+                    }
+                    else
+                    {
+                        write.WriteLine(data.partName + ";0");
+                        Debug.Log("Írtam: 0");
+                    }
+                }
+            
+        
+
         write.Flush();
         write.Close();
        

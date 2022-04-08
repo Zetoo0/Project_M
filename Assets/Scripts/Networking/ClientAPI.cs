@@ -49,15 +49,6 @@ public class ClientAPI : MonoBehaviour
                     var resultList = JsonHelper.FromJson<User>(result);
 
                     Debug.Log(resultList);
-
-                   
-
-                    
-                    
-                    
-
-                    
-
                 }
                 else
                 {
